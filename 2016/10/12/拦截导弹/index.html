@@ -1,0 +1,90 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="[Codevs 1044]拦截导弹 - 序列DP"><meta name="keywords" content="算法,DP,序列DP"><meta name="author" content="iLern"><meta name="copyright" content="iLern"><title>[Codevs 1044]拦截导弹 - 序列DP | iLern's Blog</title><link rel="shortcut icon" href="/ilern.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#【题目链接】"><span class="toc-number">1.</span> <span class="toc-text">【题目链接】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【题目描述】"><span class="toc-number">2.</span> <span class="toc-text">【题目描述】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【输入描述】"><span class="toc-number">3.</span> <span class="toc-text">【输入描述】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【输出描述】"><span class="toc-number">4.</span> <span class="toc-text">【输出描述】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【数据范围及提示】"><span class="toc-number">5.</span> <span class="toc-text">【数据范围及提示】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【题解】"><span class="toc-number">6.</span> <span class="toc-text">【题解】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【代码】"><span class="toc-number">7.</span> <span class="toc-text">【代码】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【吐槽】"><span class="toc-number">8.</span> <span class="toc-text">【吐槽】</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">iLern</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">110</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">64</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">3</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">iLern's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a></span></div><div id="post-info"><div id="post-title">[Codevs 1044]拦截导弹 - 序列DP</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016-10-12</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/OI/">OI</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h3 id="【题目链接】"><a href="#【题目链接】" class="headerlink" title="【题目链接】"></a>【题目链接】</h3><p><a href="http://codevs.cn/problem/1044/" target="_blank" rel="noopener">Codevs 1044 拦截导弹</a></p>
+<h3 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h3><p>某国为了防御敌国的导弹袭击，发展出一种导弹拦截系统。但是这种导弹拦截系统有一个缺陷：虽然它的第一发炮弹能够到达任意的高度，但是以后每一发炮弹都不能高于前一发的高度。某天，雷达捕捉到敌国的导弹来袭。由于该系统还在试用阶段，所以只有一套系统，因此有可能不能拦截所有的导弹</p>
+<h3 id="【输入描述】"><a href="#【输入描述】" class="headerlink" title="【输入描述】"></a>【输入描述】</h3><p>输入导弹依次飞来的高度（雷达给出的高度数据是不大于 $ 30000 $ 的正整数）</p>
+<a id="more"></a>
+<h3 id="【输出描述】"><a href="#【输出描述】" class="headerlink" title="【输出描述】"></a>【输出描述】</h3><p>输出这套系统最多能拦截多少导弹，如果要拦截所有导弹最少要配备多少套这种导弹拦截系统。</p>
+<h3 id="【数据范围及提示】"><a href="#【数据范围及提示】" class="headerlink" title="【数据范围及提示】"></a>【数据范围及提示】</h3><p>导弹的高度$\leq 30000$，导弹个数$\leq 20$</p>
+<h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>这道题目的第一问是非常经典的“最长<strong>不上升</strong>子序列”问题, 有复杂度为$O(n ^ 2)$的算法和$O(nlogn)$的算法， 其中$O(n ^ 2)$的算法很容易想到， 用$d[i]$表示以$i$为<strong>结尾</strong>的最长<strong>不上升</strong>子序列长度， 状态转移为<br>$$d(i) = \max {0, d(j) | j &lt; i, A_i \leq A_j} + 1$$<br>初始化时每个$i$的$d[i] = 1$</p>
+<p>类似的， 还有“最长<strong>不下降</strong>子序列”， “最长<strong>上升</strong>子序列”， “最长<strong>下降</strong>子序列”， 解决方法都是类似的。甚至说要求一个序列的最长<strong>不下降</strong>子序列只要把这个序列倒序存储然后求一下新序列的最长<strong>上升</strong>子序列就好了。</p>
+<p>至于第二问……可以看做是最长链的最小划分，根据某玄学的$Dilworth$定理:</p>
+<blockquote>
+<p>反链是一种偏序集，其任意两个元素不可比；而链则是一种任意两个元素可比的偏序集。Dilworth定理说明，存在一个反链A与一个将序列划分为链族P的划分，使得划分中链的数量等于集合A的基数。当存在这种情况时，对任何至多能包含来自P中每一个成员一个元素的反链，A一定是此序列中的最大反链。同样地，对于任何最少包含A中的每一个元素的一个链的划分，P也一定是序列可以划分出的最小链族。偏序集的宽度被定义为A与P的共同大小。<br>另一种Dilworth定理的等价表述是：在有穷偏序集中，任何反链最大元素数目等于任何将集合到链的划分中链的最小数目。一个关于无限偏序集的理论指出，在此种情况下，一个偏序集具有有限的宽度w，当且仅当它可以划分为最少w条链。反链是一种偏序集，其任意两个元素不可比；而链则是一种任意两个元素可比的偏序集。Dilworth定理说明，存在一个反链A与一个将序列划分为链族P的划分，使得划分中链的数量等于集合A的基数。当存在这种情况时，对任何至多能包含来自P中每一个成员一个元素的反链，A一定是此序列中的最大反链。同样地，对于任何最少包含A中的每一个元素的一个链的划分，P也一定是序列可以划分出的最小链族。偏序集的宽度被定义为A与P的共同大小。<br>另一种Dilworth定理的等价表述是：在有穷偏序集中，任何反链最大元素数目等于任何将集合到链的划分中链的最小数目。一个关于无限偏序集的理论指出，在此种情况下，一个偏序集具有有限的宽度w，当且仅当它可以划分为最少w条链。</p>
+</blockquote>
+<p><del>显然我根本看不懂它在说什么</del> 可知， <em>链的最少划分数 = 反链的最长长度。</em> 所以只要求出最长<strong>不上升</strong>子序列的反链也就是最长<strong>下降</strong>子序列的长度就好了， 这个时候我们只需要把整个序列倒过来然后再跑一边第一问的代码，代码都不用改</p>
+<h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><pre><code class="c++"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span>
+
+<span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">20</span> + <span class="number">5</span>;
+
+<span class="keyword">int</span> a[MAXN], d[MAXN], tmp[MAXN], f[MAXN];
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>{
+    <span class="keyword">int</span> cnt = <span class="number">1</span>;
+    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[cnt]) == <span class="number">1</span>) {
+        cnt++;
+    }
+
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; cnt; i++) {
+        tmp[i] = a[cnt - i];
+    }
+
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; cnt; i++) {
+        d[i] = <span class="number">1</span>; f[i] = <span class="number">1</span>;
+        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; i; j++) {
+            <span class="keyword">if</span>(tmp[j] &lt; tmp[i] &amp;&amp; d[j] + <span class="number">1</span> &gt; d[i]) {
+                d[i] = d[j] + <span class="number">1</span>;
+            }
+            <span class="keyword">if</span>(a[j] &lt;= a[i] &amp;&amp; f[j] + <span class="number">1</span> &gt; f[i]) {
+                f[i] = f[j] + <span class="number">1</span>;
+            }
+        }
+    }
+
+    <span class="keyword">int</span> max1 = d[<span class="number">1</span>], max2 = f[<span class="number">1</span>];
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; cnt; i++) {
+        <span class="keyword">if</span>(max1 &lt; d[i]) {
+            max1 = d[i];
+        }
+        <span class="keyword">if</span>(max2 &lt; f[i]) {
+            max2 = f[i];
+        }
+    }
+
+    <span class="built_in">printf</span>(<span class="string">"%d\n%d"</span>, max1, max2);
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+
+</code></pre>
+<h3 id="【吐槽】"><a href="#【吐槽】" class="headerlink" title="【吐槽】"></a>【吐槽】</h3><p>再刚开始写这道题的时候， 听信了辣鸡参考书《信息学奥赛一本通》p273上的题解，错误的算成了最长<strong>不下降</strong>子序列的长度， 结果每次输出的结果和样例正好相反 Orz</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">iLern</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2016/10/12/拦截导弹/">http://yoursite.com/2016/10/12/拦截导弹/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/算法/">算法</a><a class="post-meta__tags" href="/tags/DP/">DP</a><a class="post-meta__tags" href="/tags/序列DP/">序列DP</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2016/10/12/Stack/"><i class="fa fa-chevron-left">  </i><span>[洛谷 1823]音乐会的等待 - 单调栈</span></a></div><div class="next-post pull-right"><a href="/2016/10/10/problems2/"><span>习题整理</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2019 By iLern</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></body></html>
