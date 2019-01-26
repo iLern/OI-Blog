@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>[Codevs 4650] 破损的键盘 - 链表 | iLern&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="OI">
+  
+  
+  
+  
+  <meta name="description" content="【链接】Codevs 4650 破损的键盘 【题目描述】有一天，你需要打一份文件，但是你的键盘坏了，上面的home键和end键会时不时地按下，而你却毫不知情，甚至你都懒得打开显示器，当你打开显示器之后，出现在你的面前的是一段悲剧的文本。">
+<meta name="keywords" content="数据结构,链表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Codevs 4650] 破损的键盘 - 链表">
+<meta property="og:url" content="http://yoursite.com/2017/07/25/codevs_4650/index.html">
+<meta property="og:site_name" content="iLern&#39;s Blog">
+<meta property="og:description" content="【链接】Codevs 4650 破损的键盘 【题目描述】有一天，你需要打一份文件，但是你的键盘坏了，上面的home键和end键会时不时地按下，而你却毫不知情，甚至你都懒得打开显示器，当你打开显示器之后，出现在你的面前的是一段悲剧的文本。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-07T23:47:23.057Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Codevs 4650] 破损的键盘 - 链表">
+<meta name="twitter:description" content="【链接】Codevs 4650 破损的键盘 【题目描述】有一天，你需要打一份文件，但是你的键盘坏了，上面的home键和end键会时不时地按下，而你却毫不知情，甚至你都懒得打开显示器，当你打开显示器之后，出现在你的面前的是一段悲剧的文本。">
+  
+    <link rel="alternate" href="/atom.xml" title="iLern&#39;s Blog" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/ilern.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="iLern&#39;s Blog" rel="home"> iLern&#39;s Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-codevs_4650" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      [Codevs 4650] 破损的键盘 - 链表
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/07/25/codevs_4650/" class="article-date">
+	  <time datetime="2017-07-25T12:14:43.000Z" itemprop="datePublished">July 25, 2017</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/OI/">OI</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="【链接】"><a href="#【链接】" class="headerlink" title="【链接】"></a>【链接】</h3><p><a href="http://codevs.cn/problem/4650/" target="_blank" rel="noopener">Codevs 4650 破损的键盘</a></p>
+<h3 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h3><p>有一天，你需要打一份文件，但是你的键盘坏了，上面的<code>home</code>键和<code>end</code>键会时不时地按下，而你却毫不知情，甚至你都懒得打开显示器，当你打开显示器之后，出现在你的面前的是一段悲剧的文本。</p>
+<a id="more"></a>
+<h3 id="【输入描述】"><a href="#【输入描述】" class="headerlink" title="【输入描述】"></a>【输入描述】</h3><p>输入只有一行，即这份文件，这份文件只包含小写字母和<code>[</code>以及<code>]</code>，用<code>[</code>代替<code>home</code>键，用<code>]</code>代替<code>end</code>键。</p>
+<h3 id="【输出描述】"><a href="#【输出描述】" class="headerlink" title="【输出描述】"></a>【输出描述】</h3><p>你的任务是在打开显示器之前，计算出这份悲剧的文档。</p>
+<h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>直接用一个链表模拟即可。</p>
+<p>链表的入门题目，借此熟悉一下<code>std::list&lt;&gt;</code>的相关操作。</p>
+<ul>
+<li><p>定义</p>
+<p>下面的代码定义了一个名为<code>ls</code>的<code>int</code>类型的双向链表</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; ls;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>插入和删除</p>
+<p>链表的特色就是能快速在链表中的某个位置插入和删除元素，下面的代码使用在迭代器<code>it</code>所在指向的位置插入<code>5</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls.insert(it, <span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>迭代器</p>
+<p>下面的代码定义了一个<code>list</code>的迭代器</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>&lt;type&gt;::iterator iterator_name;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>成员函数</p>
+<p>下面的代码使用成员函数<code>clear()</code>清空链表</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls.clear();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">10000</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> <span class="built_in">list</span>[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">char</span>&gt; ls;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%s"</span>, <span class="built_in">list</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">		ls.clear();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> len = <span class="built_in">strlen</span>(<span class="built_in">list</span>);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">char</span>&gt;::iterator now = ls.begin();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">list</span>[i] == <span class="string">'['</span>) &#123;</span><br><span class="line">				now = ls.begin();</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">list</span>[i] == <span class="string">']'</span>) &#123;</span><br><span class="line">				now = ls.end();</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			ls.insert(now, <span class="built_in">list</span>[i]);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		now = ls.begin();</span><br><span class="line">		<span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">char</span>&gt;::iterator it = ls.begin(); it != ls.end(); it++) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%c"</span>, *it);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/OI/">OI</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/链表/">链表</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/27/bzoj_1015/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [bzoj 1015] 星球大战 - 并查集
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/17/codevs-1043/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[Codevs 1043] 方格取数 - 棋盘DP</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#【链接】"><span class="nav-number">1.</span> <span class="nav-text">【链接】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【题目描述】"><span class="nav-number">2.</span> <span class="nav-text">【题目描述】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【输入描述】"><span class="nav-number">3.</span> <span class="nav-text">【输入描述】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【输出描述】"><span class="nav-number">4.</span> <span class="nav-text">【输出描述】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【题解】"><span class="nav-number">5.</span> <span class="nav-text">【题解】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【代码】"><span class="nav-number">6.</span> <span class="nav-text">【代码】</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 iLern&#39;s Blog All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+        
+
+ <!--以下3行为一条竖线和Coding Page-->
+            <div class="powered-by">
+                </div>
+                    <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+                
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

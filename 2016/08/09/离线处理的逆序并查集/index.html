@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>离线处理的逆序并查集 | iLern&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="OI">
+  
+  
+  
+  
+  <meta name="description" content="传送门：七夕的分组 七夕的分组【题目描述】七夕到了，FFF 团开始活动了。 FFF 团是一个有组织的团体——所有团员按照团长的指挥分为若干个组。今年七夕，由于新加入FFF团的人越来越多，FFF 团需要重新分组。">
+<meta name="keywords" content="数据结构,并查集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离线处理的逆序并查集">
+<meta property="og:url" content="http://yoursite.com/2016/08/09/离线处理的逆序并查集/index.html">
+<meta property="og:site_name" content="iLern&#39;s Blog">
+<meta property="og:description" content="传送门：七夕的分组 七夕的分组【题目描述】七夕到了，FFF 团开始活动了。 FFF 团是一个有组织的团体——所有团员按照团长的指挥分为若干个组。今年七夕，由于新加入FFF团的人越来越多，FFF 团需要重新分组。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-07T23:47:23.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="离线处理的逆序并查集">
+<meta name="twitter:description" content="传送门：七夕的分组 七夕的分组【题目描述】七夕到了，FFF 团开始活动了。 FFF 团是一个有组织的团体——所有团员按照团长的指挥分为若干个组。今年七夕，由于新加入FFF团的人越来越多，FFF 团需要重新分组。">
+  
+    <link rel="alternate" href="/atom.xml" title="iLern&#39;s Blog" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/ilern.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="iLern&#39;s Blog" rel="home"> iLern&#39;s Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-离线处理的逆序并查集" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      离线处理的逆序并查集
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/08/09/离线处理的逆序并查集/" class="article-date">
+	  <time datetime="2016-08-09T07:32:51.000Z" itemprop="datePublished">August 9, 2016</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/OI/">OI</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>传送门：<a href="https://lyoi.menci.moe/problem/66" target="_blank" rel="noopener">七夕的分组</a></p>
+<h3 id="七夕的分组"><a href="#七夕的分组" class="headerlink" title="七夕的分组"></a>七夕的分组</h3><p>【题目描述】<br>七夕到了，FFF 团开始活动了。</p>
+<p>FFF 团是一个有组织的团体——所有团员按照团长的指挥分为若干个组。今年七夕，由于新加入FFF团的人越来越多，FFF 团需要重新分组。<br><a id="more"></a></p>
+<p>FFF 团的分组方式为：开始时，所有团员为一个分组，在一个图上，他们由一些Edge相连；之后，团长会每次去掉一条 Edge。在图上同一个联通块内的人为同一组。</p>
+<p>Jrisme 很害怕FFF团，因此他偷听了FFF团分组的全过程，他希望能在途中询问你，当前时刻下：</p>
+<ol>
+<li>$ u_i $ 和 $ v_i $ 两名团员是否在同一组中；</li>
+<li>当前有多少个组。</li>
+</ol>
+<p>【输入描述】<br>第一行两个整数 $ n $、$ m $，表示 FFF 团有 $ n $ 名团员，通过 $ m $ 条 Edge 相连；<br>之后的 $ m $ 行，每行两个整数 $ u_i $、$ v_i $ 表示有一条从 $ u_i $ 到 $ v_i $ 的无向边。<br>之后一行一个整数 ，表示有 $ q $ 次操作；<br>之后的 $ q $ 行，每行表示一次操作，为以下几种格式之一：</p>
+<ol>
+<li><code>F i</code> 表示 FFF 团团长命令去掉第 $ i $ 条边（边的编号按照读入顺序，从 $ i $ 开始）；</li>
+<li><code>FF u v</code> 表示 Jrisme 询问第 $ u $ 和第 $ v $ 号团员是否在同一组中；</li>
+<li><code>FFF</code> 表示 Jrisme 询问当前有多少个组；</li>
+</ol>
+<p>【输出描述】<br>为了表示你对 FFF 团的虔诚，你需要在输出文件的第一行输出「<code>FFF!</code>」。<br>之后的若干行，对于每个第二种操作，如果第 $ u $ 和第 $ v $ 号团员在同一组中，输出<code>true</code>，否则输出<code>false</code>；对于每个第三种操作，输出一个整数，表示当前有多少个组；每个输出占一行。</p>
+<p>【输入样例】</p>
+<blockquote>
+<p>4 3<br>1 2<br>2 3<br>3 4<br>4<br>F 1<br>FF 2 3<br>F 3<br>FFF</p>
+</blockquote>
+<p>【输出样例】</p>
+<blockquote>
+<p>FFF!<br>true<br>3</p>
+</blockquote>
+<p>【数据范围及提示】<br>对于 $ 10\% $ 的数据，$ q = 0 $；<br>对于 $ 30\% $ 的数据，$ n, m, q \leq 10 $；<br>对于另外 $ 20\% $ 的数据，所有第一种操作均在第二、三种操作前；<br>对于另外 $ 20\% $ 的数据，没有第二种操作；<br>对于另外 $ 20\% $ 的数据，没有第三种操作；<br>对于 $ 100\% $ 的数据，$ 1 \leq n \leq 50000, 0 \leq m \leq 200000, 1 \leq q \leq 100000, 1 \leq u_i, v_i \leq n $；<br>保证没有重边和自环。</p>
+<p><strong>由于某些原因，本题只有六组数据。</strong></p>
+<ul>
+<li>题解<br><del>这题一看就是并查集嘛</del><br>初看此题有种并查集的感觉，但又有些不同，并查集可以方便支持的是“并”与“查”两种操作，但是题目中要求的是“去掉某一条边”，我们并没有“拆查集”，所以需要一些特殊的技巧来实现这些操作。<br>就是传说中的离线处理的逆序并查集。<br>所谓离线处理，就是先把每一条命令存下来，全部读完之后再处理。<br>然后拆边操作，则可以看做倒序的加边操作，所以就可以从末状态开始利用并查集来加边，最后倒过来输出各种询问的结果</li>
+<li>代码</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">50000</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXM = <span class="number">200000</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXQ = <span class="number">100000</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UnionFindSet</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> a[MAXN];</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> n)</span> </span>&#123; <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) a[i] = i; &#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> x == a[x] ? x : a[x] = find(a[x]); &#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> x, <span class="keyword">const</span> <span class="keyword">int</span> y)</span> </span>&#123; a[find(x)] = find(y); &#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">test</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> x, <span class="keyword">const</span> <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> find(x) == find(y); &#125;</span><br><span class="line">&#125; ufs;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> u, v;</span><br><span class="line">	<span class="keyword">bool</span> del;</span><br><span class="line">&#125; E[MAXM];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Query</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> type, u, v, i, ans;</span><br><span class="line">&#125; Q[MAXQ];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;E[i].u, &amp;E[i].v), E[i].u--, E[i].v--;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> q;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;q);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; q; i++) &#123;</span><br><span class="line">		<span class="keyword">char</span> s[<span class="number">10</span>];</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>, s);</span><br><span class="line">		<span class="keyword">if</span> (s[<span class="number">1</span>] == <span class="string">'\0'</span>) &#123;</span><br><span class="line">			Q[i].type = <span class="number">0</span>;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;Q[i].i), Q[i].i--;</span><br><span class="line">			E[Q[i].i].del = <span class="literal">true</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (s[<span class="number">2</span>] == <span class="string">'\0'</span>) &#123;</span><br><span class="line">			Q[i].type = <span class="number">1</span>;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;Q[i].u, &amp;Q[i].v), Q[i].u--, Q[i].v--;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			Q[i].type = <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// printf(" %d\n", Q[i].type);</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> cnt = n;</span><br><span class="line"></span><br><span class="line">	ufs.init(n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (!E[i].del &amp;&amp; !ufs.test(E[i].u, E[i].v)) &#123;</span><br><span class="line">			ufs.merge(E[i].u, E[i].v);</span><br><span class="line">			cnt--;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = q - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">		<span class="keyword">if</span> (Q[i].type == <span class="number">0</span> &amp;&amp; !ufs.test(E[Q[i].i].u, E[Q[i].i].v)) &#123;</span><br><span class="line">			ufs.merge(E[Q[i].i].u, E[Q[i].i].v);</span><br><span class="line">			cnt--;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (Q[i].type == <span class="number">1</span>) Q[i].ans = ufs.test(Q[i].u, Q[i].v);</span><br><span class="line">		<span class="keyword">else</span> Q[i].ans = cnt;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">"FFF!"</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; q; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (Q[i].type == <span class="number">1</span>) <span class="built_in">puts</span>(Q[i].ans ? <span class="string">"true"</span> : <span class="string">"false"</span>);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (Q[i].type == <span class="number">2</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, Q[i].ans);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是Menci的标程，自己写的版本以后再放出来吧……</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/OI/">OI</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并查集/">并查集</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/10/01背包/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [Codevs 1120] 采药 - 背包DP 
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/05/最短路/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">最短路学习笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#七夕的分组"><span class="nav-number">1.</span> <span class="nav-text">七夕的分组</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 iLern&#39;s Blog All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+        
+
+ <!--以下3行为一条竖线和Coding Page-->
+            <div class="powered-by">
+                </div>
+                    <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+                
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>[洛谷 1823]音乐会的等待 - 单调栈 | iLern&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="OI">
+  
+  
+  
+  
+  <meta name="description" content="【入场券】洛谷 1823 音乐会的等待 【题目描述】$N$个人正在排队进入一个音乐会。人们等得很无聊，于是他们开始转来转去，想在队伍里寻找自己的熟人。队列中任意两个人$A$和$B$，如果他们是相邻或他们之间没有人比$A$或$B$高，那么他们是可以互相看得见的。 写一个程序计算出有多少对人可以互相看见。 【输入描述】输入的第一行包含一个整数$N (1 \leq N \leq 500000)$, 表示">
+<meta name="keywords" content="算法,数据结构,单调栈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[洛谷 1823]音乐会的等待 - 单调栈">
+<meta property="og:url" content="http://yoursite.com/2016/10/12/Stack/index.html">
+<meta property="og:site_name" content="iLern&#39;s Blog">
+<meta property="og:description" content="【入场券】洛谷 1823 音乐会的等待 【题目描述】$N$个人正在排队进入一个音乐会。人们等得很无聊，于是他们开始转来转去，想在队伍里寻找自己的熟人。队列中任意两个人$A$和$B$，如果他们是相邻或他们之间没有人比$A$或$B$高，那么他们是可以互相看得见的。 写一个程序计算出有多少对人可以互相看见。 【输入描述】输入的第一行包含一个整数$N (1 \leq N \leq 500000)$, 表示">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-07T23:47:23.053Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[洛谷 1823]音乐会的等待 - 单调栈">
+<meta name="twitter:description" content="【入场券】洛谷 1823 音乐会的等待 【题目描述】$N$个人正在排队进入一个音乐会。人们等得很无聊，于是他们开始转来转去，想在队伍里寻找自己的熟人。队列中任意两个人$A$和$B$，如果他们是相邻或他们之间没有人比$A$或$B$高，那么他们是可以互相看得见的。 写一个程序计算出有多少对人可以互相看见。 【输入描述】输入的第一行包含一个整数$N (1 \leq N \leq 500000)$, 表示">
+  
+    <link rel="alternate" href="/atom.xml" title="iLern&#39;s Blog" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/ilern.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="iLern&#39;s Blog" rel="home"> iLern&#39;s Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Stack" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      [洛谷 1823]音乐会的等待 - 单调栈
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/10/12/Stack/" class="article-date">
+	  <time datetime="2016-10-12T03:38:00.000Z" itemprop="datePublished">October 12, 2016</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/OI/">OI</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="【入场券】"><a href="#【入场券】" class="headerlink" title="【入场券】"></a>【入场券】</h3><p><a href="https://www.luogu.org/problem/show?pid=1823" target="_blank" rel="noopener">洛谷 1823 音乐会的等待</a></p>
+<h3 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h3><p>$N$个人正在排队进入一个音乐会。人们等得很无聊，于是他们开始转来转去，想在队伍里寻找自己的熟人。队列中任意两个人$A$和$B$，如果他们是相邻或他们之间没有人比$A$<strong>或</strong>$B$高，那么他们是可以互相看得见的。</p>
+<p>写一个程序计算出有多少对人可以互相看见。</p>
+<h3 id="【输入描述】"><a href="#【输入描述】" class="headerlink" title="【输入描述】"></a>【输入描述】</h3><p>输入的第一行包含一个整数$N (1 \leq N \leq 500000)$, 表示队伍中共有$N$个人。</p>
+<p>接下来的$N$行中，每行包含一个整数，表示人的高度，以毫微米(等于$10 ^ {-9}$米)为单位，每个人的调度都小于$2^{31}$毫微米。这些高度分别表示队伍中人的身高。</p>
+<a id="more"></a>
+<h3 id="【输出描述】"><a href="#【输出描述】" class="headerlink" title="【输出描述】"></a>【输出描述】</h3><p>输出仅有一行，包含一个数$S$，表示队伍中共有$S$对人可以互相看见。</p>
+<h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>考虑维护一个单调递减的单调栈。</p>
+<p>在第$i$个人进入时， 栈里保存的是能和$i$互相看到的人。</p>
+<p>先从栈顶向下搜索， 遇到不比$i$ 高的就把答案加一，当遇到第一个比$i$高的人的时候再加一， 退出循环<br>。<br>然后再从栈顶开始向下找， 在栈里一个个弹出比$i$矮的人， 因为为了维护栈内元素的单调性， 如果栈中存在比$i$矮的人，当$i$ 进来之后他就会被$i$挡住， 后面的人就再也不能看到他了， 这个时候保存他是没有意义的， 反而会在第一步统计答案的过程中被多加进去。</p>
+<p>另外特别要注意的一点就是当栈中存在身高相等的人，后边的人是两个人都能看到的（计入答案），所以这个时候不存在挡住的情况（不弹出），所以这样的情况只计入答案但不弹出。</p>
+<h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">500000</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[MAXN];</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (n--) &#123;</span><br><span class="line">		<span class="keyword">int</span> x;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (cnt == <span class="number">0</span>) &#123;</span><br><span class="line">			a[++cnt] = x;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = cnt; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">				ans++;</span><br><span class="line">				<span class="keyword">if</span> (a[i] &gt; x) <span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span>(a[cnt] &lt; x &amp;&amp; cnt &gt;= <span class="number">1</span>) cnt--;</span><br><span class="line"></span><br><span class="line">			a[++cnt] = x;</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="【吐槽】"><a href="#【吐槽】" class="headerlink" title="【吐槽】"></a>【吐槽】</h3><p>这题虽然是一个裸的单调栈结果我却写了两个晚上， 交了20多次才AC，开始试图使用<code>std::stack</code>， 后来又尝试<code>std::vector</code>, 但是因为迭代器不会用所以爆炸了 orz ,最后无奈只能手动实现单调栈（虽然并不难写）， 就是这样一道并不难写代码只有短短30几行的题莫名其妙困住了多名LYOI选手， 最后还是Menci神犇一边AC %%%</p>
+<p>另外就是在做这题的过程中收获到了各种各样的错误信息， 甚至18AC 2TLE， 最后把一个<code>for</code>循环改成<code>while</code>循环就莫名其妙AC了， 真是神奇……</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/OI/">OI</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单调栈/">单调栈</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/13/DO/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          如何编写数据生成器并实现对拍
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/12/拦截导弹/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[Codevs 1044]拦截导弹 - 序列DP</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#【入场券】"><span class="nav-number">1.</span> <span class="nav-text">【入场券】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【题目描述】"><span class="nav-number">2.</span> <span class="nav-text">【题目描述】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【输入描述】"><span class="nav-number">3.</span> <span class="nav-text">【输入描述】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【输出描述】"><span class="nav-number">4.</span> <span class="nav-text">【输出描述】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【题解】"><span class="nav-number">5.</span> <span class="nav-text">【题解】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【代码】"><span class="nav-number">6.</span> <span class="nav-text">【代码】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【吐槽】"><span class="nav-number">7.</span> <span class="nav-text">【吐槽】</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 iLern&#39;s Blog All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+        
+
+ <!--以下3行为一条竖线和Coding Page-->
+            <div class="powered-by">
+                </div>
+                    <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+                
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>使用Graphviz方便地绘制图形 | iLern&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="OI">
+  
+  
+  
+  
+  <meta name="description" content="Graphviz是一个在linux下的一个能快速绘制流程图的工具，在写图论题的题解的时候，每一次都要费一番心思来画图，但是还有可能不那么美观，有了这个工具，就可以方便的完成这样的任务了。">
+<meta name="keywords" content="整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Graphviz方便地绘制图形">
+<meta property="og:url" content="http://yoursite.com/2017/02/25/Graphviz/index.html">
+<meta property="og:site_name" content="iLern&#39;s Blog">
+<meta property="og:description" content="Graphviz是一个在linux下的一个能快速绘制流程图的工具，在写图论题的题解的时候，每一次都要费一番心思来画图，但是还有可能不那么美观，有了这个工具，就可以方便的完成这样的任务了。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ojzeatu2s.bkt.clouddn.com/test.png">
+<meta property="og:image" content="http://ojzeatu2s.bkt.clouddn.com/test2.png">
+<meta property="og:image" content="http://ojzeatu2s.bkt.clouddn.com/test31.png">
+<meta property="og:updated_time" content="2018-09-07T23:47:23.048Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Graphviz方便地绘制图形">
+<meta name="twitter:description" content="Graphviz是一个在linux下的一个能快速绘制流程图的工具，在写图论题的题解的时候，每一次都要费一番心思来画图，但是还有可能不那么美观，有了这个工具，就可以方便的完成这样的任务了。">
+<meta name="twitter:image" content="http://ojzeatu2s.bkt.clouddn.com/test.png">
+  
+    <link rel="alternate" href="/atom.xml" title="iLern&#39;s Blog" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/ilern.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="iLern&#39;s Blog" rel="home"> iLern&#39;s Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Graphviz" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      使用Graphviz方便地绘制图形
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/02/25/Graphviz/" class="article-date">
+	  <time datetime="2017-02-25T12:54:00.000Z" itemprop="datePublished">February 25, 2017</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/OI/">OI</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Graphviz是一个在linux下的一个能快速绘制流程图的工具，在写图论题的题解的时候，每一次都要费一番心思来画图，但是还有可能不那么美观，有了这个工具，就可以方便的完成这样的任务了。</p>
+<a id="more"></a>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Graphviz （Graph Visualization Software的缩写）是一个由AT&amp;T实验室启动的开源工具包，用于绘制DOT语言脚本描述的图形。它提供了一种简单的描述图形的方法，并且可以为人类和计算机程序所理解。DOT语言文件通常是具有.gv或是.dot的文件扩展名。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在终端下使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install graphviz</span><br></pre></td></tr></table></figure></p>
+<p>命令来安装graphviz </p>
+<h3 id="命令用法"><a href="#命令用法" class="headerlink" title="命令用法"></a>命令用法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dot -T&lt;type&gt; &lt;infile.dot&gt; -o &lt;outfile&gt;</span><br></pre></td></tr></table></figure>
+<p>输入文件是<code>&lt;infile.dot&gt;</code>，生成的格式由<code>&lt;type&gt;</code>指定，生成的文件是<code>&lt;outfile&gt;</code>。</p>
+<h3 id="DOT语言的简单用法"><a href="#DOT语言的简单用法" class="headerlink" title="DOT语言的简单用法"></a>DOT语言的简单用法</h3><h4 id="绘制无向图"><a href="#绘制无向图" class="headerlink" title="绘制无向图"></a>绘制无向图</h4><p>下面的代码被用作生成一张简单的无向图<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph test &#123;</span><br><span class="line">	1 -- 2 -- 3;</span><br><span class="line">    1 -- 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用关键字<code>graph</code>说明绘制的是一张无向图，用花括号扩起来需要描述的节点，相连的节点用<code>--</code>连接。</p>
+<p>上面的那几行代码所绘制出的图形是这个样子的：</p>
+<p><img src="http://ojzeatu2s.bkt.clouddn.com/test.png" alt="pic1"></p>
+<h4 id="绘制有向图"><a href="#绘制有向图" class="headerlink" title="绘制有向图"></a>绘制有向图</h4><p>下面的代码被用作生成一张简单的有向图<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">digraph test &#123;</span><br><span class="line">	1 -&gt; 2 -&gt; 3;</span><br><span class="line">    1 -&gt; 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>发生的变化仅仅是<code>graph</code>变成了<code>digraph</code>，<code>--</code>变成了<code>-&gt;</code></p>
+<p>上面的那几行代码所绘制出的图形是这个样子的：</p>
+<p><img src="http://ojzeatu2s.bkt.clouddn.com/test2.png" alt="pic2"></p>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p>如果graphviz只能做到这些那未免也太low了，我们还可以给点和边增加一些属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">digraph &#123;</span><br><span class="line">	1 [shape = box];</span><br><span class="line">    2 [style = filled, color = &quot;1, 1, 1&quot;];</span><br><span class="line">    3;</span><br><span class="line">    1 -&gt; 2 [label = &quot;10&quot;];</span><br><span class="line">    2 -&gt; 3 [label = &quot;5&quot;];</span><br><span class="line">    1 -&gt; 3 [style = dotted, label = &quot;20&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码所绘制出的图形是这样的：</p>
+<p><img src="http://ojzeatu2s.bkt.clouddn.com/test31.png" alt="pic3"></p>
+<h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>DOT支持C与C++风格的单行与多行注释，同时也支持Shell脚本风格的以#开头的注释</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zh.wikipedia.org/zh-cn/DOT%E8%AF%AD%E8%A8%80" target="_blank" rel="noopener">DOT语言 - 维基百科</a></p>
+<p><a href="https://zh.wikipedia.org/zh-cn/graphviz" target="_blank" rel="noopener">Graphviz - 维基百科</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/OI/">OI</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/整理/">整理</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/03/escape/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [Codevs 1026]逃跑的拉尔夫 - BFS
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/05/normalSplay/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[Codevs 4543]普通平衡树 - Splay</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令用法"><span class="nav-number">3.</span> <span class="nav-text">命令用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOT语言的简单用法"><span class="nav-number">4.</span> <span class="nav-text">DOT语言的简单用法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#绘制无向图"><span class="nav-number">4.1.</span> <span class="nav-text">绘制无向图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#绘制有向图"><span class="nav-number">4.2.</span> <span class="nav-text">绘制有向图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#属性"><span class="nav-number">4.3.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注释"><span class="nav-number">4.4.</span> <span class="nav-text">注释</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 iLern&#39;s Blog All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+        
+
+ <!--以下3行为一条竖线和Coding Page-->
+            <div class="powered-by">
+                </div>
+                    <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+                
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

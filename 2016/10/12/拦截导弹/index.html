@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>[Codevs 1044]拦截导弹 - 序列DP | iLern&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="OI">
+  
+  
+  
+  
+  <meta name="description" content="【题目链接】Codevs 1044 拦截导弹 【题目描述】某国为了防御敌国的导弹袭击，发展出一种导弹拦截系统。但是这种导弹拦截系统有一个缺陷：虽然它的第一发炮弹能够到达任意的高度，但是以后每一发炮弹都不能高于前一发的高度。某天，雷达捕捉到敌国的导弹来袭。由于该系统还在试用阶段，所以只有一套系统，因此有可能不能拦截所有的导弹 【输入描述】输入导弹依次飞来的高度（雷达给出的高度数据是不大于 $ 300">
+<meta name="keywords" content="算法,DP,序列DP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Codevs 1044]拦截导弹 - 序列DP">
+<meta property="og:url" content="http://yoursite.com/2016/10/12/拦截导弹/index.html">
+<meta property="og:site_name" content="iLern&#39;s Blog">
+<meta property="og:description" content="【题目链接】Codevs 1044 拦截导弹 【题目描述】某国为了防御敌国的导弹袭击，发展出一种导弹拦截系统。但是这种导弹拦截系统有一个缺陷：虽然它的第一发炮弹能够到达任意的高度，但是以后每一发炮弹都不能高于前一发的高度。某天，雷达捕捉到敌国的导弹来袭。由于该系统还在试用阶段，所以只有一套系统，因此有可能不能拦截所有的导弹 【输入描述】输入导弹依次飞来的高度（雷达给出的高度数据是不大于 $ 300">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-07T23:47:23.062Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Codevs 1044]拦截导弹 - 序列DP">
+<meta name="twitter:description" content="【题目链接】Codevs 1044 拦截导弹 【题目描述】某国为了防御敌国的导弹袭击，发展出一种导弹拦截系统。但是这种导弹拦截系统有一个缺陷：虽然它的第一发炮弹能够到达任意的高度，但是以后每一发炮弹都不能高于前一发的高度。某天，雷达捕捉到敌国的导弹来袭。由于该系统还在试用阶段，所以只有一套系统，因此有可能不能拦截所有的导弹 【输入描述】输入导弹依次飞来的高度（雷达给出的高度数据是不大于 $ 300">
+  
+    <link rel="alternate" href="/atom.xml" title="iLern&#39;s Blog" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/ilern.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="iLern&#39;s Blog" rel="home"> iLern&#39;s Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-拦截导弹" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      [Codevs 1044]拦截导弹 - 序列DP
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/10/12/拦截导弹/" class="article-date">
+	  <time datetime="2016-10-12T02:19:00.000Z" itemprop="datePublished">October 12, 2016</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/OI/">OI</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="【题目链接】"><a href="#【题目链接】" class="headerlink" title="【题目链接】"></a>【题目链接】</h3><p><a href="http://codevs.cn/problem/1044/" target="_blank" rel="noopener">Codevs 1044 拦截导弹</a></p>
+<h3 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h3><p>某国为了防御敌国的导弹袭击，发展出一种导弹拦截系统。但是这种导弹拦截系统有一个缺陷：虽然它的第一发炮弹能够到达任意的高度，但是以后每一发炮弹都不能高于前一发的高度。某天，雷达捕捉到敌国的导弹来袭。由于该系统还在试用阶段，所以只有一套系统，因此有可能不能拦截所有的导弹</p>
+<h3 id="【输入描述】"><a href="#【输入描述】" class="headerlink" title="【输入描述】"></a>【输入描述】</h3><p>输入导弹依次飞来的高度（雷达给出的高度数据是不大于 $ 30000 $ 的正整数）</p>
+<a id="more"></a>
+<h3 id="【输出描述】"><a href="#【输出描述】" class="headerlink" title="【输出描述】"></a>【输出描述】</h3><p>输出这套系统最多能拦截多少导弹，如果要拦截所有导弹最少要配备多少套这种导弹拦截系统。</p>
+<h3 id="【数据范围及提示】"><a href="#【数据范围及提示】" class="headerlink" title="【数据范围及提示】"></a>【数据范围及提示】</h3><p>导弹的高度$\leq 30000$，导弹个数$\leq 20$</p>
+<h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>这道题目的第一问是非常经典的“最长<strong>不上升</strong>子序列”问题, 有复杂度为$O(n ^ 2)$的算法和$O(nlogn)$的算法， 其中$O(n ^ 2)$的算法很容易想到， 用$d[i]$表示以$i$为<strong>结尾</strong>的最长<strong>不上升</strong>子序列长度， 状态转移为<br>$$d(i) = \max {0, d(j) | j &lt; i, A_i \leq A_j} + 1$$<br>初始化时每个$i$的$d[i] = 1$</p>
+<p>类似的， 还有“最长<strong>不下降</strong>子序列”， “最长<strong>上升</strong>子序列”， “最长<strong>下降</strong>子序列”， 解决方法都是类似的。甚至说要求一个序列的最长<strong>不下降</strong>子序列只要把这个序列倒序存储然后求一下新序列的最长<strong>上升</strong>子序列就好了。</p>
+<p>至于第二问……可以看做是最长链的最小划分，根据某玄学的$Dilworth$定理:</p>
+<blockquote>
+<p>反链是一种偏序集，其任意两个元素不可比；而链则是一种任意两个元素可比的偏序集。Dilworth定理说明，存在一个反链A与一个将序列划分为链族P的划分，使得划分中链的数量等于集合A的基数。当存在这种情况时，对任何至多能包含来自P中每一个成员一个元素的反链，A一定是此序列中的最大反链。同样地，对于任何最少包含A中的每一个元素的一个链的划分，P也一定是序列可以划分出的最小链族。偏序集的宽度被定义为A与P的共同大小。<br>另一种Dilworth定理的等价表述是：在有穷偏序集中，任何反链最大元素数目等于任何将集合到链的划分中链的最小数目。一个关于无限偏序集的理论指出，在此种情况下，一个偏序集具有有限的宽度w，当且仅当它可以划分为最少w条链。反链是一种偏序集，其任意两个元素不可比；而链则是一种任意两个元素可比的偏序集。Dilworth定理说明，存在一个反链A与一个将序列划分为链族P的划分，使得划分中链的数量等于集合A的基数。当存在这种情况时，对任何至多能包含来自P中每一个成员一个元素的反链，A一定是此序列中的最大反链。同样地，对于任何最少包含A中的每一个元素的一个链的划分，P也一定是序列可以划分出的最小链族。偏序集的宽度被定义为A与P的共同大小。<br>另一种Dilworth定理的等价表述是：在有穷偏序集中，任何反链最大元素数目等于任何将集合到链的划分中链的最小数目。一个关于无限偏序集的理论指出，在此种情况下，一个偏序集具有有限的宽度w，当且仅当它可以划分为最少w条链。</p>
+</blockquote>
+<p><del>显然我根本看不懂它在说什么</del> 可知， <em>链的最少划分数 = 反链的最长长度。</em> 所以只要求出最长<strong>不上升</strong>子序列的反链也就是最长<strong>下降</strong>子序列的长度就好了， 这个时候我们只需要把整个序列倒过来然后再跑一边第一问的代码，代码都不用改</p>
+<h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><pre><code class="c++"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span>
+
+<span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">20</span> + <span class="number">5</span>;
+
+<span class="keyword">int</span> a[MAXN], d[MAXN], tmp[MAXN], f[MAXN];
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>{
+    <span class="keyword">int</span> cnt = <span class="number">1</span>;
+    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[cnt]) == <span class="number">1</span>) {
+        cnt++;
+    }
+
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; cnt; i++) {
+        tmp[i] = a[cnt - i];
+    }
+
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; cnt; i++) {
+        d[i] = <span class="number">1</span>; f[i] = <span class="number">1</span>;
+        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; i; j++) {
+            <span class="keyword">if</span>(tmp[j] &lt; tmp[i] &amp;&amp; d[j] + <span class="number">1</span> &gt; d[i]) {
+                d[i] = d[j] + <span class="number">1</span>;
+            }
+            <span class="keyword">if</span>(a[j] &lt;= a[i] &amp;&amp; f[j] + <span class="number">1</span> &gt; f[i]) {
+                f[i] = f[j] + <span class="number">1</span>;
+            }
+        }
+    }
+
+    <span class="keyword">int</span> max1 = d[<span class="number">1</span>], max2 = f[<span class="number">1</span>];
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; cnt; i++) {
+        <span class="keyword">if</span>(max1 &lt; d[i]) {
+            max1 = d[i];
+        }
+        <span class="keyword">if</span>(max2 &lt; f[i]) {
+            max2 = f[i];
+        }
+    }
+
+    <span class="built_in">printf</span>(<span class="string">"%d\n%d"</span>, max1, max2);
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+
+</code></pre>
+<h3 id="【吐槽】"><a href="#【吐槽】" class="headerlink" title="【吐槽】"></a>【吐槽】</h3><p>再刚开始写这道题的时候， 听信了辣鸡参考书《信息学奥赛一本通》p273上的题解，错误的算成了最长<strong>不下降</strong>子序列的长度， 结果每次输出的结果和样例正好相反 Orz</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/OI/">OI</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/序列DP/">序列DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/12/Stack/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [洛谷 1823]音乐会的等待 - 单调栈
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/10/problems2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">习题整理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#【题目链接】"><span class="nav-number">1.</span> <span class="nav-text">【题目链接】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【题目描述】"><span class="nav-number">2.</span> <span class="nav-text">【题目描述】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【输入描述】"><span class="nav-number">3.</span> <span class="nav-text">【输入描述】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【输出描述】"><span class="nav-number">4.</span> <span class="nav-text">【输出描述】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【数据范围及提示】"><span class="nav-number">5.</span> <span class="nav-text">【数据范围及提示】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【题解】"><span class="nav-number">6.</span> <span class="nav-text">【题解】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【代码】"><span class="nav-number">7.</span> <span class="nav-text">【代码】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【吐槽】"><span class="nav-number">8.</span> <span class="nav-text">【吐槽】</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 iLern&#39;s Blog All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+        
+
+ <!--以下3行为一条竖线和Coding Page-->
+            <div class="powered-by">
+                </div>
+                    <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+                
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

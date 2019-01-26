@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>在linux下使用hexo + coding搭建自己的博客 | iLern&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="OI">
+  
+  
+  
+  
+  <meta name="description" content="不知不觉两个月没写博客了，其中有大部分的原因是自己太辣鸡根本搞不定博客而且学校文化课时间比较紧没有空去做，现在终于到了寒假，就一口气搞定了在自己的电脑上配置博客环境的问题">
+<meta name="keywords" content="整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在linux下使用hexo + coding搭建自己的博客">
+<meta property="og:url" content="http://yoursite.com/2017/01/18/blog/index.html">
+<meta property="og:site_name" content="iLern&#39;s Blog">
+<meta property="og:description" content="不知不觉两个月没写博客了，其中有大部分的原因是自己太辣鸡根本搞不定博客而且学校文化课时间比较紧没有空去做，现在终于到了寒假，就一口气搞定了在自己的电脑上配置博客环境的问题">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ojzeatu2s.bkt.clouddn.com/screenfetch.png">
+<meta property="og:image" content="http://ojzeatu2s.bkt.clouddn.com/data.png">
+<meta property="og:image" content="http://ojzeatu2s.bkt.clouddn.com/error1.png">
+<meta property="og:image" content="http://ojzeatu2s.bkt.clouddn.com/error2.png">
+<meta property="og:updated_time" content="2018-09-07T23:47:23.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在linux下使用hexo + coding搭建自己的博客">
+<meta name="twitter:description" content="不知不觉两个月没写博客了，其中有大部分的原因是自己太辣鸡根本搞不定博客而且学校文化课时间比较紧没有空去做，现在终于到了寒假，就一口气搞定了在自己的电脑上配置博客环境的问题">
+<meta name="twitter:image" content="http://ojzeatu2s.bkt.clouddn.com/screenfetch.png">
+  
+    <link rel="alternate" href="/atom.xml" title="iLern&#39;s Blog" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/ilern.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fashion.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="iLern&#39;s Blog" rel="home"> iLern&#39;s Blog </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows" style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-blog" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      在linux下使用hexo + coding搭建自己的博客
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/01/18/blog/" class="article-date">
+	  <time datetime="2017-01-18T14:37:00.000Z" itemprop="datePublished">January 18, 2017</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>不知不觉两个月没写博客了，其中有大部分的原因是自己太辣鸡根本搞不定博客而且学校文化课时间比较紧没有空去做，现在终于到了寒假，就一口气搞定了在自己的电脑上配置博客环境的问题</p>
+<a id="more"></a>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>我目前用的linux发行版是Deepin 15.3<br><img src="http://ojzeatu2s.bkt.clouddn.com/screenfetch.png" alt="screenfetch"><br>之前在集训的时候用过一阵Elementary OS，但是并不会用……于是后来就用了新人友好向Deepin</p>
+<h3 id="什么是Hexo"><a href="#什么是Hexo" class="headerlink" title="什么是Hexo"></a>什么是Hexo</h3><blockquote>
+<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+</blockquote>
+<h3 id="需要的东西"><a href="#需要的东西" class="headerlink" title="需要的东西"></a>需要的东西</h3><p>在安装<code>hexo</code>之前，需要先保证电脑里安装了<code>Node.js</code>和<code>Git</code></p>
+<h4 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h4><p>安装<code>Node.js</code>的时候我们选择的工具是<code>nvm</code>，它是一个Node版本管理工具，可以方便的安装最新的Node</p>
+<p>在终端中使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>命令可以安装<code>nvm</code></p>
+<p>在安装完成后可以看到这样一句话</p>
+<blockquote>
+<p>Close and reopen your terminal to start using nvm</p>
+</blockquote>
+<p>然后重启终端，使用<code>nvm install stable</code>命令来安装最新的稳定版</p>
+<h4 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h4><p>在终端中使用<code>sudo apt-get install git-core</code>命令即可安装Git</p>
+<h4 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h4><p>在安装好上述程序之后就可以使用<code>npm install -g hexo-cli</code>命令来安装hexo</p>
+<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><p>在处理好上面的那些东西之后就可以开始建站了，在<a href="https://hexo.io/zh-cn/docs/setup.html" target="_blank" rel="noopener">官网</a>里有详细的说明，我把博客的数据存放在了U盘里面，大概是这个样子</p>
+<p><img src="http://ojzeatu2s.bkt.clouddn.com/data.png" alt="Picture2"></p>
+<p>其中我们用于存放文章的文件夹为<code>source/_posts</code>，简单来说就是在这个文件夹用<code>markdown</code>语法写好一篇文章之后就可以使用<code>hexo g -d</code>命令生成并上传新的内容了。</p>
+<p>在做完了上面的那一点微小的工作之后，如果直接使用<code>hexo g -d</code>命令的话，他其实是不能正常使用的，比如说可能会这样</p>
+<p><img src="http://ojzeatu2s.bkt.clouddn.com/error1.png" alt="Picture3"></p>
+<p>这个时候直接在自己的那个目录下使用<code>npm install</code>命令</p>
+<h3 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h3><p>在这个时候生成的网页并没有地方保存，所以我们在coding上新建一个Blog的项目，然后就可以把数据都扔在里面了</p>
+<h4 id="SSH公钥"><a href="#SSH公钥" class="headerlink" title="SSH公钥"></a>SSH公钥</h4><p>虽然并不知道这是什么但是没了他似乎不行，按照<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank" rel="noopener">这个网页</a>的指示来做就可以生成一个公钥，在<code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code>这个命令之后按四下回车，会得到一个正方形的图案，那就说明成功了，接下来使用<code>ssh-add ~/.ssh/id_rsa</code>命令就可以显示出来，把他复制到Coding的那个添加公钥页面就可以了</p>
+<h4 id="copy-and-paste"><a href="#copy-and-paste" class="headerlink" title="copy and paste"></a>copy and paste</h4><p>在配置好了SSH公钥之后，直接使用<code>hexo g -d</code>会出现像这样的提示</p>
+<p><img src="http://ojzeatu2s.bkt.clouddn.com/error2.png" alt="Picture4"></p>
+<p>然后按照他提示的使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email &quot;you@example.com&quot;</span><br></pre></td></tr></table></figure></p>
+<p>和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Your Name&quot;</span><br></pre></td></tr></table></figure></p>
+<p>再试一次<code>hexo g -d</code>发现好像成功啦！</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/整理/">整理</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/19/picture/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          如何在Markdown中插入本地图片
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/18/noip2016/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">NOIp2016游记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Hexo"><span class="nav-number">2.</span> <span class="nav-text">什么是Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需要的东西"><span class="nav-number">3.</span> <span class="nav-text">需要的东西</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-js"><span class="nav-number">3.1.</span> <span class="nav-text">Node.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git"><span class="nav-number">3.2.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hexo"><span class="nav-number">3.3.</span> <span class="nav-text">hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建站"><span class="nav-number">4.</span> <span class="nav-text">建站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Coding"><span class="nav-number">5.</span> <span class="nav-text">Coding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SSH公钥"><span class="nav-number">5.1.</span> <span class="nav-text">SSH公钥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#copy-and-paste"><span class="nav-number">5.2.</span> <span class="nav-text">copy and paste</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 iLern&#39;s Blog All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+        
+
+ <!--以下3行为一条竖线和Coding Page-->
+            <div class="powered-by">
+                </div>
+                    <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+                
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
