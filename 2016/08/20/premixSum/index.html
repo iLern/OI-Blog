@@ -1,99 +1,89 @@
-extends includes/layout.pug
-
-block top_img
-  - var top_img = page.top_img || theme.post_meta.top_img || theme.top_img || config.top_img
-  if (top_img && page.top_img !== false)
-    - var bg_img = top_img !== true ? `background-image: url(${top_img})` : ''
-    - var flag = top_img === true ? 'no-bg' : ''
-    div#top-container(style=bg_img class=flag)
-      include ./includes/header.pug
-      #post-info
-        #post-title= page.title || _p('no_title')
-        #post-meta
-          if (theme.post_meta.date_type)
-            - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
-            time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
-          if (theme.post_meta.categories && page.categories.data.length > 0)
-            if (theme.post_meta.date_type)
-              span.post-meta__separator |
-            each item, index in page.categories.data
-              i.fa.fa-inbox.post-meta__icon(aria-hidden="true")
-              a(href=url_for(item.path)).post-meta__categories #[=item.name]
-              if (index < page.categories.data.length - 1)
-                 i.fa.fa-angle-right(aria-hidden="true")
-          if (theme.disqus.enable && theme.disqus.count)
-            if (theme.post_meta.date_type || theme.post_meta.categories && page.categories.data.length > 0)
-              span.post-meta__separator |
-            i.fa.fa-comment-o.post-meta__icon(aria-hidden="true")
-            a(href=url_for(page.path) + '#disqus_thread')
-              span.disqus-comment-count(data-disqus-identifier=page.path)
-          if (theme.wordcount && theme.wordcount.enable)
-            .post-meta-wordcount
-              span= _p('post.wordcount') + ': '
-              span.word-count= wordcount(page.content)
-              span.post-meta__separator |
-              span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
-  else
-    div#top-container.plain
-      include ./includes/header.pug
-
-block content
-  article#post(class="")
-    if (!top_img)
-      #post-title.plain= page.title || _p('no_title')
-      #post-meta
-        if (theme.post_meta.date_type)
-          - var date_type = theme.post_meta.date_type === 'updated' ? '' : 'date'
-          time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
-        if (theme.post_meta.categories && page.categories.data.length > 0)
-          if (theme.post_meta.date_type)
-            span.post-meta__separator |
-          each item, index in page.categories.data
-            i.fa.fa-inbox(aria-hidden="true")
-            a(href=url_for(item.path)).post-meta__categories  #[=item.name]
-            if (index < page.categories.data.length - 1)
-                i.fa.fa-angle-right.post-meta__separator(aria-hidden="true")
-        if (theme.disqus.enable && theme.disqus.count)
-          if (theme.post_meta.date_type || theme.post_meta.categories && page.categories.data.length > 0)
-            span.post-meta__separator |
-          i.fa.fa-comment-o(aria-hidden="true")
-          a(href=url_for(page.path) + '#disqus_thread')
-            span.disqus-comment-count(data-disqus-identifier=page.path)
-        if (theme.wordcount && theme.wordcount.enable)
-          span.post-meta__separator |
-          span.post-meta-wordcount
-            span= _p('post.wordcount') + ': '
-            span.word-count= wordcount(page.content)
-            span.post-meta__separator |
-            span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
-    #post-content.article-container!= page.content
-  if (theme.post_copyright && theme.post_copyright.enable)
-    .post-copyright
-      .post-copyright__author
-        span.post-copyright-meta= _p('post.copyright.author') + ": "
-        span.post-copyright-info
-          a(href=`mailto:${config.email}`) #[=config.author]
-      .post-copyright__type
-        span.post-copyright-meta= _p('post.copyright.link') + ": "
-        span.post-copyright-info
-          a(href=url_for(page.permalink)) #[=page.permalink]
-      .post-copyright__notice
-        span.post-copyright-meta= _p('post.copyright.copyright_notice') + ": "
-        span.post-copyright-info!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
-  if (theme.post_meta.tags)
-    .post-meta__tag-list
-      each item, index in page.tags.data
-        a(href=url_for(item.path)).post-meta__tags #[=item.name]
-  if (theme.QR_code)
-    if (theme.QR_code.length > 0)
-      .post-qr-code
-        each item in theme.QR_code
-          .post-qr-code-item
-            img.post-qr-code__img(src=(item.itemlist||item).img)
-            .post-qr-code__desc=(item.itemlist||item).text
-  include includes/share/index.pug
-  include includes/pagination.pug
-  if (theme.adv && theme.adv.enable)
-    .post-adv!= theme.adv.info
-  if page.comments !== false
-    include includes/comments/index.pug
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="前缀和与差分学习笔记"><meta name="keywords" content="算法,前缀和,差分"><meta name="author" content="iLern"><meta name="copyright" content="iLern"><title>前缀和与差分学习笔记 | iLern's Blog</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前缀和与差分"><span class="toc-number">1.</span> <span class="toc-text">前缀和与差分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#前缀和-Prefix-Sum"><span class="toc-number">1.1.</span> <span class="toc-text">前缀和 (Prefix Sum)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#差分-difference）"><span class="toc-number">1.2.</span> <span class="toc-text">差分(difference）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【前缀和-Prefix-Sum-】"><span class="toc-number">2.</span> <span class="toc-text">【前缀和 (Prefix Sum)】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【差分-difference-】"><span class="toc-number">3.</span> <span class="toc-text">【差分(difference)】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【用差分实现区间操作】"><span class="toc-number">4.</span> <span class="toc-text">【用差分实现区间操作】</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">iLern</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">110</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">64</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">3</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">iLern's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">前缀和与差分学习笔记</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016-08-20</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/OI/">OI</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h3 id="前缀和与差分"><a href="#前缀和与差分" class="headerlink" title="前缀和与差分"></a>前缀和与差分</h3><h4 id="前缀和-Prefix-Sum"><a href="#前缀和-Prefix-Sum" class="headerlink" title="前缀和 (Prefix Sum)"></a>前缀和 (Prefix Sum)</h4><p>对于一维数组数组a，前缀和sum[i]表示从开始到a[i]的所有数字的和(包括a[i])</p>
+<h4 id="差分-difference）"><a href="#差分-difference）" class="headerlink" title="差分(difference）"></a>差分(difference）</h4><p>差分，又名差分函数或差分运算，差分的结果反映了离散量之间的一种变化，是研究离散数学的一种工具。</p>
+<a id="more"></a>
+<h3 id="【前缀和-Prefix-Sum-】"><a href="#【前缀和-Prefix-Sum-】" class="headerlink" title="【前缀和 (Prefix Sum)】"></a>【前缀和 (Prefix Sum)】</h3><p>对于一维数组数组a，前缀和<code>sum[i]</code>表示从开始到<code>a[i]</code>的所有数字的和(包括$a[i]$).(数列的前$i$项和)</p>
+<p>递推求前缀和：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sum[<span class="number">1</span>] = a[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++) &#123;</span><br><span class="line">    sum[i] = sum[i - <span class="number">1</span>] + a[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>同样，对于二维数组b，前缀和<code>sum[i][j]</code>表示所有<code>b[m][n]</code>$(1 \leq m \leq i, i \leq n \leq k)$的和(包括$b[m][n]$).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">6</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">9</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">12</td>
+</tr>
+</tbody>
+</table>
+<p>对于上面这个二维数组B，前缀和数组B’为</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">1</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">12</td>
+<td style="text-align:center">21</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">27</td>
+<td style="text-align:center">45</td>
+</tr>
+<tr>
+<td style="text-align:center">22</td>
+<td style="text-align:center">48</td>
+<td style="text-align:center">78</td>
+</tr>
+</tbody>
+</table>
+<p>递推求前缀和：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sum[<span class="number">1</span>][<span class="number">1</span>] = b[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= len; j++) &#123;</span><br><span class="line">        sum[i][j]=sum[i<span class="number">-1</span>][j]+sum[i][j<span class="number">-1</span>]-sum[i - <span class="number">1</span>][j - <span class="number">1</span>]+b[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="【差分-difference-】"><a href="#【差分-difference-】" class="headerlink" title="【差分(difference)】"></a>【差分(difference)】</h3><blockquote>
+<p>差分，又名差分函数或差分运算，差分的结果反映了离散量之间的一种变化，是研究离散数学的一种工具。它将原函数$f(x)$ 映射到$f(x+a)-f(x+b)$ 。差分运算，相应于微分运算，是微积分中重要的一个概念。总而言之，差分对应离散，微分对应连续。差分又分为前向差分和逆向差分两种。</p>
+</blockquote>
+<p>比如，在一个等差数列${ a_n }$中，公差$d$定义为$a_i - a_{i - 1}$，这就是一种简单的差分。</p>
+<p>对于一个一维数组，如果我们要求区间[i .. k]的和，可以用一个循环加起来，但是这样是比较耗时间的，如果我们利用前缀和，只需要用<code>sum[k] - sum[i-1]</code>就可以快速得到答案。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ans = sum[k] - sum[i - <span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+<p>对于一个二维数组，也可以进行同样的操作。下面的代码演示了如何求一个二维数组a中从$a[x][y]$到$a[x1][y1]$所有数值的和</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ans = sum[x1][y1] - sum[x - <span class="number">1</span>][y1] - sum[x1][y - <span class="number">1</span>] + sum[x - <span class="number">1</span>][y - <span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="【用差分实现区间操作】"><a href="#【用差分实现区间操作】" class="headerlink" title="【用差分实现区间操作】"></a>【用差分实现区间操作】</h3><p>如果我们想让我们的数据结构支持一个<code>add(l, r, v)</code>的操作，即让一个区间中的所有数都加上一个数或减去一个数，该怎么操作呢，当然可以使用强(xuan)大(xue)的线段树，但是据说在NOIp阶段不会考，实际上这个操作可以利用差分来解决</p>
+<p>设A数组为<br>$$A={2, 3, 1, 4, 5, 2, 6}$$<br>C数组为修改数组，表示 $[1..n]$ 这些元素都加上 $c[i]$ 这个数<br>$$C={ 1, 4, 3, -1, -4}$$<br>S数组为C数组的前缀和数组<br>$$S={1, 5, 8, 7, 3, 3, 3}$$</p>
+<p>对于每一个<code>add(l, r, a)</code>我们对$[L,R]$区间进行加$a$操作，在$C[L]$处加上$a$，在$C[R+1]$处减去$a$</p>
+<p>最后求序列的每个位置变成了多少，只要看一下这个位置上$C$数组的前缀和就可以。</p>
+<p>对于二维数组，处理方法也是类似的</p>
+<blockquote>
+<p>对于一个$n \times m$的表格，要求支持操作<code>add(x1,y1,x2,y2,a)</code>，表示对于以$(x1,y1)$为左下角,$(x2,y2)$为右上角的矩形区域，每个元素都加上$a$。问最后的表格的样子</p>
+</blockquote>
+<p>用数组$C$存修改信息。在$C[x1][y1]$处加上$a$，在$C[x2+1][y1]$和$C[x1][y2+1]$处减$a$，在$C[x2+1][y2+1]$再加上$a$。<br>最后$(i,k)$位置上的数值就是$C$数组在$(i,k)$位置的前缀和。</p>
+<p><del>最后贴段代码好了</del></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[MAXN][MAXN];</span><br><span class="line"><span class="keyword">int</span> sum[MAXN][MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	sum[<span class="number">1</span>][<span class="number">1</span>] = a[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">			sum[i][j] = sum[i - <span class="number">1</span>][j] + sum[i][j - <span class="number">1</span>] - sum[i - <span class="number">1</span>][j - <span class="number">1</span>] + a[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"----------------\n"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d "</span>, sum[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"---------------\n"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> x, y;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">	<span class="keyword">int</span> x1, y1;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x1, &amp;y1);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"----------------\n"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> ans = sum[x1][y1] - sum[x - <span class="number">1</span>][y1] - sum[x1][y - <span class="number">1</span>] + sum[x - <span class="number">1</span>][y - <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">iLern</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2016/08/20/premixSum/">http://yoursite.com/2016/08/20/premixSum/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/算法/">算法</a><a class="post-meta__tags" href="/tags/前缀和/">前缀和</a><a class="post-meta__tags" href="/tags/差分/">差分</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2016/08/29/problems/"><i class="fa fa-chevron-left">  </i><span>一些习题</span></a></div><div class="next-post pull-right"><a href="/2016/08/17/stone/"><span>NOIp2015跳石头 - 二分答案</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2019 By iLern</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script></body></html>

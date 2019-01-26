@@ -1,99 +1,29 @@
-extends includes/layout.pug
-
-block top_img
-  - var top_img = page.top_img || theme.post_meta.top_img || theme.top_img || config.top_img
-  if (top_img && page.top_img !== false)
-    - var bg_img = top_img !== true ? `background-image: url(${top_img})` : ''
-    - var flag = top_img === true ? 'no-bg' : ''
-    div#top-container(style=bg_img class=flag)
-      include ./includes/header.pug
-      #post-info
-        #post-title= page.title || _p('no_title')
-        #post-meta
-          if (theme.post_meta.date_type)
-            - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
-            time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
-          if (theme.post_meta.categories && page.categories.data.length > 0)
-            if (theme.post_meta.date_type)
-              span.post-meta__separator |
-            each item, index in page.categories.data
-              i.fa.fa-inbox.post-meta__icon(aria-hidden="true")
-              a(href=url_for(item.path)).post-meta__categories #[=item.name]
-              if (index < page.categories.data.length - 1)
-                 i.fa.fa-angle-right(aria-hidden="true")
-          if (theme.disqus.enable && theme.disqus.count)
-            if (theme.post_meta.date_type || theme.post_meta.categories && page.categories.data.length > 0)
-              span.post-meta__separator |
-            i.fa.fa-comment-o.post-meta__icon(aria-hidden="true")
-            a(href=url_for(page.path) + '#disqus_thread')
-              span.disqus-comment-count(data-disqus-identifier=page.path)
-          if (theme.wordcount && theme.wordcount.enable)
-            .post-meta-wordcount
-              span= _p('post.wordcount') + ': '
-              span.word-count= wordcount(page.content)
-              span.post-meta__separator |
-              span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
-  else
-    div#top-container.plain
-      include ./includes/header.pug
-
-block content
-  article#post(class="")
-    if (!top_img)
-      #post-title.plain= page.title || _p('no_title')
-      #post-meta
-        if (theme.post_meta.date_type)
-          - var date_type = theme.post_meta.date_type === 'updated' ? '' : 'date'
-          time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
-        if (theme.post_meta.categories && page.categories.data.length > 0)
-          if (theme.post_meta.date_type)
-            span.post-meta__separator |
-          each item, index in page.categories.data
-            i.fa.fa-inbox(aria-hidden="true")
-            a(href=url_for(item.path)).post-meta__categories  #[=item.name]
-            if (index < page.categories.data.length - 1)
-                i.fa.fa-angle-right.post-meta__separator(aria-hidden="true")
-        if (theme.disqus.enable && theme.disqus.count)
-          if (theme.post_meta.date_type || theme.post_meta.categories && page.categories.data.length > 0)
-            span.post-meta__separator |
-          i.fa.fa-comment-o(aria-hidden="true")
-          a(href=url_for(page.path) + '#disqus_thread')
-            span.disqus-comment-count(data-disqus-identifier=page.path)
-        if (theme.wordcount && theme.wordcount.enable)
-          span.post-meta__separator |
-          span.post-meta-wordcount
-            span= _p('post.wordcount') + ': '
-            span.word-count= wordcount(page.content)
-            span.post-meta__separator |
-            span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
-    #post-content.article-container!= page.content
-  if (theme.post_copyright && theme.post_copyright.enable)
-    .post-copyright
-      .post-copyright__author
-        span.post-copyright-meta= _p('post.copyright.author') + ": "
-        span.post-copyright-info
-          a(href=`mailto:${config.email}`) #[=config.author]
-      .post-copyright__type
-        span.post-copyright-meta= _p('post.copyright.link') + ": "
-        span.post-copyright-info
-          a(href=url_for(page.permalink)) #[=page.permalink]
-      .post-copyright__notice
-        span.post-copyright-meta= _p('post.copyright.copyright_notice') + ": "
-        span.post-copyright-info!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
-  if (theme.post_meta.tags)
-    .post-meta__tag-list
-      each item, index in page.tags.data
-        a(href=url_for(item.path)).post-meta__tags #[=item.name]
-  if (theme.QR_code)
-    if (theme.QR_code.length > 0)
-      .post-qr-code
-        each item in theme.QR_code
-          .post-qr-code-item
-            img.post-qr-code__img(src=(item.itemlist||item).img)
-            .post-qr-code__desc=(item.itemlist||item).text
-  include includes/share/index.pug
-  include includes/pagination.pug
-  if (theme.adv && theme.adv.enable)
-    .post-adv!= theme.adv.info
-  if page.comments !== false
-    include includes/comments/index.pug
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="[Codefoces #428(div2) B] Game of the Rows - 贪心"><meta name="keywords" content="算法,贪心"><meta name="author" content="iLern"><meta name="copyright" content="iLern"><title>[Codefoces #428(div2) B] Game of the Rows - 贪心 | iLern's Blog</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#【链接】"><span class="toc-number">1.</span> <span class="toc-text">【链接】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【题目描述】"><span class="toc-number">2.</span> <span class="toc-text">【题目描述】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【输入描述】"><span class="toc-number">3.</span> <span class="toc-text">【输入描述】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【输出描述】"><span class="toc-number">4.</span> <span class="toc-text">【输出描述】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【题解】"><span class="toc-number">5.</span> <span class="toc-text">【题解】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【代码】"><span class="toc-number">6.</span> <span class="toc-text">【代码】</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">iLern</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">110</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">64</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">3</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">iLern's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">[Codefoces #428(div2) B] Game of the Rows - 贪心</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-08-13</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/OI/">OI</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h3 id="【链接】"><a href="#【链接】" class="headerlink" title="【链接】"></a>【链接】</h3><p><a href="http://codeforces.com/problemset/problem/839/Bv" target="_blank" rel="noopener">Codeforces #428(div2) Game of the Rows</a></p>
+<h3 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h3><p>Daenerys Targaryen has an army consisting of $k$ groups of soldiers, the $i$-th group contains $a_i$ soldiers. She wants to bring her army to the other side of the sea to get the Iron Throne. She has recently bought an airplane to carry her army through the sea. The airplane has n rows, each of them has $8$ seats. We call two seats neighbor, if they are in the same row and in seats ${1, 2}$, ${3, 4}$, ${4, 5}$, ${5, 6}$ or ${7, 8}$.</p>
+<p>A row in the airplane Daenerys Targaryen wants to place her army in the plane so that there are no two soldiers from different groups sitting on neighboring seats.</p>
+<p>Your task is to determine if there is a possible arranging of her army in the airplane such that the condition above is satisfied.</p>
+<p>飞机上有$n$排如图所示的座椅，现在有$k$个小队，每个小队有$a_i$个人，要给这些人排座位，要求不同小队的人不能相邻，问能否实现</p>
+<p><img src="http://ojzeatu2s.bkt.clouddn.com/20a11448a0afaf3655320120c369fcbc0e46769d.png" alt="pic1"></p>
+<a id="more"></a>
+<h3 id="【输入描述】"><a href="#【输入描述】" class="headerlink" title="【输入描述】"></a>【输入描述】</h3><p>The first line contains two integers $n$ and $k (1 \leq n \leq 10000, 1 \leq k \leq 100)$ — the number of rows and the number of groups of soldiers, respectively.</p>
+<p>The second line contains $k$ integers $a_1, a_2, a_3 \dots a_k (1 \leq a_i \leq 10000)$, where $a_i$ denotes the number of soldiers in the $i$-th group.</p>
+<p>It is guaranteed that $\sum_{i = 1}^k a_i \leq 8 \times n$.</p>
+<h3 id="【输出描述】"><a href="#【输出描述】" class="headerlink" title="【输出描述】"></a>【输出描述】</h3><p>If we can place the soldiers in the airplane print <code>YES</code> (without quotes). Otherwise print <code>NO</code> (without quotes).</p>
+<p>You can choose the case (lower or upper) for each letter arbitrary.</p>
+<h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>贪心，考虑这样几种小队人数情况：大于等于$4$人，$3$人，$2$人，$1$人。</p>
+<p>依次处理下面这几种情况。</p>
+<p>对于大于等于$4$人的小队，以$4$人为一组安排，他们优先坐中间的四个位置，如果中间的座位已经满了，那就坐边上的两个位置。</p>
+<p>对于$3$人的小队，处理方法与大于等于$4$人的小队相同。</p>
+<p>对于$2$人的小队，他们优先坐边上的两个位置，如果边上没有位置但中间还有位置，那就把中间的位置拿出两个分配给他们，然后中间还剩下一个可用的座位，如果中间也没有位置了，那就把两人拆开，最后处理。</p>
+<p>对于$1$人的小队，只要看看剩下的座位够不够用就可以了。</p>
+<p>如果以上任意一步不能满足，那么就是<code>NO</code></p>
+<h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> have[<span class="number">5</span>], cnt[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, k;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;k);</span><br><span class="line"></span><br><span class="line">	have[<span class="number">4</span>] = n;</span><br><span class="line">	have[<span class="number">2</span>] = n * <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> x;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (x &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (have[<span class="number">4</span>] &gt; <span class="number">0</span>) have[<span class="number">4</span>]--, x -= <span class="number">4</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (have[<span class="number">2</span>] &gt; <span class="number">0</span>) have[<span class="number">2</span>]--, x -= <span class="number">2</span>;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (x &gt; <span class="number">0</span>) cnt[x]++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (cnt[<span class="number">2</span>] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (have[<span class="number">2</span>] &gt; <span class="number">0</span>) have[<span class="number">2</span>]--, cnt[<span class="number">2</span>]--;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (have[<span class="number">4</span>] &gt; <span class="number">0</span>) have[<span class="number">4</span>]--, cnt[<span class="number">2</span>]--, have[<span class="number">1</span>]++;</span><br><span class="line">		<span class="keyword">else</span> cnt[<span class="number">2</span>]--, cnt[<span class="number">1</span>] += <span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (cnt[<span class="number">1</span>] &gt; have[<span class="number">1</span>] + have[<span class="number">2</span>] + have[<span class="number">4</span>] * <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">iLern</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2017/08/13/Codeforces_428_B/">http://yoursite.com/2017/08/13/Codeforces_428_B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/算法/">算法</a><a class="post-meta__tags" href="/tags/贪心/">贪心</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2017/08/13/Codeforces_428_C/"><i class="fa fa-chevron-left">  </i><span>[Codeforces #428(div2) C] Journey - 数学期望</span></a></div><div class="next-post pull-right"><a href="/2017/07/30/Codeforces_271_D/"><span>[Codefoces #271(div2) D] Flowers - 序列DP</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2019 By iLern</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script></body></html>

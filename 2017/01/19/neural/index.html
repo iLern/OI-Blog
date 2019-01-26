@@ -1,99 +1,24 @@
-extends includes/layout.pug
-
-block top_img
-  - var top_img = page.top_img || theme.post_meta.top_img || theme.top_img || config.top_img
-  if (top_img && page.top_img !== false)
-    - var bg_img = top_img !== true ? `background-image: url(${top_img})` : ''
-    - var flag = top_img === true ? 'no-bg' : ''
-    div#top-container(style=bg_img class=flag)
-      include ./includes/header.pug
-      #post-info
-        #post-title= page.title || _p('no_title')
-        #post-meta
-          if (theme.post_meta.date_type)
-            - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
-            time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
-          if (theme.post_meta.categories && page.categories.data.length > 0)
-            if (theme.post_meta.date_type)
-              span.post-meta__separator |
-            each item, index in page.categories.data
-              i.fa.fa-inbox.post-meta__icon(aria-hidden="true")
-              a(href=url_for(item.path)).post-meta__categories #[=item.name]
-              if (index < page.categories.data.length - 1)
-                 i.fa.fa-angle-right(aria-hidden="true")
-          if (theme.disqus.enable && theme.disqus.count)
-            if (theme.post_meta.date_type || theme.post_meta.categories && page.categories.data.length > 0)
-              span.post-meta__separator |
-            i.fa.fa-comment-o.post-meta__icon(aria-hidden="true")
-            a(href=url_for(page.path) + '#disqus_thread')
-              span.disqus-comment-count(data-disqus-identifier=page.path)
-          if (theme.wordcount && theme.wordcount.enable)
-            .post-meta-wordcount
-              span= _p('post.wordcount') + ': '
-              span.word-count= wordcount(page.content)
-              span.post-meta__separator |
-              span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
-  else
-    div#top-container.plain
-      include ./includes/header.pug
-
-block content
-  article#post(class="")
-    if (!top_img)
-      #post-title.plain= page.title || _p('no_title')
-      #post-meta
-        if (theme.post_meta.date_type)
-          - var date_type = theme.post_meta.date_type === 'updated' ? '' : 'date'
-          time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(page[date_type], config.date_format)]
-        if (theme.post_meta.categories && page.categories.data.length > 0)
-          if (theme.post_meta.date_type)
-            span.post-meta__separator |
-          each item, index in page.categories.data
-            i.fa.fa-inbox(aria-hidden="true")
-            a(href=url_for(item.path)).post-meta__categories  #[=item.name]
-            if (index < page.categories.data.length - 1)
-                i.fa.fa-angle-right.post-meta__separator(aria-hidden="true")
-        if (theme.disqus.enable && theme.disqus.count)
-          if (theme.post_meta.date_type || theme.post_meta.categories && page.categories.data.length > 0)
-            span.post-meta__separator |
-          i.fa.fa-comment-o(aria-hidden="true")
-          a(href=url_for(page.path) + '#disqus_thread')
-            span.disqus-comment-count(data-disqus-identifier=page.path)
-        if (theme.wordcount && theme.wordcount.enable)
-          span.post-meta__separator |
-          span.post-meta-wordcount
-            span= _p('post.wordcount') + ': '
-            span.word-count= wordcount(page.content)
-            span.post-meta__separator |
-            span= _p('post.min2read', min2read(page.content, {cn: 350, en: 160}))
-    #post-content.article-container!= page.content
-  if (theme.post_copyright && theme.post_copyright.enable)
-    .post-copyright
-      .post-copyright__author
-        span.post-copyright-meta= _p('post.copyright.author') + ": "
-        span.post-copyright-info
-          a(href=`mailto:${config.email}`) #[=config.author]
-      .post-copyright__type
-        span.post-copyright-meta= _p('post.copyright.link') + ": "
-        span.post-copyright-info
-          a(href=url_for(page.permalink)) #[=page.permalink]
-      .post-copyright__notice
-        span.post-copyright-meta= _p('post.copyright.copyright_notice') + ": "
-        span.post-copyright-info!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
-  if (theme.post_meta.tags)
-    .post-meta__tag-list
-      each item, index in page.tags.data
-        a(href=url_for(item.path)).post-meta__tags #[=item.name]
-  if (theme.QR_code)
-    if (theme.QR_code.length > 0)
-      .post-qr-code
-        each item in theme.QR_code
-          .post-qr-code-item
-            img.post-qr-code__img(src=(item.itemlist||item).img)
-            .post-qr-code__desc=(item.itemlist||item).text
-  include includes/share/index.pug
-  include includes/pagination.pug
-  if (theme.adv && theme.adv.enable)
-    .post-adv!= theme.adv.info
-  if page.comments !== false
-    include includes/comments/index.pug
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="[Codevs 1088] 神经网络 - 拓扑排序"><meta name="keywords" content="算法,NOIp,拓扑排序"><meta name="author" content="iLern"><meta name="copyright" content="iLern"><title>[Codevs 1088] 神经网络 - 拓扑排序 | iLern's Blog</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#【链接】"><span class="toc-number">1.</span> <span class="toc-text">【链接】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【题目描述】"><span class="toc-number">2.</span> <span class="toc-text">【题目描述】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【输入描述】"><span class="toc-number">3.</span> <span class="toc-text">【输入描述】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【输出描述】"><span class="toc-number">4.</span> <span class="toc-text">【输出描述】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【题解】"><span class="toc-number">5.</span> <span class="toc-text">【题解】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#【代码】"><span class="toc-number">6.</span> <span class="toc-text">【代码】</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">iLern</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">110</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">64</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">3</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">iLern's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span></div><div id="post-info"><div id="post-title">[Codevs 1088] 神经网络 - 拓扑排序</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-01-19</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/OI/">OI</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h3 id="【链接】"><a href="#【链接】" class="headerlink" title="【链接】"></a>【链接】</h3><p><a href="http://codevs.cn/problem/1088/" target="_blank" rel="noopener">Codevs 1088　神经网络</a></p>
+<h3 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h3><p>在兰兰的模型中，神经网络就是一张有向图，图中的节点称为神经元，而且两个神经元之间至多有一条边相连，下图是一个神经元的例子：</p>
+<p><img src="http://codevs.cn/media/image/problem/1088.png" alt="network"></p>
+<p>图中，$X_1 - X_3$是信息输入渠道，$Y_1 - Y_2$是信息输出渠道，$C_1$表示神经元目前的状态，$U_i$是阈值，可视为神经元的一个内在参数。</p>
+<a id="more"></a>
+<p>神经元按一定的顺序排列，构成整个神经网络。在兰兰的模型之中，神经网络中的神经元分为几层，称为输入层、输出层，和若干个中间层。每层神经元只向下一层的神经元输出信息，只从上一层神经元接受信息。图是一个简单的三层神经网络的例子。</p>
+<p>兰兰规定，$C_i$服从公式：<br>$$C_i = \sum_{(i, j) \in E}W_{ji}C_j - U_i$$<br>（其中n是网络中所有神经元的数目）</p>
+<p>公式中的$W_{ji}$（可能为负值）表示连接$j$号神经元和$i$号神经元的边的权值。当$C_i$大于$0$时，该神经元处于兴奋状态，否则就处于平静状态。当神经元处于兴奋状态时，下一秒它会向其他神经元传送信号，信号的强度为$C_i$。</p>
+<p>如此．在输入层神经元被激发之后，整个网络系统就在信息传输的推动下进行运作。</p>
+<p>现在，给定一个神经网络，及当前输入层神经元的状态$(C_i)$，要求你的程序运算出最后网络输出层的状态。</p>
+<h3 id="【输入描述】"><a href="#【输入描述】" class="headerlink" title="【输入描述】"></a>【输入描述】</h3><p>输入文件第一行是两个整数$n(1 \leq n \leq 100)$和$p$。接下来$n$行，每行两个整数，第$i+1$行是神经元$i$最初状态和其阈值$(U_i)$，非输入层的神经元开始时状态必然为0。再下面$p$行，每行由两个整数$i$，$j$及一个整数$W_{ij}$，表示连接神经元$i$、$j$的边权值为$W_{ij}$。</p>
+<h3 id="【输出描述】"><a href="#【输出描述】" class="headerlink" title="【输出描述】"></a>【输出描述】</h3><p>输出文件包含若干行，每行有两个整数，分别对应一个神经元的编号，及其最后的状态，两个整数间以空格分隔。仅输出最后状态非零的输出层神经元状态，并且按照编号由小到大顺序输出。<br>若输出层的神经元最后状态均为0，则输出<code>NULL</code>。</p>
+<h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>这题乍一看给人一种很高端的感觉，实际上看明白题面之后其实就是一个类似于拓扑排序的题目，先找到所有没有入边的点，也就是输入层的点，依次向它连向的点输送信息，并每次吧它连向的点的入度减一，有入度为零的点就扔到队列里，出队的时候看看$C_i$是不是大于零，是就发送信息，不是就<code>continue</code>掉，队列空了之后找到输出层的点然后输出大于零的那部分就可以了。反正数据只有100的规模，怎么乱搞都是可以的嘛。</p>
+<h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> now, threshold, inEdge;</span><br><span class="line">	<span class="keyword">bool</span> flag;</span><br><span class="line">	Edge *edges;</span><br><span class="line"></span><br><span class="line">	Node() : now(<span class="number">0</span>), threshold(<span class="number">0</span>), inEdge(<span class="number">0</span>), flag(<span class="literal">false</span>), edges(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line">&#125; nodes[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">	Node *fr, *to;</span><br><span class="line">	<span class="keyword">int</span> w;</span><br><span class="line">	Edge *next;</span><br><span class="line"></span><br><span class="line">	Edge(Node *fr, Node *to, <span class="keyword">int</span> w) : fr(fr), to(to), w(w) &#123;</span><br><span class="line">		next = fr-&gt;edges;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(Node *fr, Node *to, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">	fr-&gt;edges = <span class="keyword">new</span> Edge(fr, to, w);</span><br><span class="line">	to-&gt;inEdge++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, p;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;p);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;nodes[i].now, &amp;nodes[i].threshold);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= p; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> u, v, w;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;u, &amp;v, &amp;w);</span><br><span class="line">		addEdge(nodes + u, nodes + v, w);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">queue</span>&lt;Node*&gt; q;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (nodes[i].inEdge == <span class="number">0</span>) &#123;</span><br><span class="line">			q.push(nodes + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">		Node *v = q.front();</span><br><span class="line">		q.pop();</span><br><span class="line">		<span class="keyword">for</span> (Edge *e = v-&gt;edges; e; e = e-&gt;next) &#123;</span><br><span class="line">			e-&gt;to-&gt;inEdge--;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (!e-&gt;to-&gt;flag) &#123;</span><br><span class="line">				e-&gt;to-&gt;flag = <span class="literal">true</span>;</span><br><span class="line">				e-&gt;to-&gt;now -= e-&gt;to-&gt;threshold;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			e-&gt;to-&gt;now += (v-&gt;now * e-&gt;w);</span><br><span class="line">			<span class="comment">// e-&gt;to-&gt;now -= v-&gt;threshold;</span></span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (!e-&gt;to-&gt;inEdge &amp;&amp; e-&gt;to-&gt;now &gt; <span class="number">0</span>) &#123;</span><br><span class="line">				q.push(e-&gt;to);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">bool</span> flag2 = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (!nodes[i].edges &amp;&amp; nodes[i].now &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, i, nodes[i].now);</span><br><span class="line">			flag2 = <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!flag2) <span class="built_in">printf</span>(<span class="string">"NULL\n"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">iLern</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2017/01/19/neural/">http://yoursite.com/2017/01/19/neural/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/算法/">算法</a><a class="post-meta__tags" href="/tags/NOIp/">NOIp</a><a class="post-meta__tags" href="/tags/拓扑排序/">拓扑排序</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2017/01/21/prime2/"><i class="fa fa-chevron-left">  </i><span>[Codevs 1702] 素数判定2 - MillerRabin素数快速判定</span></a></div><div class="next-post pull-right"><a href="/2017/01/19/picture/"><span>如何在Markdown中插入本地图片</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2019 By iLern</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script></body></html>
