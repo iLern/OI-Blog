@@ -18,7 +18,7 @@
 <p>这样一来Github就知道是你在向库里提交东西了。</p>
 <h3 id="添加远程库（现有本地库，再有远程库）"><a href="#添加远程库（现有本地库，再有远程库）" class="headerlink" title="添加远程库（现有本地库，再有远程库）"></a>添加远程库（现有本地库，再有远程库）</h3><p>在Github上新建一个仓库，使用<code>git remote add origin &lt;SSH key&gt;</code>添加一个远程库，其中SSH key可以在如图所示的地方找到。<br><img src="https://s2.ax1x.com/2019/01/29/kQb45F.png" alt="t1"></p>
 <p>添加后，远程库的名字就是<code>origin</code>，这是Git默认的叫法，也可以改成别的，但是<code>origin</code>这个名字一看就知道是远程库。</p>
-<p>接下来用<code>git push -u origin master</code>命令就可以把本地内容推送到远程库上了，第一次提交需要写<code>-u</code>，以后就不需要了，可以直接<code>git push orgin master</code>。</p>
+<p>接下来用<code>git push -u origin master</code>命令就可以把本地内容推送到远程库上了，第一次提交需要写<code>-u</code>，以后就不需要了，可以直接<code>git push origin master</code>。</p>
 <p>这样就可以在没有网络的时候在本地工作，有网络之后直接<code>git push</code>就好了。</p>
 <h3 id="从远程库克隆（现有远程库，再有本地库）"><a href="#从远程库克隆（现有远程库，再有本地库）" class="headerlink" title="从远程库克隆（现有远程库，再有本地库）"></a>从远程库克隆（现有远程库，再有本地库）</h3><p>先找到想要克隆的仓库，还是在如图位置找到地址，使用<code>git clone &lt;SSH key&gt;</code>来将这个库克隆到本地。</p>
 <p><img src="https://s2.ax1x.com/2019/01/29/kQLuFO.png" alt="t2"></p>
