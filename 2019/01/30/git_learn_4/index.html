@@ -21,12 +21,17 @@
 <li>使用<code>git merge &lt;branch&gt;</code>来将<code>&lt;branch&gt;</code>这个分支合并到当前分支。</li>
 <li>使用<code>git branch -d &lt;baranch&gt;</code>来删除分支。</li>
 </ul>
-<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><p>有时候两个分支各自有不同的修改，就不能很顺利地完成合并。<br><img src="https://cdn.liaoxuefeng.com/cdn/files/attachments/001384909115478645b93e2b5ae4dc78da049a0d1704a41000/0" alt="t1"></p>
-<p>这个时候直接<code>git merge &lt;branch&gt;</code>来合并的话会出现冲突，<code>master</code>后面会出现<code>MERGING</code>的标志。<br><img src="https://s2.ax1x.com/2019/01/30/klRyfx.png" alt="t2"></p>
-<p>这个时候查看修改过文件的内容会给出不同分支中不同的部分，改成一样之后再<strong>提交</strong>就可以了。<br><img src="https://s2.ax1x.com/2019/01/30/klRotI.png" alt="t3"></p>
-<p>现在，<code>master</code>分支和<code>feature1</code>分支变成了下图所示：<br><img src="https://cdn.liaoxuefeng.com/cdn/files/attachments/00138490913052149c4b2cd9702422aa387ac024943921b000/0" alt="t4"></p>
+<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><p>有时候两个分支各自有不同的修改，就不能很顺利地完成合并。</p>
+<p><img src="https://cdn.liaoxuefeng.com/cdn/files/attachments/001384909115478645b93e2b5ae4dc78da049a0d1704a41000/0" alt="t1"></p>
+<p>这个时候直接<code>git merge &lt;branch&gt;</code>来合并的话会出现冲突，<code>master</code>后面会出现<code>MERGING</code>的标志。</p>
+<p><img src="https://s2.ax1x.com/2019/01/30/klRyfx.png" alt="t2"></p>
+<p>这个时候查看修改过文件的内容会给出不同分支中不同的部分，改成一样之后再<strong>提交</strong>就可以了。</p>
+<p><img src="https://s2.ax1x.com/2019/01/30/klRotI.png" alt="t3"></p>
+<p>现在，<code>master</code>分支和<code>feature1</code>分支变成了下图所示：</p>
+<p><img src="https://cdn.liaoxuefeng.com/cdn/files/attachments/00138490913052149c4b2cd9702422aa387ac024943921b000/0" alt="t4"></p>
 <p>最后删除<code>feature1</code>分支就行了。</p>
-<p>这个图示可以用<code>git log --graph</code>来查看。<br><img src="https://s2.ax1x.com/2019/01/30/klfCad.png" alt="t5"></p>
+<p>这个图示可以用<code>git log --graph</code>来查看。</p>
+<p><img src="https://s2.ax1x.com/2019/01/30/klfCad.png" alt="t5"></p>
 <h3 id="分支策略"><a href="#分支策略" class="headerlink" title="分支策略"></a>分支策略</h3><p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
 <p>首先，<code>master</code>分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；</p>
 <p>那在哪干活呢？干活都在<code>dev</code>分支上，也就是说，<code>dev</code>分支是不稳定的，到某个时候，比如<code>1.0</code>版本发布时，再把<code>dev</code>分支合并到<code>master</code>上，在<code>master</code>分支发布<code>1.0</code>版本；</p>
