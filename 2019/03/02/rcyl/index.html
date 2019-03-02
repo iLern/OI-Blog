@@ -23,7 +23,7 @@
 </ol>
 <p>我们发现如果 $a$ 不能被 $n$ 的任何质因子以及其乘积整除(没有公共的质因子)，那么 $n$ 和 $a$ 一定互质。现在问题就转化为了求不大于$n$的数中不具有性质$A$的元素个数，其中性质$A$ 就是<strong>能被</strong> $n$ 的某个质因子或者其几个质因子的乘积整除。</p>
 <p>而这种<strong>不具有任何性质</strong>的元素个数问题正是容斥原理所能解决的。</p>
-<p>令<br>$$<br>A_i = { x \mid 0 \le x \le n - 1 \text{且} p_i | x }<br>$$</p>
+<p>令<br>$$<br>A_i = \left{ x \mid 0 \le x \le n - 1 \text{且} p_i | x \right}<br>$$</p>
 <p>则<br>$$<br>\varphi(n) = |\overline A_1 \cap \overline A_2 \cap \dots \cap \overline A_k|<br>$$</p>
 <p>我们考虑等式右边的计算方法，在$[1, n - 1]$的范围中，一定是每 $p_i$ 个数出现一个数能被 $p_i$ 整除，所以<br>$$<br>|A_i| = \frac{n}{p_i}, i = 1, 2, 3, \dots ,k<br>$$</p>
 <p>又因为$p_i$都是质数所以任意两两互质，所以有<br>$$<br>|A_i \cap A_j| = \frac{n}{\operatorname{lcm}(p_i, p_j)} = \frac{n}{p_ip_j}， 1 \le i &lt; j \le k<br>$$</p>
