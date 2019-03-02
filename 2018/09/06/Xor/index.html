@@ -11,8 +11,7 @@
 <a id="more"></a>
 <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>异或是一种二元逻辑运算符，作用是 「取异」，即两值相异返回$1$，相同返回 $0$ 。</p>
 <p>另外一种理解是异或是二进制下忽略进位的加法：</p>
-<p>$$0 \oplus 0 = 0 \rightarrow 0 + 0 = 0$$<br>$$1 \oplus 1 = 0 \rightarrow 1 + 1 = (1)0$$<br>$$1 \oplus 0 = 1 \rightarrow 1 + 0 = 1$$</p>
-<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>异或运算满足交换律与结合律。</p>
+<script type="math/tex; mode=display">0 \oplus 0 = 0 \rightarrow 0 + 0 = 0</script><script type="math/tex; mode=display">1 \oplus 1 = 0 \rightarrow 1 + 1 = (1)0</script><script type="math/tex; mode=display">1 \oplus 0 = 1 \rightarrow 1 + 0 = 1</script><h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>异或运算满足交换律与结合律。</p>
 <p>异或具有自反性即 $a \oplus b \oplus b = a$。</p>
 <h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h4 id="两数交换"><a href="#两数交换" class="headerlink" title="两数交换"></a>两数交换</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> &amp;a, <span class="keyword">int</span> &amp;b)</span> </span>&#123;</span><br><span class="line">    a ^= b ^= a ^= b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>并不易懂，不推荐使用，三变量交换法足够了。</p>

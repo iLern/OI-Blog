@@ -13,6 +13,7 @@
 <h3 id="【前缀和-Prefix-Sum-】"><a href="#【前缀和-Prefix-Sum-】" class="headerlink" title="【前缀和 (Prefix Sum)】"></a>【前缀和 (Prefix Sum)】</h3><p>对于一维数组数组a，前缀和<code>sum[i]</code>表示从开始到<code>a[i]</code>的所有数字的和(包括$a[i]$).(数列的前$i$项和)</p>
 <p>递推求前缀和：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sum[<span class="number">1</span>] = a[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++) &#123;</span><br><span class="line">    sum[i] = sum[i - <span class="number">1</span>] + a[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>同样，对于二维数组b，前缀和<code>sum[i][j]</code>表示所有<code>b[m][n]</code>$(1 \leq m \leq i, i \leq n \leq k)$的和(包括$b[m][n]$).</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -39,7 +40,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>对于上面这个二维数组B，前缀和数组B’为</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -66,19 +69,22 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>递推求前缀和：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sum[<span class="number">1</span>][<span class="number">1</span>] = b[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= len; j++) &#123;</span><br><span class="line">        sum[i][j]=sum[i<span class="number">-1</span>][j]+sum[i][j<span class="number">-1</span>]-sum[i - <span class="number">1</span>][j - <span class="number">1</span>]+b[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="【差分-difference-】"><a href="#【差分-difference-】" class="headerlink" title="【差分(difference)】"></a>【差分(difference)】</h3><blockquote>
 <p>差分，又名差分函数或差分运算，差分的结果反映了离散量之间的一种变化，是研究离散数学的一种工具。它将原函数$f(x)$ 映射到$f(x+a)-f(x+b)$ 。差分运算，相应于微分运算，是微积分中重要的一个概念。总而言之，差分对应离散，微分对应连续。差分又分为前向差分和逆向差分两种。</p>
 </blockquote>
-<p>比如，在一个等差数列${ a_n }$中，公差$d$定义为$a_i - a_{i - 1}$，这就是一种简单的差分。</p>
+<p>比如，在一个等差数列${ a<em>n }$中，公差$d$定义为$a_i - a</em>{i - 1}$，这就是一种简单的差分。</p>
 <p>对于一个一维数组，如果我们要求区间[i .. k]的和，可以用一个循环加起来，但是这样是比较耗时间的，如果我们利用前缀和，只需要用<code>sum[k] - sum[i-1]</code>就可以快速得到答案。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ans = sum[k] - sum[i - <span class="number">1</span>];</span><br></pre></td></tr></table></figure>
 <p>对于一个二维数组，也可以进行同样的操作。下面的代码演示了如何求一个二维数组a中从$a[x][y]$到$a[x1][y1]$所有数值的和</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ans = sum[x1][y1] - sum[x - <span class="number">1</span>][y1] - sum[x1][y - <span class="number">1</span>] + sum[x - <span class="number">1</span>][y - <span class="number">1</span>];</span><br></pre></td></tr></table></figure>
 <h3 id="【用差分实现区间操作】"><a href="#【用差分实现区间操作】" class="headerlink" title="【用差分实现区间操作】"></a>【用差分实现区间操作】</h3><p>如果我们想让我们的数据结构支持一个<code>add(l, r, v)</code>的操作，即让一个区间中的所有数都加上一个数或减去一个数，该怎么操作呢，当然可以使用强(xuan)大(xue)的线段树，但是据说在NOIp阶段不会考，实际上这个操作可以利用差分来解决</p>
-<p>设A数组为<br>$$A={2, 3, 1, 4, 5, 2, 6}$$<br>C数组为修改数组，表示 $[1..n]$ 这些元素都加上 $c[i]$ 这个数<br>$$C={ 1, 4, 3, -1, -4}$$<br>S数组为C数组的前缀和数组<br>$$S={1, 5, 8, 7, 3, 3, 3}$$</p>
-<p>对于每一个<code>add(l, r, a)</code>我们对$[L,R]$区间进行加$a$操作，在$C[L]$处加上$a$，在$C[R+1]$处减去$a$</p>
+<p>设A数组为 </p>
+<script type="math/tex; mode=display">A=\{2, 3, 1, 4, 5, 2, 6\}</script><p>C数组为修改数组，表示 $[1..n]$ 这些元素都加上 $c[i]$ 这个数</p>
+<script type="math/tex; mode=display">C=\{ 1, 4, 3, -1, -4\}</script><p>S数组为C数组的前缀和数组</p>
+<script type="math/tex; mode=display">S=\{1, 5, 8, 7, 3, 3, 3\}</script><p>对于每一个<code>add(l, r, a)</code>我们对$[L,R]$区间进行加$a$操作，在$C[L]$处加上$a$，在$C[R+1]$处减去$a$</p>
 <p>最后求序列的每个位置变成了多少，只要看一下这个位置上$C$数组的前缀和就可以。</p>
 <p>对于二维数组，处理方法也是类似的</p>
 <blockquote>

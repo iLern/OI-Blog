@@ -13,8 +13,8 @@
 <ol>
 <li>给定 $ m $ 个区间 $ [L_i, R_i] $</li>
 <li>选出一个参数 $ W $ </li>
-<li>对于每一个区间，其检验值定义为<br>$$ Y_i = \sum_j 1 \times \sum_j v_j,j \in [L_i, R_i] , w_j \ge W $$</li>
-<li>对于这一批矿产，其检验值为<br>$$ Y = \sum_i^m Y_i $$</li>
+<li>对于每一个区间，其检验值定义为<script type="math/tex; mode=display">Y_i = \sum_j 1 \times \sum_j v_j,j \in [L_i, R_i] , w_j \ge W</script></li>
+<li>对于这一批矿产，其检验值为<script type="math/tex; mode=display">Y = \sum_i^m Y_i</script></li>
 </ol>
 <p>若这批矿产的检验结果与所给标准值 $ S $ 相差太多，就需要再去检验另一批矿产。质监员不想费时间去检验另一批矿产，所以他想通过调整参数 $ W $ 的值，让检验结果尽可能的靠近标准值 $ S $ ，即使得 $ S - Y $ 的绝对值最小。请你帮忙求出这个最小值。</p>
 <h3 id="【输入描述】"><a href="#【输入描述】" class="headerlink" title="【输入描述】"></a>【输入描述】</h3><p>第一行包含三个整数 $ n，m，S $，分别表示矿石的个数、区间的个数和标准值。<br>接下来的 $ n $ 行，每行 $ 2 $ 个整数，中间用空格隔开，第 $ i + 1 $ 行表示 $ i $ 号矿石的重量 $ w_i $ 和价值 $ v_i $ 。<br>接下来的 $ m $ 行，表示区间，每行 $ 2 $ 个整数，中间用空格隔开，第 $ i + n + 1 $ 行表示区间 $ [Li,Ri] $ 的两个端点 $ L_i $ 和 $ R_i $。注意：不同区间可能重合或相互重叠。）</p>

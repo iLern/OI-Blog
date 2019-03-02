@@ -16,9 +16,9 @@
 <p>对于$60\%$的数据，$2 \leq b \leq 50000000$</p>
 <p>对于$100\%$的数据，$2 \leq a, b \leq 2000000000$</p>
 <h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>这是一道数论题, 题目要求解一个简单的同余方程, 出题人很良心地让$ax$ 与 $1$ 同余, 这样题目就变成了裸的求逆元, 解法也就不止一种了</p>
-<h4 id="算法一【欧拉定理求逆元】"><a href="#算法一【欧拉定理求逆元】" class="headerlink" title="算法一【欧拉定理求逆元】"></a>算法一【欧拉定理求逆元】</h4><p>欧拉定理：<br>$$a^{\varphi(b)} \equiv 1 \pmod b$$</p>
-<p>稍微变形可得：<br>$$a \times a^{\varphi(b) - 1} \equiv 1 \pmod b$$</p>
-<p>会发现这里的$a^{\varphi(b) - 1}$就是我们要求的$x$, 用快速幂算一下就可以了。</p>
+<h4 id="算法一【欧拉定理求逆元】"><a href="#算法一【欧拉定理求逆元】" class="headerlink" title="算法一【欧拉定理求逆元】"></a>算法一【欧拉定理求逆元】</h4><p>欧拉定理：</p>
+<script type="math/tex; mode=display">a^{\varphi(b)} \equiv 1 \pmod b</script><p>稍微变形可得：</p>
+<script type="math/tex; mode=display">a \times a^{\varphi(b) - 1} \equiv 1 \pmod b</script><p>会发现这里的$a^{\varphi(b) - 1}$就是我们要求的$x$, 用快速幂算一下就可以了。</p>
 <p>$\varphi(n)$是什么?它叫做欧拉函数, 表示的是不大于$n$的正整数中与$n$互质的数的个数……</p>
 <h4 id="算法二-【拓展欧几里得求逆元】"><a href="#算法二-【拓展欧几里得求逆元】" class="headerlink" title="算法二 【拓展欧几里得求逆元】"></a>算法二 【拓展欧几里得求逆元】</h4><p>这种算法据说常数会比用欧拉函数来求要小一些, 所以对于求逆元来说更优一些</p>
 <p>留坑待填……</p>
