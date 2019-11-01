@@ -150,9 +150,29 @@
 </ul>
 <h3 id="数据的文件写入"><a href="#数据的文件写入" class="headerlink" title="数据的文件写入"></a>数据的文件写入</h3><p>想要写入文件，在打开文件时应该用<code>w</code> / <code>wb</code>形式</p>
 <ul>
-<li><p>python提供两种写文件的方法</p>
-<p>|               方法               |                             说明                             |<br>| :———————————————: | :—————————————————————————————: |<br>|    <code>&lt;file_object&gt;.write(str)</code>    |                   写字符串或文件流到文件中                   |<br>| <code>&lt;file_object&gt;.writelines(list)</code> | 把一个全为字符串的列表写到文件里，实际上是把列表中的字符串续到一起 |</p>
-</li>
+<li>python提供两种写文件的方法</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>&lt;file_object&gt;.write(str)</code></td>
+<td style="text-align:center">写字符串或文件流到文件中</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>&lt;file_object&gt;.writelines(list)</code></td>
+<td style="text-align:center">把一个全为字符串的列表写到文件里，实际上是把列表中的字符串续到一起</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
 <li><p>文件指针</p>
 <ul>
 <li><p>不是C语言里的那种文件指针。</p>
