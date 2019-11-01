@@ -43,16 +43,47 @@
 </ul>
 </li>
 </ul>
-<pre><code>| 打开模式 |                       描述                       |
-| :------: | :----------------------------------------------: |
-|    r     |  **默认**打开模式，只读，若文件不存在则抛出异常  |
-|    w     |     覆盖写，若不存在则创建，若存在则完全覆盖     |
-|    x     |     创建写，若不存在则创建，若存在则抛出异常     |
-|    a     |   追加写，若不存在则创建，若存在则在文件后追加   |
-|    b     |                    二进制打开                    |
-|    t     |              文本打开，**默认**方式              |
-|    +     | 与前四种模式一同使用，在原本的基础上增加读写功能 |
-</code></pre><ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">打开模式</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">r</td>
+<td style="text-align:center"><strong>默认</strong>打开模式，只读，若文件不存在则抛出异常</td>
+</tr>
+<tr>
+<td style="text-align:center">w</td>
+<td style="text-align:center">覆盖写，若不存在则创建，若存在则完全覆盖</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td style="text-align:center">创建写，若不存在则创建，若存在则抛出异常</td>
+</tr>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">追加写，若不存在则创建，若存在则在文件后追加</td>
+</tr>
+<tr>
+<td style="text-align:center">b</td>
+<td style="text-align:center">二进制打开</td>
+</tr>
+<tr>
+<td style="text-align:center">t</td>
+<td style="text-align:center">文本打开，<strong>默认</strong>方式</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">与前四种模式一同使用，在原本的基础上增加读写功能</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
 <li><p>默认的文件编码格式为<code>UTF-8</code>，要打开其他编码格式的文件要在打开文件时为<code>read</code>添加参数<code>encoding</code>表示要使用的编码方式。</p>
 </li>
 <li><p>如果编码方式不规范，<code>open</code>会抛出异常，遇到这种情况可以添加<code>errors</code>参数表示如何处理，最简单的方式就是直接忽略<code>error = &#39;ignore&#39;</code>。</p>
