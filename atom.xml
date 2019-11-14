@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2019-11-14T08:32:27.568Z</updated>
+  <updated>2019-11-14T08:43:17.406Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://ilern.github.io/2019/11/14/Computer-Networking-Lab-1/"/>
     <id>http://ilern.github.io/2019/11/14/Computer-Networking-Lab-1/</id>
     <published>2019-11-13T16:00:00.000Z</published>
-    <updated>2019-11-14T08:32:27.568Z</updated>
+    <updated>2019-11-14T08:43:17.406Z</updated>
     
-    <content type="html"><![CDATA[<p>《计算机网络-自顶向下方法》 Socket编程作业一</p><a id="more"></a><p>本作业完整代码可在我的这个<a href="https://github.com/iLern/Computer-Networking-Lab" target="_blank" rel="noopener">Github仓库</a>中找到。</p><h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>实现一个最简单的Web服务器，它能够处理一个请求：</p><ul><li>当客户（浏览器）联系时创建一个连接Socket</li><li>从这个连接接收HTTP请求</li><li>解释该请求以确定所请求的特定文件</li><li>从服务器的文件系统获取该文件</li><li>创建一个由请求的文件组成的HTTP响应报文，报文前面有首部行</li><li>经TCP连接向请求的浏览器发送响应。若服务器中不存在请求的文件是，返回一个<code>404 Not Found</code>的差错报文</li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul><li>HTTP建立在TCP之上，所以在服务端建立TCP Socket</li><li>HTTP响应报文的首部行需要手写</li></ul>]]></content>
+    <content type="html"><![CDATA[<p>《计算机网络-自顶向下方法》 Socket编程作业一</p><a id="more"></a><p>本作业完整代码可在我的这个<a href="https://github.com/iLern/Computer-Networking-Lab" target="_blank" rel="noopener">Github仓库</a>中找到。</p><h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>实现一个最简单的Web服务器，它能够处理一个请求：</p><ul><li>当客户（浏览器）联系时创建一个连接Socket</li><li>从这个连接接收HTTP请求</li><li>解释该请求以确定所请求的特定文件</li><li>从服务器的文件系统获取该文件</li><li>创建一个由请求的文件组成的HTTP响应报文，报文前面有首部行</li><li>经TCP连接向请求的浏览器发送响应。若服务器中不存在请求的文件是，返回一个<code>404 Not Found</code>的差错报文</li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul><li>HTTP建立在TCP之上，所以在服务端建立TCP Socket</li><li>HTTP响应报文的首部行需要手写，感觉有点奇怪</li></ul><h2 id="图示"><a href="#图示" class="headerlink" title="图示"></a>图示</h2><p><img src="C:\Users\Taisi\Pictures\Saved Pictures\无标题.png" alt></p>]]></content>
     
     <summary type="html">
     

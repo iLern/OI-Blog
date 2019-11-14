@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[《计算机网络-自顶向下方法》 编程作业一 Web服务器]]></title>
     <url>%2F2019%2F11%2F14%2FComputer-Networking-Lab-1%2F</url>
-    <content type="text"><![CDATA[《计算机网络-自顶向下方法》 Socket编程作业一 本作业完整代码可在我的这个Github仓库中找到。 要求实现一个最简单的Web服务器，它能够处理一个请求： 当客户（浏览器）联系时创建一个连接Socket 从这个连接接收HTTP请求 解释该请求以确定所请求的特定文件 从服务器的文件系统获取该文件 创建一个由请求的文件组成的HTTP响应报文，报文前面有首部行 经TCP连接向请求的浏览器发送响应。若服务器中不存在请求的文件是，返回一个404 Not Found的差错报文 思路 HTTP建立在TCP之上，所以在服务端建立TCP Socket HTTP响应报文的首部行需要手写]]></content>
+    <content type="text"><![CDATA[《计算机网络-自顶向下方法》 Socket编程作业一 本作业完整代码可在我的这个Github仓库中找到。 要求实现一个最简单的Web服务器，它能够处理一个请求： 当客户（浏览器）联系时创建一个连接Socket 从这个连接接收HTTP请求 解释该请求以确定所请求的特定文件 从服务器的文件系统获取该文件 创建一个由请求的文件组成的HTTP响应报文，报文前面有首部行 经TCP连接向请求的浏览器发送响应。若服务器中不存在请求的文件是，返回一个404 Not Found的差错报文 思路 HTTP建立在TCP之上，所以在服务端建立TCP Socket HTTP响应报文的首部行需要手写，感觉有点奇怪 图示]]></content>
       <categories>
         <category>计算机网络</category>
       </categories>
