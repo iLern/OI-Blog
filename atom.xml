@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2019-11-16T13:02:43.650Z</updated>
+  <updated>2019-11-27T13:33:02.581Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title> 《计算机网络-自顶向下方法》 编程作业三 邮件服务器</title>
+    <link href="http://ilern.github.io/2019/11/27/Computer-Networking-Lab-3/"/>
+    <id>http://ilern.github.io/2019/11/27/Computer-Networking-Lab-3/</id>
+    <published>2019-11-26T16:00:00.000Z</published>
+    <updated>2019-11-27T13:33:02.581Z</updated>
+    
+    <content type="html"><![CDATA[<p>《计算机网络-自顶向下方法》 Socket编程作业三</p><a id="more"></a><p>本作业完整代码可在我的这个<a href="https://github.com/iLern/Computer-Networking-Lab" target="_blank" rel="noopener">Github仓库</a>中找到。</p><h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>通过完成本实验，您将更加了解SMTP协议。您还将学到使用Python实现标准协议的经验。</p><p>您的任务是开发一个简单的邮件客户端，将邮件发送给任意收件人。您的客户端将需要连接到邮件服务器，使用SMTP协议与邮件服务器进行对话，并向邮件服务器发送电子邮件。 Python提供了一个名为smtplib的模块，它内置了使用SMTP协议发送邮件的方法。但是我们不会在本实验中使用此模块，因为它隐藏了SMTP和套接字编程的细节。</p><p>为了限制垃圾邮件，一些邮件服务器不接受来源随意的TCP连接。对于下面所述的实验，您可能需要尝试连接到您的大学邮件服务器和流行的Webmail服务器（如AOL邮件服务器）。您也可以尝试从您的家和您的大学校园进行连接。</p><h3 id="附加说明"><a href="#附加说明" class="headerlink" title="附加说明"></a>附加说明</h3><p>在某些情况下，接收邮件服务器可能会将您的电子邮件分类为垃圾邮件。当您查找从客户端发送的电子邮件时，请检查垃圾邮件文件夹。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;《计算机网络-自顶向下方法》 Socket编程作业三&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="计算机网络" scheme="http://ilern.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="Web" scheme="http://ilern.github.io/tags/Web/"/>
+    
+      <category term="网络" scheme="http://ilern.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title> 《计算机网络-自顶向下方法》 编程作业二 UDP ping 程序</title>
@@ -286,30 +310,6 @@
   </entry>
   
   <entry>
-    <title>差分约束系统学习笔记</title>
-    <link href="http://ilern.github.io/2019/07/30/difference_constraints/"/>
-    <id>http://ilern.github.io/2019/07/30/difference_constraints/</id>
-    <published>2019-07-30T15:37:23.000Z</published>
-    <updated>2019-07-30T11:38:45.435Z</updated>
-    
-    <content type="html"><![CDATA[<p>数学问题转化到图论上解决，有点巧妙。</p><a id="more"></a><p>差分约束系统是一种特殊的 $N$ 元一次不等式组。包含 $N$ 个变量，$M$ 个约束条件，每个约束条件都是以差分的形式给出，形如 $X_i - X_j \leq c_k$。</p><p>现在要求 $X_i$ 的一组解，使得所有不等式成立。</p><p>对于这样的问题，有一个统一的转化方法：</p><ul><li>把不等式表示成 $X_i - X_j \leq c_k$ 的形式，</li><li>把每个变量 $X_i$ 看作 <strong>有向图</strong> 中的一个结点 $i$，把每个约束条件 $X_i - X_j \leq c_k$ 看作从 $i$ 到 $j$ 连一条长度为 $c_k$ 的有向边，</li><li>注意到此时建立的图不一定联通，需要添加一个超级源点，从 $0$ 号结点向每个点连一条边权为$0$ 的边。</li><li>用 <strong>spfa</strong> 求出 $0$ 号点到各个点的最短路，如果最短路存在，那么每个点的 <code>dis</code> 值就是原不等式组的一组解。</li><li>如果有负环，则解不存在，为了解决负环的问题，只能用 <strong>spfa</strong> 来求最短路。</li></ul><p>为什么这样是对的？看上去毫不相干的不等式怎么和最短路怎么联系起来的呢？<br><del>其实不知道也没关系</del></p><p><a href="https://blog.csdn.net/PleasantlY1/article/details/82775505" target="_blank" rel="noopener">有空就学</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;数学问题转化到图论上解决，有点巧妙。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="ACM" scheme="http://ilern.github.io/categories/ACM/"/>
-    
-    
-      <category term="算法" scheme="http://ilern.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="图论" scheme="http://ilern.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
-  </entry>
-  
-  <entry>
     <title>[Poj 3169] Layout - 差分约束 + spfa</title>
     <link href="http://ilern.github.io/2019/07/30/poj_3169/"/>
     <id>http://ilern.github.io/2019/07/30/poj_3169/</id>
@@ -332,6 +332,30 @@
       <category term="图论" scheme="http://ilern.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
     
       <category term="差分约束" scheme="http://ilern.github.io/tags/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>差分约束系统学习笔记</title>
+    <link href="http://ilern.github.io/2019/07/30/difference_constraints/"/>
+    <id>http://ilern.github.io/2019/07/30/difference_constraints/</id>
+    <published>2019-07-30T15:37:23.000Z</published>
+    <updated>2019-07-30T11:38:45.435Z</updated>
+    
+    <content type="html"><![CDATA[<p>数学问题转化到图论上解决，有点巧妙。</p><a id="more"></a><p>差分约束系统是一种特殊的 $N$ 元一次不等式组。包含 $N$ 个变量，$M$ 个约束条件，每个约束条件都是以差分的形式给出，形如 $X_i - X_j \leq c_k$。</p><p>现在要求 $X_i$ 的一组解，使得所有不等式成立。</p><p>对于这样的问题，有一个统一的转化方法：</p><ul><li>把不等式表示成 $X_i - X_j \leq c_k$ 的形式，</li><li>把每个变量 $X_i$ 看作 <strong>有向图</strong> 中的一个结点 $i$，把每个约束条件 $X_i - X_j \leq c_k$ 看作从 $i$ 到 $j$ 连一条长度为 $c_k$ 的有向边，</li><li>注意到此时建立的图不一定联通，需要添加一个超级源点，从 $0$ 号结点向每个点连一条边权为$0$ 的边。</li><li>用 <strong>spfa</strong> 求出 $0$ 号点到各个点的最短路，如果最短路存在，那么每个点的 <code>dis</code> 值就是原不等式组的一组解。</li><li>如果有负环，则解不存在，为了解决负环的问题，只能用 <strong>spfa</strong> 来求最短路。</li></ul><p>为什么这样是对的？看上去毫不相干的不等式怎么和最短路怎么联系起来的呢？<br><del>其实不知道也没关系</del></p><p><a href="https://blog.csdn.net/PleasantlY1/article/details/82775505" target="_blank" rel="noopener">有空就学</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;数学问题转化到图论上解决，有点巧妙。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="ACM" scheme="http://ilern.github.io/categories/ACM/"/>
+    
+    
+      <category term="算法" scheme="http://ilern.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="图论" scheme="http://ilern.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -413,6 +437,30 @@
   </entry>
   
   <entry>
+    <title> Leading and Trailing - 对数 + 快速幂</title>
+    <link href="http://ilern.github.io/2019/07/21/Lat/"/>
+    <id>http://ilern.github.io/2019/07/21/Lat/</id>
+    <published>2019-07-21T14:32:23.000Z</published>
+    <updated>2019-07-21T10:37:46.785Z</updated>
+    
+    <content type="html"><![CDATA[<p>QDU2019暑期集训第一周数学部分</p><a id="more"></a><h3 id="【链接】"><a href="#【链接】" class="headerlink" title="【链接】"></a>【链接】</h3><p> <a href="https://vjudge.net/contest/312605#problem/B" target="_blank" rel="noopener">Leading and Trailing</a></p><h3 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h3><p>You are given two integers: $n$ and $k$, your task is to find the most significant three digits, and least significant three digits of $n^k$.</p><p>给定$n$和$k$，求$n^k$的前三位数字和后三位数字。</p><h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>后三位数字直接用快速幂对$1000$取模即可。</p><p>前三位数字的做法比较巧妙。</p><p>设 $10^p = n^k$ ，两边同取对数 $p = k\lg n$ ，$p$ 是一个浮点数，整数部分为$[p]$, 记为 $x$ ; 小数部分为 $p - [p]$， 记为$y$ 。有$10^p = 10^{x + y} = 10^x \cdot 10^y = n^k$ 这样就把 $n^k$ 转化为了科学记数法表示，$10^y &lt; 1$ ，所以要求的前三位就是 $10^y \cdot 10^3 = 10^{y+3}$。</p><p>最后三位前面不足的位置补$0$。</p><h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fastPowMod</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span> % MOD;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (; b; b &gt;&gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>) ans = (<span class="keyword">long</span> <span class="keyword">long</span>)ans * a % MOD;</span><br><span class="line">        a = (<span class="keyword">long</span> <span class="keyword">long</span>)a * a % MOD;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> cnt = <span class="number">1</span>; cnt &lt;= t; cnt++) &#123;</span><br><span class="line">        <span class="keyword">int</span> n, k;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;k);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span> p = k * <span class="built_in">log10</span>(n);</span><br><span class="line">        <span class="keyword">int</span> x = (<span class="keyword">int</span>)p;</span><br><span class="line">        <span class="keyword">double</span> y = p - x;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case %d: %d %03d\n"</span>, cnt, (<span class="keyword">int</span>)<span class="built_in">pow</span>(<span class="number">10.0</span>, y + <span class="number">2</span>), fastPowMod(n, k));</span><br><span class="line">        <span class="comment">//if (cnt &lt; t) printf("\n");</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;QDU2019暑期集训第一周数学部分&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="ACM" scheme="http://ilern.github.io/categories/ACM/"/>
+    
+    
+      <category term="算法" scheme="http://ilern.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="数学" scheme="http://ilern.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>扩展欧几里得算法学习笔记</title>
     <link href="http://ilern.github.io/2019/07/21/exgcd_learn/"/>
     <id>http://ilern.github.io/2019/07/21/exgcd_learn/</id>
@@ -445,54 +493,6 @@
     <updated>2019-07-21T10:15:51.468Z</updated>
     
     <content type="html"><![CDATA[<p>QDU2019暑期集训第一周数学部分</p><a id="more"></a><h3 id="【链接】"><a href="#【链接】" class="headerlink" title="【链接】"></a>【链接】</h3><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1576" target="_blank" rel="noopener">HDU 1576 A/B</a></p><h3 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h3><p>要求$(A / B)\%9973$，但由于$A$很大，我们只给出$n(n = A \% 9973)$(我们给定的$A$必能被$B$整除，且$\gcd(B, 9973) = 1)$。</p><h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>$(A / B)\%9973 = (AB^{-1}) \% 9973 = (A \% 9973 \cdot B^{-1} \%9973) \%9973 = (n \cdot B^{-1} \%9973) \%9973$</p><p>问题转化为求$B^{-1}$</p><p>可用费马小定理或者扩展欧几里得算法求解。</p><p>​    </p><h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD = <span class="number">9973</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fastPowMod</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span> % MOD;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (; b; b &gt;&gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>) ans = (<span class="keyword">long</span> <span class="keyword">long</span>)ans * a % MOD;</span><br><span class="line">        a = (<span class="keyword">long</span> <span class="keyword">long</span>)a * a % MOD;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        <span class="keyword">int</span> n, b;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;b);</span><br><span class="line"></span><br><span class="line">        b = fastPowMod(b, MOD - <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, (n % MOD * b % MOD) % MOD);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;QDU2019暑期集训第一周数学部分&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="ACM" scheme="http://ilern.github.io/categories/ACM/"/>
-    
-    
-      <category term="算法" scheme="http://ilern.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="数学" scheme="http://ilern.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title> Leading and Trailing - 对数 + 快速幂</title>
-    <link href="http://ilern.github.io/2019/07/21/Lat/"/>
-    <id>http://ilern.github.io/2019/07/21/Lat/</id>
-    <published>2019-07-21T14:32:23.000Z</published>
-    <updated>2019-07-21T10:37:46.785Z</updated>
-    
-    <content type="html"><![CDATA[<p>QDU2019暑期集训第一周数学部分</p><a id="more"></a><h3 id="【链接】"><a href="#【链接】" class="headerlink" title="【链接】"></a>【链接】</h3><p> <a href="https://vjudge.net/contest/312605#problem/B" target="_blank" rel="noopener">Leading and Trailing</a></p><h3 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h3><p>You are given two integers: $n$ and $k$, your task is to find the most significant three digits, and least significant three digits of $n^k$.</p><p>给定$n$和$k$，求$n^k$的前三位数字和后三位数字。</p><h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>后三位数字直接用快速幂对$1000$取模即可。</p><p>前三位数字的做法比较巧妙。</p><p>设 $10^p = n^k$ ，两边同取对数 $p = k\lg n$ ，$p$ 是一个浮点数，整数部分为$[p]$, 记为 $x$ ; 小数部分为 $p - [p]$， 记为$y$ 。有$10^p = 10^{x + y} = 10^x \cdot 10^y = n^k$ 这样就把 $n^k$ 转化为了科学记数法表示，$10^y &lt; 1$ ，所以要求的前三位就是 $10^y \cdot 10^3 = 10^{y+3}$。</p><p>最后三位前面不足的位置补$0$。</p><h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fastPowMod</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span> % MOD;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (; b; b &gt;&gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>) ans = (<span class="keyword">long</span> <span class="keyword">long</span>)ans * a % MOD;</span><br><span class="line">        a = (<span class="keyword">long</span> <span class="keyword">long</span>)a * a % MOD;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> cnt = <span class="number">1</span>; cnt &lt;= t; cnt++) &#123;</span><br><span class="line">        <span class="keyword">int</span> n, k;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;k);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span> p = k * <span class="built_in">log10</span>(n);</span><br><span class="line">        <span class="keyword">int</span> x = (<span class="keyword">int</span>)p;</span><br><span class="line">        <span class="keyword">double</span> y = p - x;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case %d: %d %03d\n"</span>, cnt, (<span class="keyword">int</span>)<span class="built_in">pow</span>(<span class="number">10.0</span>, y + <span class="number">2</span>), fastPowMod(n, k));</span><br><span class="line">        <span class="comment">//if (cnt &lt; t) printf("\n");</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;QDU2019暑期集训第一周数学部分&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="ACM" scheme="http://ilern.github.io/categories/ACM/"/>
-    
-    
-      <category term="算法" scheme="http://ilern.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="数学" scheme="http://ilern.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[bzoj 1477] 青蛙的约会  - 扩展欧几里得</title>
-    <link href="http://ilern.github.io/2019/07/21/bzoj_1477/"/>
-    <id>http://ilern.github.io/2019/07/21/bzoj_1477/</id>
-    <published>2019-07-21T13:00:00.000Z</published>
-    <updated>2019-07-21T12:56:41.347Z</updated>
-    
-    <content type="html"><![CDATA[<p>QDU2019暑期集训第一周数学部分</p><a id="more"></a><h3 id="【链接】"><a href="#【链接】" class="headerlink" title="【链接】"></a>【链接】</h3><p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1477" target="_blank" rel="noopener">bzoj 1477 青蛙的约会</a></p><h3 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h3><p>两只青蛙在网上相识了，它们聊得很开心，于是觉得很有必要见一面。它们很高兴地发现它们住在同一条纬度线上，于是它们约定各自朝西跳，直到碰面为止。可是它们出发之前忘记了一件很重要的事情，既没有问清楚对方的特征，也没有约定见面的具体位置。不过青蛙们都是很乐观的，它们觉得只要一直朝着某个方向跳下去，总能碰到对方的。但是除非这两只青蛙在同一时间跳到同一点上，不然是永远都不可能碰面的。为了帮助这两只乐观的青蛙，你被要求写一个程序来判断这两只青蛙是否能够碰面，会在什么时候碰面。 我们把这两只青蛙分别叫做青蛙A和青蛙B，并且规定纬度线上东经 $0$ 度处为原点，由东往西为正方向，单位长度 $1$ 米，这样我们就得到了一条首尾相接的数轴。设青蛙 $A$ 的出发点坐标是 $x$，青蛙 $B$ 的出发点坐标是 $y$。青蛙 $A$ 一次能跳 $m$ 米，青蛙 $B$ 一次能跳$n$ 米，两只青蛙跳一次所花费的时间相同。纬度线总长 $L$ 米。现在要你求出它们跳了几次以后才会碰面。</p><h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>青蛙$A$: $(x + km) \% L$</p><p>青蛙$B$: $(y + kn)\%L$</p><p>问题转化为$(x + km) \% L = (y + kn)\%L$</p><p>展开得线性同余方程$k(m-n) \equiv y-x \pmod L$</p><p>其中 $m-n$ 和 $ y-x  $ 都是已知的常数，利用扩展欧几里得算法求出 $k$ 即可。</p><p>需要注意的是$(m-n)$一定要是正的，如果算出来是负的，等号两边同乘以负一。</p><p>最后 $k$ 也应该也是正的，如果算出来是负的，加上$\frac{b}{d}$就好。</p><p>记得用<code>long long</code></p><h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !b ? a : gcd(b, a % b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">long</span> <span class="keyword">long</span> &amp;x, <span class="keyword">long</span> <span class="keyword">long</span> &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;x = <span class="number">1</span>; y = <span class="number">0</span>; <span class="keyword">return</span> a;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> d = exgcd(b, a % b, x, y);</span><br><span class="line">    <span class="keyword">int</span> z = x; x = y; y = z - y * (a / b);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x, y, m, n, l;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d%d"</span>, &amp;x, &amp;y, &amp;m, &amp;n, &amp;l);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a = m - n;</span><br><span class="line">    <span class="keyword">int</span> b = l;</span><br><span class="line">    <span class="keyword">int</span> c = y - x;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (a &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        a = -a;</span><br><span class="line">        c = -c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//printf("a = %d, b = %d, c = %d\n", a, b, c);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//solve ax + cy = b;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> d = gcd(a, b);</span><br><span class="line">    <span class="comment">//printf("d = %d\n", d);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (c % d != <span class="number">0</span>) <span class="built_in">printf</span>(<span class="string">"Impossible\n"</span>);</span><br><span class="line">    <span class="keyword">else</span> &#123; </span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> x0 = <span class="number">0</span>, y0 = <span class="number">0</span>;</span><br><span class="line">        d = exgcd(a, b, x0, y0);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> x = x0 * c / d;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> t = b / d;</span><br><span class="line">        <span class="keyword">if</span> (x &gt;= <span class="number">0</span>) x %= t;</span><br><span class="line">        <span class="keyword">else</span> x = x % t + t;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
