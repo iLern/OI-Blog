@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2020-01-22T13:26:22.741Z</updated>
+  <updated>2020-01-22T14:45:23.260Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://ilern.github.io/2020/01/22/how_to_diff/"/>
     <id>http://ilern.github.io/2020/01/22/how_to_diff/</id>
     <published>2020-01-22T13:33:00.000Z</published>
-    <updated>2020-01-22T13:26:22.741Z</updated>
+    <updated>2020-01-22T14:45:23.260Z</updated>
     
-    <content type="html"><![CDATA[<p>对于一个半加器，我们用一个异或门表示加和输出，一个与门表示进位输出，可以实现两个二进制数中一位的加法。</p><p>将和与前一位运算的进位通过一个半加器连接在一起就构成了全加器。</p><p>至此就实现了二进制加法。</p><p>每一个全加器只能计算<strong>一位</strong>二进制数，要进行多位二进制数的加法就需要串联多个全加器。</p><a id="more"></a>]]></content>
+    <content type="html"><![CDATA[<p>对于一个半加器，我们用一个异或门表示加和输出，一个与门表示进位输出，可以实现两个二进制数中一位的加法。</p><p>将和与前一位运算的进位通过一个半加器连接在一起就构成了全加器。</p><p>至此就实现了二进制加法。</p><p>每一个全加器只能计算<strong>一位</strong>二进制数，要进行多位二进制数的加法就需要串联多个全加器。</p><a id="more"></a><p>对于减法而言，不存在进位，但是有借位。</p><p>为了避免借位，提出<strong>补数</strong>的概念</p><blockquote><p>对于一个 $k$ 进制数 $a$ ，从一串 $k$ 中（个数等于 $k$ 进制下 $a$ 的位数）减去 $a$ 得到的数，称为 $a$ 对 $k$ 的补数</p></blockquote><p>提出补数的好处是计算补数的过程不需要借位</p><p>当计算出补数之后，将补数与被减数<strong>相加</strong>，把结果加一，再减去$10^n$，$n$为$a$的位数。</p><p>为什么这样可行？举个例子</p><script type="math/tex; mode=display">\begin{align}   253 - 176 &= 253 - 176 + 1000 - 1000 \\   &= 253 - 176 + 999 + 1 - 1000  \\   &= 253 + (999 - 176) + 1 - 1000\\\end{align}</script><p>二进制的减法与之类似。</p><p>整个过程下来，似乎非常好，但是有一个问题，这个过程还是有减法，但是我们现在并不知道如何计算减法。不过情况比一开始要稍微好一点，至少被减数固定下来了。</p><p>好在，对于一个二进制数，计算它的补数只需要对其按位取反，也就是它的<strong>反码</strong>(inverse)，</p>]]></content>
     
     <summary type="html">
     

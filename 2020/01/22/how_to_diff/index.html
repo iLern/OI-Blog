@@ -12,6 +12,22 @@
 <p>至此就实现了二进制加法。</p>
 <p>每一个全加器只能计算<strong>一位</strong>二进制数，要进行多位二进制数的加法就需要串联多个全加器。</p>
 <a id="more"></a>
+<p>对于减法而言，不存在进位，但是有借位。</p>
+<p>为了避免借位，提出<strong>补数</strong>的概念</p>
+<blockquote>
+<p>对于一个 $k$ 进制数 $a$ ，从一串 $k$ 中（个数等于 $k$ 进制下 $a$ 的位数）减去 $a$ 得到的数，称为 $a$ 对 $k$ 的补数</p>
+</blockquote>
+<p>提出补数的好处是计算补数的过程不需要借位</p>
+<p>当计算出补数之后，将补数与被减数<strong>相加</strong>，把结果加一，再减去$10^n$，$n$为$a$的位数。</p>
+<p>为什么这样可行？举个例子</p>
+<script type="math/tex; mode=display">
+\begin{align}  
+ 253 - 176 &= 253 - 176 + 1000 - 1000 \\  
+ &= 253 - 176 + 999 + 1 - 1000  \\  
+ &= 253 + (999 - 176) + 1 - 1000\\
+\end{align}</script><p>二进制的减法与之类似。</p>
+<p>整个过程下来，似乎非常好，但是有一个问题，这个过程还是有减法，但是我们现在并不知道如何计算减法。不过情况比一开始要稍微好一点，至少被减数固定下来了。</p>
+<p>好在，对于一个二进制数，计算它的补数只需要对其按位取反，也就是它的<strong>反码</strong>(inverse)，</p>
 </div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">iLern</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://ilern.github.io/2020/01/22/how_to_diff/">http://ilern.github.io/2020/01/22/how_to_diff/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/《编码》笔记/">《编码》笔记</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2019/11/27/Computer-Networking-Lab-3/"><span> 《计算机网络-自顶向下方法》 编程作业三 邮件服务器</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2016 - 2020 By iLern</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://ilern.github.io/">blog</a>!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
   tex2jax: {
     inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
