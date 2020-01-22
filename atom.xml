@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2019-11-27T14:51:08.481Z</updated>
+  <updated>2020-01-22T13:26:22.741Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何实现减法</title>
+    <link href="http://ilern.github.io/2020/01/22/how_to_diff/"/>
+    <id>http://ilern.github.io/2020/01/22/how_to_diff/</id>
+    <published>2020-01-22T13:33:00.000Z</published>
+    <updated>2020-01-22T13:26:22.741Z</updated>
+    
+    <content type="html"><![CDATA[<p>对于一个半加器，我们用一个异或门表示加和输出，一个与门表示进位输出，可以实现两个二进制数中一位的加法。</p><p>将和与前一位运算的进位通过一个半加器连接在一起就构成了全加器。</p><p>至此就实现了二进制加法。</p><p>每一个全加器只能计算<strong>一位</strong>二进制数，要进行多位二进制数的加法就需要串联多个全加器。</p><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;对于一个半加器，我们用一个异或门表示加和输出，一个与门表示进位输出，可以实现两个二进制数中一位的加法。&lt;/p&gt;
+&lt;p&gt;将和与前一位运算的进位通过一个半加器连接在一起就构成了全加器。&lt;/p&gt;
+&lt;p&gt;至此就实现了二进制加法。&lt;/p&gt;
+&lt;p&gt;每一个全加器只能计算&lt;strong&gt;一位&lt;/strong&gt;二进制数，要进行多位二进制数的加法就需要串联多个全加器。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="计算机组成原理" scheme="http://ilern.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
+    
+    
+      <category term="《编码》笔记" scheme="http://ilern.github.io/tags/%E3%80%8A%E7%BC%96%E7%A0%81%E3%80%8B%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title> 《计算机网络-自顶向下方法》 编程作业三 邮件服务器</title>
@@ -448,31 +473,6 @@
     <summary type="html">
     
       &lt;p&gt;QDU2019暑期集训第一周数学部分&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="ACM" scheme="http://ilern.github.io/categories/ACM/"/>
-    
-    
-      <category term="算法" scheme="http://ilern.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="数学" scheme="http://ilern.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>扩展欧几里得算法学习笔记</title>
-    <link href="http://ilern.github.io/2019/07/21/exgcd_learn/"/>
-    <id>http://ilern.github.io/2019/07/21/exgcd_learn/</id>
-    <published>2019-07-21T14:32:23.000Z</published>
-    <updated>2019-07-21T09:53:20.392Z</updated>
-    
-    <content type="html"><![CDATA[<p>扩展欧几里得算法能在计算$\gcd(a,b)$ 的同时求解方程$ax + by = \gcd(a, b)$的一组特解。</p><p>是为欧几里得算法之扩展。</p><a id="more"></a><h3 id="Bezout’s-identity（裴蜀定理）"><a href="#Bezout’s-identity（裴蜀定理）" class="headerlink" title="Bézout’s identity（裴蜀定理）"></a>Bézout’s identity（裴蜀定理）</h3><blockquote><p>对于任意整数$a, b$，存在一对整数 $x, y$ 满足$ax + by = \gcd(a, b)$</p></blockquote><p>使用（类似）数学归纳法证明：</p><ul><li><p>当 $b = 0$ 时，有$x = 1, y  = 0$ 使得等式成立，即有 $a \times 1 + b \times 0 = \gcd(a, 0) = a$</p></li><li><p>当 $b&gt;0$ 时，假设存在 $x, y$  使得等式成立，即</p><script type="math/tex; mode=display">ax + by = \gcd(a, b) = \gcd(b, a \% b) = bx + (a \% b)y</script><p> 又由取模运算的定义</p><script type="math/tex; mode=display">a \% b = a - b \lfloor \frac{a}{b} \rfloor</script><p>可知</p><script type="math/tex; mode=display">\begin{equation}\begin{aligned}\gcd(a, b) &= bx + ay - b \lfloor \frac{a}{b} \rfloor y \\&= ay + b(x - b \lfloor \frac{a}{b} \rfloor y)\end{aligned}\end{equation}</script><p>令 $x’ = y, y’ = x - b \lfloor \frac{a}{b} \rfloor y$ 可得 $ax’ + by’ = gcd(a, b)$</p><p>即 $bx + (a \% b)y = \gcd(a, b)$ 有解</p></li><li><p>这里的 $a, b$ 在交换一次之后变小了，这样一直递归下去就会到达 $b = 0$ 的边界，所以解一定存在</p></li></ul><h3 id="扩展欧几里德算法"><a href="#扩展欧几里德算法" class="headerlink" title="扩展欧几里德算法"></a>扩展欧几里德算法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;x = <span class="number">1</span>, y = <span class="number">0</span>; <span class="keyword">return</span> a;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> d = exgcd(b, a % b, x, y);</span><br><span class="line">    <span class="keyword">int</span> z = x; x = y; y = z - y * (a / b);</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>上面的代码求出了$ax + by = \gcd(a, b)$，返回了$\gcd(a, b)$。</p><p>对于一般的线性方程$ax + by = c$，当且仅当$\gcd(a, b) | c$ 时存在非负整数解，此时先用扩展欧几里得算法求出$ax + by = \gcd(a, b)$ 的一组特解 $x_0, y_0$ 再等式两边同时乘以$\frac{c}{\gcd(a,b)}$ 即可求得原方程的一组特解 $x_0 \frac{c}{\gcd(a, b)}, y_0 \frac{c}{\gcd(a, b)}$</p><p>而原方程的通解表示为</p><script type="math/tex; mode=display">\begin{aligned}x &= x_0 \frac{c}{\gcd(a, b)} + k \frac{b}{\gcd(a, b)} \\y &= y_0 \frac{c}{\gcd(a, b)} + k \frac{a}{\gcd(a, b)}\end{aligned}</script><p>其中 $k$ 可以取遍全体整数</p><h3 id="线性同余方程"><a href="#线性同余方程" class="headerlink" title="线性同余方程"></a>线性同余方程</h3><p>线性同余方程是指形如 $ax \equiv b \pmod m$ 的方程，因为未知数为的次数为一，故称之为<strong>线性</strong>同余方程。</p><p>扩展欧几里得算法的应用之一就是求解线性同余方程。</p><p>同余可以理解为<strong>模等于</strong>，也就是 $ax$ 模 $m$ 等于 $b$ ，所以原方程表示 $ax-b$ 是 $m$ 的倍数，不妨设为 $-y$ 倍，则原方程转化为 $ax - b = -ym$ 即 $ax + my = b$ 。</p><p>这样的方程我们可以用扩展欧几里得算法进行求解，当且仅当 $\gcd(a, m) | b$ 时，方程有解，易得原线性同余方程方程的特解为 $x = x_0 \frac{b}{\gcd(a, m)}$</p><h3 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h3><p>特殊地，当 $ax \equiv 1 \pmod m$ 时， $x$ 被称为 $a$ 在模 $m$ 意义下的逆元，可以套用上面的方法求出，要求$\gcd(x, m) = 1$</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;扩展欧几里得算法能在计算$\gcd(a,b)$ 的同时求解方程$ax + by = \gcd(a, b)$的一组特解。&lt;/p&gt;
-&lt;p&gt;是为欧几里得算法之扩展。&lt;/p&gt;
     
     </summary>
     
