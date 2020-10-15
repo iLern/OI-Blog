@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2020-02-22T14:14:41.501Z</updated>
+  <updated>2020-10-15T07:01:40.237Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>计算机网络复习笔记-数据链路层</title>
+    <link href="http://ilern.github.io/2020/10/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/"/>
+    <id>http://ilern.github.io/2020/10/15/计算机网络复习笔记-数据链路层/</id>
+    <published>2020-10-15T06:55:25.000Z</published>
+    <updated>2020-10-15T07:01:40.237Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><p>数据链路层的信道种类</p><ul><li>点对点信道<ul><li>一对一通信</li></ul></li><li>广播信道<ul><li>一对多</li><li>需要专门的协议</li></ul></li></ul></li><li><p>链路与数据链路</p><ul><li>链路指一条无源的点到点的线路</li><li>物理线路加上通信协议 / 实现通信协议的软硬件就形成了数据链路</li></ul></li><li><p>数据链路层的传输单位是帧 Frame</p></li><li><p>数据链路层解决的三个基本问题</p><ul><li>封装成帧</li><li>透明传输</li><li>差错控制</li></ul></li></ul><a id="more"></a><h2 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h2><ul><li>添加首部尾部进行帧定界 <code>SOH</code> Start_of_header <code>EOT</code> End_of_transmission</li><li>帧定界符是特殊的控制字符</li></ul><h2 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h2><ul><li>透明就是不透明</li><li>透明传输使得不用关心下层的传输，所采用的设备只是一个通道的作用</li><li>当传输二进制文件中出现定界符序列时，在这个序列之前添加<code>ESC</code>进行转义</li><li>称为 字节填充 / 字符填充<ul><li>在前面的非归零反相编码 NRZI 中有提到比特位填充 <code>bit_stuffing</code></li></ul></li><li>先转义还是先封装?</li></ul><h2 id="差错控制-差错检测"><a href="#差错控制-差错检测" class="headerlink" title="差错控制 / 差错检测"></a>差错控制 / 差错检测</h2><ul><li>误码率 BER<ul><li>$P_e = \frac{N_e}{N}$</li><li>传错的除以总的</li></ul></li><li>噪声的类型<ul><li>热噪声<ul><li>时刻存在、强度低</li><li>高斯白噪声</li><li>引起随机差错</li></ul></li><li>冲击噪声<ul><li>外界电磁干扰引起、强度高</li><li>闪电</li><li>引起突发错</li></ul></li></ul></li><li>纠错码与检错码<ul><li>纠错码适用于错误出现多的情况，可以由接收方发现错误并纠正</li><li>检错码适用于错误出现较少的地方，例如有线网络，发现出错后不进行纠正，直接抛弃</li></ul></li><li>常用检错码<ul><li>奇偶校验<ul><li>最后添加一个校验位</li><li>统计数据码中1的个数</li></ul></li><li>循环冗余编码CRC<ul><li>有纠错能力，但是数据链路层只用它来检错</li></ul></li></ul></li></ul><h3 id="CRC"><a href="#CRC" class="headerlink" title="CRC"></a>CRC</h3><ul><li>生成多项式<ul><li>除数，长度为生成多项式最高项的次数，翻译为二进制为多项式每一项的系数</li></ul></li><li>FCS<ul><li>帧检验序列</li><li>CRC是生成FCS的一种方法但不是唯一方法</li></ul></li><li>无差错接受<ul><li>凡是接受的帧，都可以以非常接近于1的概率认为它正确的</li><li>也有可能因为噪声，所有的位变成了0，但是概率非常小</li></ul></li></ul><h2 id="点对点协议-PPP"><a href="#点对点协议-PPP" class="headerlink" title="点对点协议 PPP"></a>点对点协议 PPP</h2><ul><li>PPP 既能面向Bit也能面向字节 / 字符</li><li>点对点通信</li><li>只支持全双工</li><li>使用广域网进行串行通信</li></ul><h3 id="需要满足的要求"><a href="#需要满足的要求" class="headerlink" title="需要满足的要求"></a>需要满足的要求</h3><ul><li>简单</li><li>链路层功能<ul><li>封装成帧</li><li>透明性</li><li>差错检测</li></ul></li><li>对上与对下<ul><li>多种网络层协议</li><li>多种类型链路</li></ul></li><li>检测连接状态</li><li>最大传送单元<ul><li>MTU</li><li>不包含帧头帧尾</li><li>发送过程中逐步进行调整</li><li>高层协议根据链路层的MTU进行分片</li></ul></li><li>网络层地址协商</li><li>数据压缩协商</li></ul><h3 id="不需要的功能"><a href="#不需要的功能" class="headerlink" title="不需要的功能"></a>不需要的功能</h3><ul><li><p>纠错</p><ul><li>链路层不要求可靠性</li></ul></li><li><p>流量控制</p><ul><li>流量来自于端系统的进程，进程间通信由TCP协议负责</li></ul></li><li><p>序号</p><ul><li>PPP不保证可靠性</li><li>实际上链路层的传输本就很可靠</li></ul></li><li><p>多点链路</p><ul><li>PPP只支持点对点</li></ul></li><li><p>半双工 / 单工链路</p><p>PPP只支持全双工链路</p></li></ul><h3 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h3><ul><li>一个将IP数据报封装到串行链路的方法<ul><li>面向字符的异步链路</li><li>面向比特的同步链路</li></ul></li><li>链路控制协议 <code>LCP</code> Link Control Protocol<ul><li>与物理层交互</li></ul></li><li><strong>一套</strong>网络控制协议 <code>NCP</code> Network Control Protocol<ul><li>与网络层交互</li><li>每个协议支持一种不同的网络层协议</li></ul></li></ul><h3 id="帧格式"><a href="#帧格式" class="headerlink" title="帧格式"></a>帧格式</h3><ul><li>首部<ul><li>定界符 / 定界字节序列　　0x7E</li><li>AC 固定的两个部分，但是说不准以后会有用</li><li>协议<ul><li>0x0021 信息部分为IP数据报</li><li>0xC021 信息部分位PPP链路控制数据</li><li>0x8021 信息部分位网络控制数据</li></ul></li></ul></li><li>信息部分<ul><li>IP数据报</li></ul></li><li>尾部<ul><li>CRC检验序列<ul><li>从AC开始到信息部分结束</li><li>万一以后AC部分有用呢</li></ul></li><li>定界符 / 定界字节序列        0x7E</li></ul></li></ul><h4 id="字节填充"><a href="#字节填充" class="headerlink" title="　字节填充"></a>　字节填充</h4><ul><li>出现控制字符时，前面添加转义字符0x7D，同时第六个bit取反</li></ul><h4 id="零比特填充"><a href="#零比特填充" class="headerlink" title="零比特填充"></a>零比特填充</h4><ul><li>SONET / SDH使用同步传输，同步传输中没有 <strong>字符</strong> 的概念</li><li>0x7E = 0111 1110</li><li>5个连续1之后插一个0，保证不出现连续6个1，就不会出现定界符</li></ul><h4 id="同步传输"><a href="#同步传输" class="headerlink" title="同步传输"></a>同步传输</h4><ul><li>使用时钟信号线或前同步序列保证发送端与接收端的时钟保持同步</li><li>以数据帧位单位传输</li></ul><h4 id="异步传输"><a href="#异步传输" class="headerlink" title="异步传输"></a>异步传输</h4><ul><li>以字符为单位传输</li><li>每个字符前添加起始位0，后面加停止位1，表示数据的开始和结束</li></ul><h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>连接从下往上建立，从上往下释放</p><ul><li>调制解调器建立物理连接</li><li>PC向路由器发送一系列的LCP分组 （0xC021）建立LCP连接</li><li>NCP给新接入的PC分配一个临时的IP地址</li><li>通信</li><li>NCP释放网络层链接，收回临时IP</li><li>LCP释放数据链路层连接</li><li>释放物理层链接</li></ul><h3 id="挑战握手认证协议-CHAP"><a href="#挑战握手认证协议-CHAP" class="headerlink" title="挑战握手认证协议 CHAP"></a>挑战握手认证协议 CHAP</h3><p>在初始链路建立时完成，也可以在链路建立后的任何时</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;p&gt;数据链路层的信道种类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点对点信道&lt;ul&gt;
+&lt;li&gt;一对一通信&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;广播信道&lt;ul&gt;
+&lt;li&gt;一对多&lt;/li&gt;
+&lt;li&gt;需要专门的协议&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;链路与数据链路&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;链路指一条无源的点到点的线路&lt;/li&gt;
+&lt;li&gt;物理线路加上通信协议 / 实现通信协议的软硬件就形成了数据链路&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数据链路层的传输单位是帧 Frame&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数据链路层解决的三个基本问题&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;封装成帧&lt;/li&gt;
+&lt;li&gt;透明传输&lt;/li&gt;
+&lt;li&gt;差错控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="计算机网络" scheme="http://ilern.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="网络" scheme="http://ilern.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>SQL学习笔记</title>
@@ -481,30 +532,6 @@
       <category term="算法" scheme="http://ilern.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="题解" scheme="http://ilern.github.io/tags/%E9%A2%98%E8%A7%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[HDU 1576] A/B - 乘法逆元+费马小定理/扩展欧几里得</title>
-    <link href="http://ilern.github.io/2019/07/21/hdu_1576/"/>
-    <id>http://ilern.github.io/2019/07/21/hdu_1576/</id>
-    <published>2019-07-21T14:32:23.000Z</published>
-    <updated>2019-07-21T10:15:51.468Z</updated>
-    
-    <content type="html"><![CDATA[<p>QDU2019暑期集训第一周数学部分</p><a id="more"></a><h3 id="【链接】"><a href="#【链接】" class="headerlink" title="【链接】"></a>【链接】</h3><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1576" target="_blank" rel="noopener">HDU 1576 A/B</a></p><h3 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h3><p>要求$(A / B)\%9973$，但由于$A$很大，我们只给出$n(n = A \% 9973)$(我们给定的$A$必能被$B$整除，且$\gcd(B, 9973) = 1)$。</p><h3 id="【题解】"><a href="#【题解】" class="headerlink" title="【题解】"></a>【题解】</h3><p>$(A / B)\%9973 = (AB^{-1}) \% 9973 = (A \% 9973 \cdot B^{-1} \%9973) \%9973 = (n \cdot B^{-1} \%9973) \%9973$</p><p>问题转化为求$B^{-1}$</p><p>可用费马小定理或者扩展欧几里得算法求解。</p><p>​    </p><h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD = <span class="number">9973</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fastPowMod</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span> % MOD;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (; b; b &gt;&gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>) ans = (<span class="keyword">long</span> <span class="keyword">long</span>)ans * a % MOD;</span><br><span class="line">        a = (<span class="keyword">long</span> <span class="keyword">long</span>)a * a % MOD;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        <span class="keyword">int</span> n, b;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;b);</span><br><span class="line"></span><br><span class="line">        b = fastPowMod(b, MOD - <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, (n % MOD * b % MOD) % MOD);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;QDU2019暑期集训第一周数学部分&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="ACM" scheme="http://ilern.github.io/categories/ACM/"/>
-    
-    
-      <category term="算法" scheme="http://ilern.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="数学" scheme="http://ilern.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
