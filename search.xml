@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[操作系统学习笔记-进程同步]]></title>
+    <url>%2F2020%2F10%2F15%2F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%2F</url>
+    <content type="text"><![CDATA[The Critical-Section ProblemAbout Critical Section An atomic action is required in a critical section. When one process is executing in its critical section, no other process is to be allowed to execute in its critical section. The critical section is not a public section. Each process has its own critical section. Each process must request permission to enter its critical section. The section of code implementing this request is the entry section, the critical section may be followed by an exit section Solution of the critical-section problem Mutual exclusion 互斥 If process $p_i$ is executing its critical section, then no other process can be executing in their critical sections progress 进步？ If no process is executing in its critical section and some processes with to enter their critical sections, then only those processes that are not executing in their remainder sections can participate in deciding which will enter its critical section next, and this selection cannot be postponed indefinitely. 如果没有进程在执行临界区并且某些进程想要执行他们的临界区，那么只有那些不在他们剩余区的进程可以参与决定谁来执行临界区的筛选，这个选择过程不会无限期推迟。 Bounded waiting 有界等待 There exists a bound on the number of times that other processes are allowed to enter their critical sections after a process has made a request to enter its critical section and before that request is granted. 12345gantt section Figure1 请求进入临界区 :des1, 1d 等待 :des2, after des1, 3d 被授权进入临界区 :des3, after des2, 5d 如上图，在等待的过程中其他进程被允许进入临界区的次数是有限的 Algorithms两个进程的同步算法，软件实现 12345678// initicall turn = 0// turn is a shared variabledo &#123; while (turn != i); // only turn == i can this process execute it's critical section //critical section turn = j; //reminder section&#125; while (1); Satisfies mutual exclusion, but not progress 机械的规定零号进程一号进程交替进行。 进程是否有进入临界区的 意愿 ？ 12345678910//initial flag[0] = flag[1] = false;//flag[i] == true -&gt; process i ready to enter critical sectiondo &#123; flag[i] = true; while (flag[j]); // mutual exclusion //critical section flag[i] = false; //remainder section&#125; while (1); 不满足 progress ，在flag[i] = true之后，切换到另一个进程flag[j] = true，此时两个进程都想进临界区，但是都在看对方，都不能进入临界区 Peterson‘s Solution12345678910//share turn flag[2]do &#123; flag[i] = true; turn = j; while (flag[j] &amp;&amp; turn == j); //critical section flag[i] = false; //remainder section&#125; while (1) 最后执行turn等于谁，谁就进入临界区 Synchronization HardwareBased on locking Uniprocessors 同一时刻指运行一个进程 disable interrupts 把中断屏蔽即可 special atomic hardware instructions 硬件提供特殊的原子指令 原子指令执行期间不允许切换 test memory 查看某内存单元的值 set value 对某内存单元设置为1 swap 交换两个内存单元的值 123456do &#123; acquire lock //criticla section release lock //remainder section&#125; while (1); test_and_set Instruction做成一条机器指令 12345678//tar 看作一个锁，一堆人去抢这把锁boolean test_and_set(boolean *tar) &#123; bool rv = *tar; *tar = true; return rv; //got the lock or not; //flase -&gt; 锁没被锁，自己锁了 //true -&gt; 已经被锁了&#125; 使用这条指令加锁1234567891011//mutux lock//锁只是一个普通变量do &#123; while(test_and_set(&amp;lock)); //do something //critical section lock = false; //释放锁 //remainder section&#125; while (1);//比较倒霉的情况可能不满足有界等待//几率小，当倒霉处理 compare_and_swap Instruction和test_and_set Instruction做一样的事情，但是实际功能更强。 用牛刀杀鸡 12345678int compare_and_swap(int *value, int expected, int new_value) &#123; int temp = *value; if (*value == expected) *value = new_value; return temp;&#125;//旧值和新值比较 1234567do &#123; while (compare_and_swap(&amp;lock, 0, 1) != 0); //是0就设置为1 //do something //critical section lock = 0; //remainder section&#125; while (1); Mutex LockSoftware Tool 使用原子的acquire()和release()来申请、释放锁，不需要在意底层具体实现方式。 CPU busy waiting 问题 循环查看锁开没开 Spinlock 自旋锁 会浪费CPU的时间 更好的办法 锁可用获得锁 锁不可用进程挂起 释放锁时有进程挂起则挑一个唤醒 没有进程挂起直接释放 Semaphore信号量 Synchronization Tool that does not require busy waiting is an integer wait() P 减信号量 请求执行 12345wait(S) &#123; while (S &lt;= 0); //busy wait S--;&#125; signal() V 加信号量 123signal(S) &#123; S++;&#125; Usage某个资源的只能被有限的人使用，例如为了保证网络通畅，只允许五个人连接。 不局限于加锁解锁，可以有一定范围。 当信号量被限制到二元，则退化（？）为互斥锁。 生产者 / 消费者问题？ 有界缓冲区问题？ 哲学家就餐问题？如何把这些搞哲学的饿死。 一个使用信号量解决问题的例子 Implementation]]></content>
+      <tags>
+        <tag>进程同步</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[计算机网络复习笔记-数据链路层]]></title>
     <url>%2F2020%2F10%2F15%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%2F</url>
     <content type="text"><![CDATA[数据链路层的信道种类 点对点信道 一对一通信 广播信道 一对多 需要专门的协议 链路与数据链路 链路指一条无源的点到点的线路 物理线路加上通信协议 / 实现通信协议的软硬件就形成了数据链路 数据链路层的传输单位是帧 Frame 数据链路层解决的三个基本问题 封装成帧 透明传输 差错控制 封装成帧 添加首部尾部进行帧定界 SOH Start_of_header EOT End_of_transmission 帧定界符是特殊的控制字符 透明传输 透明就是不透明 透明传输使得不用关心下层的传输，所采用的设备只是一个通道的作用 当传输二进制文件中出现定界符序列时，在这个序列之前添加ESC进行转义 称为 字节填充 / 字符填充 在前面的非归零反相编码 NRZI 中有提到比特位填充 bit_stuffing 先转义还是先封装? 差错控制 / 差错检测 误码率 BER $P_e = \frac{N_e}{N}$ 传错的除以总的 噪声的类型 热噪声 时刻存在、强度低 高斯白噪声 引起随机差错 冲击噪声 外界电磁干扰引起、强度高 闪电 引起突发错 纠错码与检错码 纠错码适用于错误出现多的情况，可以由接收方发现错误并纠正 检错码适用于错误出现较少的地方，例如有线网络，发现出错后不进行纠正，直接抛弃 常用检错码 奇偶校验 最后添加一个校验位 统计数据码中1的个数 循环冗余编码CRC 有纠错能力，但是数据链路层只用它来检错 CRC 生成多项式 除数，长度为生成多项式最高项的次数，翻译为二进制为多项式每一项的系数 FCS 帧检验序列 CRC是生成FCS的一种方法但不是唯一方法 无差错接受 凡是接受的帧，都可以以非常接近于1的概率认为它正确的 也有可能因为噪声，所有的位变成了0，但是概率非常小 点对点协议 PPP PPP 既能面向Bit也能面向字节 / 字符 点对点通信 只支持全双工 使用广域网进行串行通信 需要满足的要求 简单 链路层功能 封装成帧 透明性 差错检测 对上与对下 多种网络层协议 多种类型链路 检测连接状态 最大传送单元 MTU 不包含帧头帧尾 发送过程中逐步进行调整 高层协议根据链路层的MTU进行分片 网络层地址协商 数据压缩协商 不需要的功能 纠错 链路层不要求可靠性 流量控制 流量来自于端系统的进程，进程间通信由TCP协议负责 序号 PPP不保证可靠性 实际上链路层的传输本就很可靠 多点链路 PPP只支持点对点 半双工 / 单工链路 PPP只支持全双工链路 组成部分 一个将IP数据报封装到串行链路的方法 面向字符的异步链路 面向比特的同步链路 链路控制协议 LCP Link Control Protocol 与物理层交互 一套网络控制协议 NCP Network Control Protocol 与网络层交互 每个协议支持一种不同的网络层协议 帧格式 首部 定界符 / 定界字节序列 0x7E AC 固定的两个部分，但是说不准以后会有用 协议 0x0021 信息部分为IP数据报 0xC021 信息部分位PPP链路控制数据 0x8021 信息部分位网络控制数据 信息部分 IP数据报 尾部 CRC检验序列 从AC开始到信息部分结束 万一以后AC部分有用呢 定界符 / 定界字节序列 0x7E 字节填充 出现控制字符时，前面添加转义字符0x7D，同时第六个bit取反 零比特填充 SONET / SDH使用同步传输，同步传输中没有 字符 的概念 0x7E = 0111 1110 5个连续1之后插一个0，保证不出现连续6个1，就不会出现定界符 同步传输 使用时钟信号线或前同步序列保证发送端与接收端的时钟保持同步 以数据帧位单位传输 异步传输 以字符为单位传输 每个字符前添加起始位0，后面加停止位1，表示数据的开始和结束 工作流程连接从下往上建立，从上往下释放 调制解调器建立物理连接 PC向路由器发送一系列的LCP分组 （0xC021）建立LCP连接 NCP给新接入的PC分配一个临时的IP地址 通信 NCP释放网络层链接，收回临时IP LCP释放数据链路层连接 释放物理层链接 挑战握手认证协议 CHAP在初始链路建立时完成，也可以在链路建立后的任何时]]></content>
@@ -175,18 +183,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[差分约束系统学习笔记]]></title>
-    <url>%2F2019%2F07%2F30%2Fdifference_constraints%2F</url>
-    <content type="text"><![CDATA[数学问题转化到图论上解决，有点巧妙。 差分约束系统是一种特殊的 $N$ 元一次不等式组。包含 $N$ 个变量，$M$ 个约束条件，每个约束条件都是以差分的形式给出，形如 $X_i - X_j \leq c_k$。 现在要求 $X_i$ 的一组解，使得所有不等式成立。 对于这样的问题，有一个统一的转化方法： 把不等式表示成 $X_i - X_j \leq c_k$ 的形式， 把每个变量 $X_i$ 看作 有向图 中的一个结点 $i$，把每个约束条件 $X_i - X_j \leq c_k$ 看作从 $i$ 到 $j$ 连一条长度为 $c_k$ 的有向边， 注意到此时建立的图不一定联通，需要添加一个超级源点，从 $0$ 号结点向每个点连一条边权为$0$ 的边。 用 spfa 求出 $0$ 号点到各个点的最短路，如果最短路存在，那么每个点的 dis 值就是原不等式组的一组解。 如果有负环，则解不存在，为了解决负环的问题，只能用 spfa 来求最短路。 为什么这样是对的？看上去毫不相干的不等式怎么和最短路怎么联系起来的呢？其实不知道也没关系 有空就学]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>图论</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[[Poj 3169] Layout - 差分约束 + spfa]]></title>
     <url>%2F2019%2F07%2F30%2Fpoj_3169%2F</url>
     <content type="text"><![CDATA[【题目大意】有一些牛，关系好的两头牛希望彼此距离不大于某个数，关系不好的两头牛希望彼此距离不小于某个数，求奶牛 $1$ 和奶牛 $N$ 之间的最大可能距离。 【题解】遇到这题才去学的差分约束系统。 明显题目中给出了关于两元素差的不等式，是差分约束的模型，转化成标准的模式 $a - b \leq c$，建图之后SPFA求出最短路即可，答案为nodes[n].dis。 【代码】12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394#include &lt;cstdio&gt;#include &lt;vector&gt;#include &lt;queue&gt;#include &lt;climits&gt;#include &lt;algorithm&gt;const int MAXN = 1000 + 10;struct Node;struct Edge;struct Node &#123; std::vector&lt;Edge&gt; edges; int dis, times; bool inQue; Node() : dis(INT_MAX), times(0), inQue(false) &#123;&#125;&#125; nodes[MAXN];struct Edge &#123; Node *fr, *to; int w; Edge(Node *fr, Node *to, int w) : fr(fr), to(to), w(w) &#123;&#125;&#125;;void addEdge(int u, int v, int w) &#123; nodes[u].edges.push_back(Edge(&amp;nodes[u], &amp;nodes[v], w));&#125;std::queue&lt;Node*&gt; q;bool spfa(Node *x, int n) &#123; x-&gt;dis = 0; x-&gt;inQue = true; x-&gt;times++; q.push(x); while (!q.empty()) &#123; Node *v = q.front(); v-&gt;inQue = false; q.pop(); for (std::vector&lt;Edge&gt;::iterator it = v-&gt;edges.begin(); it != v-&gt;edges.end(); it++) &#123; if (it-&gt;to-&gt;dis &gt; v-&gt;dis + it-&gt;w) &#123; it-&gt;to-&gt;dis = v-&gt;dis + it-&gt;w; if (!it-&gt;to-&gt;inQue) &#123; it-&gt;to-&gt;inQue = true; it-&gt;to-&gt;times++; if (it-&gt;to-&gt;times &gt; n) return false; q.push(it-&gt;to); &#125; &#125; &#125; &#125; return true;&#125;int main() &#123; int n, ml, md; scanf("%d%d%d", &amp;n, &amp;ml, &amp;md); for (int i = 0; i &lt; ml; i++) &#123; int u, v, w; scanf("%d%d%d", &amp;u, &amp;v, &amp;w); if (u &gt; v) std::swap(u, v); addEdge(u, v, w); &#125; for (int i = 0; i &lt; md; i++) &#123; int u, v, w; scanf("%d%d%d", &amp;u, &amp;v, &amp;w); if (u &lt; v) std::swap(u, v); addEdge(u, v, -w); &#125; // for (int i = 1; i &lt; n; i++) addEdge(i, i + 1, 0); // for (int i = 1; i &lt;= n; i++) addEdge(0, i, 0); if (!spfa(nodes + 1, n)) printf("-1\n"); else &#123; if (nodes[n].dis == INT_MAX) printf("-2"); else printf("%d\n", nodes[n].dis); &#125; return 0;&#125;]]></content>
@@ -197,6 +193,18 @@
         <tag>算法</tag>
         <tag>图论</tag>
         <tag>差分约束</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[差分约束系统学习笔记]]></title>
+    <url>%2F2019%2F07%2F30%2Fdifference_constraints%2F</url>
+    <content type="text"><![CDATA[数学问题转化到图论上解决，有点巧妙。 差分约束系统是一种特殊的 $N$ 元一次不等式组。包含 $N$ 个变量，$M$ 个约束条件，每个约束条件都是以差分的形式给出，形如 $X_i - X_j \leq c_k$。 现在要求 $X_i$ 的一组解，使得所有不等式成立。 对于这样的问题，有一个统一的转化方法： 把不等式表示成 $X_i - X_j \leq c_k$ 的形式， 把每个变量 $X_i$ 看作 有向图 中的一个结点 $i$，把每个约束条件 $X_i - X_j \leq c_k$ 看作从 $i$ 到 $j$ 连一条长度为 $c_k$ 的有向边， 注意到此时建立的图不一定联通，需要添加一个超级源点，从 $0$ 号结点向每个点连一条边权为$0$ 的边。 用 spfa 求出 $0$ 号点到各个点的最短路，如果最短路存在，那么每个点的 dis 值就是原不等式组的一组解。 如果有负环，则解不存在，为了解决负环的问题，只能用 spfa 来求最短路。 为什么这样是对的？看上去毫不相干的不等式怎么和最短路怎么联系起来的呢？其实不知道也没关系 有空就学]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>图论</tag>
       </tags>
   </entry>
   <entry>
@@ -236,9 +244,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Leading and Trailing - 对数 + 快速幂]]></title>
-    <url>%2F2019%2F07%2F21%2FLat%2F</url>
-    <content type="text"><![CDATA[QDU2019暑期集训第一周数学部分 【链接】 Leading and Trailing 【题目描述】You are given two integers: $n$ and $k$, your task is to find the most significant three digits, and least significant three digits of $n^k$. 给定$n$和$k$，求$n^k$的前三位数字和后三位数字。 【题解】后三位数字直接用快速幂对$1000$取模即可。 前三位数字的做法比较巧妙。 设 $10^p = n^k$ ，两边同取对数 $p = k\lg n$ ，$p$ 是一个浮点数，整数部分为$[p]$, 记为 $x$ ; 小数部分为 $p - [p]$， 记为$y$ 。有$10^p = 10^{x + y} = 10^x \cdot 10^y = n^k$ 这样就把 $n^k$ 转化为了科学记数法表示，$10^y &lt; 1$ ，所以要求的前三位就是 $10^y \cdot 10^3 = 10^{y+3}$。 最后三位前面不足的位置补$0$。 【代码】1234567891011121314151617181920212223242526272829303132333435#include &lt;cstdio&gt;#include &lt;cmath&gt;const int MOD = 1000;int fastPowMod(int a, int b) &#123; int ans = 1 % MOD; for (; b; b &gt;&gt;= 1) &#123; if (b &amp; 1) ans = (long long)ans * a % MOD; a = (long long)a * a % MOD; &#125; return ans;&#125;int main() &#123; int t; scanf("%d", &amp;t); for (int cnt = 1; cnt &lt;= t; cnt++) &#123; int n, k; scanf("%d%d", &amp;n, &amp;k); double p = k * log10(n); int x = (int)p; double y = p - x; printf("Case %d: %d %03d\n", cnt, (int)pow(10.0, y + 2), fastPowMod(n, k)); //if (cnt &lt; t) printf("\n"); &#125; return 0;&#125;]]></content>
+    <title><![CDATA[[HDU 1576] A/B - 乘法逆元+费马小定理/扩展欧几里得]]></title>
+    <url>%2F2019%2F07%2F21%2Fhdu_1576%2F</url>
+    <content type="text"><![CDATA[QDU2019暑期集训第一周数学部分 【链接】HDU 1576 A/B 【题目描述】要求$(A / B)\%9973$，但由于$A$很大，我们只给出$n(n = A \% 9973)$(我们给定的$A$必能被$B$整除，且$\gcd(B, 9973) = 1)$。 【题解】$(A / B)\%9973 = (AB^{-1}) \% 9973 = (A \% 9973 \cdot B^{-1} \%9973) \%9973 = (n \cdot B^{-1} \%9973) \%9973$ 问题转化为求$B^{-1}$ 可用费马小定理或者扩展欧几里得算法求解。 ​ 【代码】1234567891011121314151617181920212223242526272829#include &lt;cstdio&gt;const int MOD = 9973;int fastPowMod(int a, int b) &#123; int ans = 1 % MOD; for (; b; b &gt;&gt;= 1) &#123; if (b &amp; 1) ans = (long long)ans * a % MOD; a = (long long)a * a % MOD; &#125; return ans;&#125;int main() &#123; int t; scanf("%d", &amp;t); while (t--) &#123; int n, b; scanf("%d%d", &amp;n, &amp;b); b = fastPowMod(b, MOD - 2); printf("%d\n", (n % MOD * b % MOD) % MOD); &#125; return 0;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -248,9 +256,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[[HDU 1576] A/B - 乘法逆元+费马小定理/扩展欧几里得]]></title>
-    <url>%2F2019%2F07%2F21%2Fhdu_1576%2F</url>
-    <content type="text"><![CDATA[QDU2019暑期集训第一周数学部分 【链接】HDU 1576 A/B 【题目描述】要求$(A / B)\%9973$，但由于$A$很大，我们只给出$n(n = A \% 9973)$(我们给定的$A$必能被$B$整除，且$\gcd(B, 9973) = 1)$。 【题解】$(A / B)\%9973 = (AB^{-1}) \% 9973 = (A \% 9973 \cdot B^{-1} \%9973) \%9973 = (n \cdot B^{-1} \%9973) \%9973$ 问题转化为求$B^{-1}$ 可用费马小定理或者扩展欧几里得算法求解。 ​ 【代码】1234567891011121314151617181920212223242526272829#include &lt;cstdio&gt;const int MOD = 9973;int fastPowMod(int a, int b) &#123; int ans = 1 % MOD; for (; b; b &gt;&gt;= 1) &#123; if (b &amp; 1) ans = (long long)ans * a % MOD; a = (long long)a * a % MOD; &#125; return ans;&#125;int main() &#123; int t; scanf("%d", &amp;t); while (t--) &#123; int n, b; scanf("%d%d", &amp;n, &amp;b); b = fastPowMod(b, MOD - 2); printf("%d\n", (n % MOD * b % MOD) % MOD); &#125; return 0;&#125;]]></content>
+    <title><![CDATA[Leading and Trailing - 对数 + 快速幂]]></title>
+    <url>%2F2019%2F07%2F21%2FLat%2F</url>
+    <content type="text"><![CDATA[QDU2019暑期集训第一周数学部分 【链接】 Leading and Trailing 【题目描述】You are given two integers: $n$ and $k$, your task is to find the most significant three digits, and least significant three digits of $n^k$. 给定$n$和$k$，求$n^k$的前三位数字和后三位数字。 【题解】后三位数字直接用快速幂对$1000$取模即可。 前三位数字的做法比较巧妙。 设 $10^p = n^k$ ，两边同取对数 $p = k\lg n$ ，$p$ 是一个浮点数，整数部分为$[p]$, 记为 $x$ ; 小数部分为 $p - [p]$， 记为$y$ 。有$10^p = 10^{x + y} = 10^x \cdot 10^y = n^k$ 这样就把 $n^k$ 转化为了科学记数法表示，$10^y &lt; 1$ ，所以要求的前三位就是 $10^y \cdot 10^3 = 10^{y+3}$。 最后三位前面不足的位置补$0$。 【代码】1234567891011121314151617181920212223242526272829303132333435#include &lt;cstdio&gt;#include &lt;cmath&gt;const int MOD = 1000;int fastPowMod(int a, int b) &#123; int ans = 1 % MOD; for (; b; b &gt;&gt;= 1) &#123; if (b &amp; 1) ans = (long long)ans * a % MOD; a = (long long)a * a % MOD; &#125; return ans;&#125;int main() &#123; int t; scanf("%d", &amp;t); for (int cnt = 1; cnt &lt;= t; cnt++) &#123; int n, k; scanf("%d%d", &amp;n, &amp;k); double p = k * log10(n); int x = (int)p; double y = p - x; printf("Case %d: %d %03d\n", cnt, (int)pow(10.0, y + 2), fastPowMod(n, k)); //if (cnt &lt; t) printf("\n"); &#125; return 0;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -284,17 +292,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[三分法学习笔记]]></title>
-    <url>%2F2019%2F07%2F03%2Fdivide3%2F</url>
-    <content type="text"><![CDATA[三分法是一种求解单峰函数极值的算法 【简介】所谓单峰函数，如图所示，三分法可以求出这样的函数的极值。 【算法】 确定极值点所在的区间 取区间的中点 mid 在中点左右各一个小距离中分别取midL midR，这两个点将整个区间三分 计算出midL midR的函数值 若f(midL) 比较大，则舍弃右边的部分，将区间右端点设置为mid 若f(midR)比较大，则舍弃左边的部分，将区间左端点设置为mid 重复上述过程直至区间大小小于某个设定好的EPS 【模板】洛谷P3382 【模板】三分法 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include &lt;cstdio&gt;#include &lt;cmath&gt;const int MAXN = 15;const double EPS = 1e-7;double a[MAXN];// double func(double a[], int n, double x) &#123;// double ret = 0;// double b = 1;// for (int i = n; i &gt;= 0; i--) &#123;// ret += (b * a[i]);// b *= x;// &#125;// return ret;// &#125;double func(double a[], int n, double x) &#123; double sum = 0; for (int i = n; i &gt;= 0; i--) &#123; sum = sum * x + a[i]; &#125; return sum; &#125;int main() &#123; int n; scanf("%d", &amp;n); double l, r; scanf("%lf%lf", &amp;l, &amp;r); for (int i = n; i &gt;= 0; i--) &#123; scanf("%lf", &amp;a[i]); &#125; while (fabs(r - l) &gt;= EPS) &#123; double mid = (l + r) / 2; // double midL = (l + r) / 3; // double midR = midL * 2; double midL = mid - EPS; double midR = mid + EPS; if (func(a, n, midL) &lt; func(a, n, midR)) l = mid; else r = mid; &#125; printf("%.5lf\n", l); return 0;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[[QDUoj 582] 嘉馨学姐吃包子 - 三分]]></title>
     <url>%2F2019%2F07%2F03%2Fqduoj582%2F</url>
     <content type="text"><![CDATA[【链接】嘉馨学姐吃包子 【题目描述】嘉馨学姐非常爱吃包子，但是嘉馨学姐这个人很懒，她总是希望包子可以自己飞到她的嘴里，现在有 $n(n \leq 100000)$ 个包子，告诉你每个包子的位置 $p_i(|p_i| \leq 10^6)$ 和重量$w_i(1 &lt; w_i \leq 10)$。 已知包子飞行时，包子的口感度会降低，如果一个包子飞行了$x$，那这个包子的口感度会降低$x^3 \times w$。嘉馨学姐的初始位置由你来决定，要求尽量使所有包子降低的口感度总和$F$最小。 【题解】设起点为$x$，则每个包子移动的距离为$|p_i - x|$，那么降低的口感总和为 f(x) = \sum_{i = 0}^n (|p_i - x|)^3 \times w_i三分这个函数求出最值即可。 【代码】1234567891011121314151617181920212223242526272829303132333435363738394041#include &lt;cstdio&gt;#include &lt;cmath&gt;const int MAXN = 100000 + 10;const double EPS = 1e-5;double p[MAXN], w[MAXN];double func(int n, double x) &#123; double ret = 0; for (int i = 0; i &lt; n; i++) &#123; ret += (pow(fabs(p[i] - x), 3) * w[i]); &#125; return ret;&#125;int main() &#123; int n; scanf("%d", &amp;n); for (int i = 0; i &lt; n; i++) &#123; scanf("%lf%lf", &amp;p[i], &amp;w[i]); &#125; double l = -1e6; double r = 1e6; while (fabs(r - l) &gt;= EPS) &#123; double mid = (l + r) / 2; double midL = mid - EPS; double midR = mid + EPS; if (func(n, midL) &gt; func(n, midR)) l = mid; else r = mid; &#125; printf("%.0lf\n", func(n, l) / 10); return 0;&#125;]]></content>
@@ -304,6 +301,17 @@
       <tags>
         <tag>算法</tag>
         <tag>三分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[三分法学习笔记]]></title>
+    <url>%2F2019%2F07%2F03%2Fdivide3%2F</url>
+    <content type="text"><![CDATA[三分法是一种求解单峰函数极值的算法 【简介】所谓单峰函数，如图所示，三分法可以求出这样的函数的极值。 【算法】 确定极值点所在的区间 取区间的中点 mid 在中点左右各一个小距离中分别取midL midR，这两个点将整个区间三分 计算出midL midR的函数值 若f(midL) 比较大，则舍弃右边的部分，将区间右端点设置为mid 若f(midR)比较大，则舍弃左边的部分，将区间左端点设置为mid 重复上述过程直至区间大小小于某个设定好的EPS 【模板】洛谷P3382 【模板】三分法 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include &lt;cstdio&gt;#include &lt;cmath&gt;const int MAXN = 15;const double EPS = 1e-7;double a[MAXN];// double func(double a[], int n, double x) &#123;// double ret = 0;// double b = 1;// for (int i = n; i &gt;= 0; i--) &#123;// ret += (b * a[i]);// b *= x;// &#125;// return ret;// &#125;double func(double a[], int n, double x) &#123; double sum = 0; for (int i = n; i &gt;= 0; i--) &#123; sum = sum * x + a[i]; &#125; return sum; &#125;int main() &#123; int n; scanf("%d", &amp;n); double l, r; scanf("%lf%lf", &amp;l, &amp;r); for (int i = n; i &gt;= 0; i--) &#123; scanf("%lf", &amp;a[i]); &#125; while (fabs(r - l) &gt;= EPS) &#123; double mid = (l + r) / 2; // double midL = (l + r) / 3; // double midR = midL * 2; double midL = mid - EPS; double midR = mid + EPS; if (func(a, n, midL) &lt; func(a, n, midR)) l = mid; else r = mid; &#125; printf("%.5lf\n", l); return 0;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -602,20 +610,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[[POJ 2777] Count Color - 线段树 + 状态压缩]]></title>
-    <url>%2F2017%2F11%2F05%2FPOJ_2777%2F</url>
-    <content type="text"><![CDATA[【链接】POJ 2777 Count Color 【题目描述】给出一个区间，每次选择一个子区间染色，每次询问某个区间内颜色种类数 【题解】线段树，发现颜色 种类 数在合并的时候不能简单相加，而是 并集 操作，想到愤怒的小鸟一题中取并集的方法，考虑状态压缩，因为颜色种类数并不多，所以可以把状态压入一个int里面，建立线段树即可 调了很久发现是自己手算算错 【代码】123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153#include &lt;cstdio&gt;#include &lt;algorithm&gt;const int MAXN = 100000 + 10;int a[MAXN];int count(int n) &#123; //0xAAAAAAAA，0x55555555分别是以“1位”为单位提取奇偶位 n = ((n &amp; 0xAAAAAAAA) &gt;&gt; 1) + (n &amp; 0x55555555); //0xCCCCCCCC，0x33333333分别是以“2位”为单位提取奇偶位 n = ((n &amp; 0xCCCCCCCC) &gt;&gt; 2) + (n &amp; 0x33333333); //0xF0F0F0F0，0x0F0F0F0F分别是以“4位”为单位提取奇偶位 n = ((n &amp; 0xF0F0F0F0) &gt;&gt; 4) + (n &amp; 0x0F0F0F0F); //0xFF00FF00，0x00FF00FF分别是以“8位”为单位提取奇偶位 n = ((n &amp; 0xFF00FF00) &gt;&gt; 8) + (n &amp; 0x00FF00FF); //0xFFFF0000，0x0000FFFF分别是以“16位”为单位提取奇偶位 n = ((n &amp; 0xFFFF0000) &gt;&gt; 16) + (n &amp; 0x0000FFFF); return n; &#125;void printBinary(int x) &#123; while (x &gt; 0) &#123; printf("%d", x % 2); x /= 2; &#125; printf("\n");&#125;struct SegmentTree &#123; int l, r, mid; SegmentTree *lc, *rc; int tag; int color; SegmentTree(int l, int r) : l(l), r(r) &#123; mid = (l + r) / 2; lc = rc = NULL; color = 0; tag = 0; &#125; void update() &#123; color = 0; if (lc) color |= lc-&gt;color; if (rc) color |= rc-&gt;color; &#125; void build() &#123; if (r - l == 1) color = a[l]; else &#123; lc = new SegmentTree(l, mid); lc-&gt;build(); rc = new SegmentTree(mid, r); rc-&gt;build(); update(); &#125; &#125; void addTag(int tag) &#123; this-&gt;tag = tag; color = 0; color |= (1 &lt;&lt; (tag - 1)); &#125; void pushDown() &#123; if (tag) &#123; if (lc) lc-&gt;addTag(tag); if (rc) rc-&gt;addTag(tag); tag = 0; &#125; &#125; int query(int l, int r) &#123; // int ans = 0; // if (this-&gt;l == l &amp;&amp; this-&gt;r == r) return count(color); // else &#123; // pushDown(); // if (l &lt; mid) ans += lc-&gt;query(l, std::min(mid, r)); // if (r &gt; mid) ans += rc-&gt;query(std::max(l, mid), r); // return ans; // &#125; int ans = 0; if (this-&gt;l == l &amp;&amp; this-&gt;r == r) return color; else &#123; pushDown(); if (l &lt; mid) ans |= lc-&gt;query(l, std::min(mid, r)); if (r &gt; mid) ans |= rc-&gt;query(std::max(l, mid), r); return ans; &#125; &#125; void modify(int l, int r, int delta) &#123; if (this-&gt;l == l &amp;&amp; this-&gt;r == r) &#123; addTag(delta); &#125; else &#123; pushDown(); if (l &lt; mid) lc-&gt;modify(l, std::min(mid, r), delta); if (r &gt; mid) rc-&gt;modify(std::max(l, mid), r, delta); update(); &#125; &#125;&#125;;void printColor(SegmentTree *x) &#123; printf("[%d, %d]:\n", x-&gt;l, x-&gt;r - 1); printf(" tag = %d\n", x-&gt;tag); printf(" color = %d =&gt;", x-&gt;color); printBinary(x-&gt;color); if (x-&gt;lc) printColor(x-&gt;lc); if (x-&gt;rc) printColor(x-&gt;rc);&#125;int main() &#123; int l, t, o; while (scanf("%d%d%d", &amp;l, &amp;t, &amp;o) == 3) &#123; std::fill(a + 1, a + l + 1, 1); SegmentTree root(1, l + 1); root.build(); getchar(); for (int i = 1; i &lt;= o; i++) &#123; char op; op = getchar(); if (op == 'C') &#123; int l, r, delta; if (r &lt; l) std::swap(l ,r); scanf("%d%d%d", &amp;l, &amp;r, &amp;delta); root.modify(l, r + 1, delta);#ifdef DBG printf("---------\n"); printColor(&amp;root); printf("---------\n");#endif &#125; else &#123; int l, r; scanf("%d%d", &amp;l, &amp;r); if (r &lt; l) std::swap(l, r); printf("%d\n", count(root.query(l, r + 1))); &#125; getchar(); &#125; &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>OI</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-        <tag>数据结构</tag>
-        <tag>线段树</tag>
-        <tag>状态压缩</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[「lyx_tst 系列」lyx 的小迷妹 - 最短路]]></title>
     <url>%2F2017%2F11%2F05%2Flyx_tst_4%2F</url>
     <content type="text"><![CDATA[【链接】「lyx_tst 系列」lyx 的小迷妹 【题目描述】lyx 一脚踢倒了关押 tst 小黑屋的门，说时迟那时快，杨教授扛起 tst 就是一个百米冲刺。杨教授跑到四院门口，迎面来了一辆公交车，他不假思索的冲了上去。 市内有 $n$ 个路口和 $m$ 条双向道路，每条道路都有过路费，第 $i$ 条道路的过路费为 $w_i$ 元。市内还有 $k$ 条公交线路，公交车只在路口停靠，而且一路公交车只会沿着固定的线路往返行驶。上第 $i$ 路公交车需要 $b_i$ 元的费用，但费用是一次性的，即你可以在公交线路上的任意停靠路口下车。但是一旦下车了，如果要再次上车，则还需要再次付费。 路痴 lyx 有点迷茫，杨教授在全市乱跑，她要从路口 $s$ 怎么行动，才能到每个路口的费用最小？ （我跟你们嗦，lyx 呀，怎么这么可爱啊！ 【输入描述】第一行四个整数 $n$、$m$、$k$ 和 $s$，分别代表路口数、道路数、公交线路数和 lyx 所处的路口编号。 接下来的 $m$ 行，每行三个整数 $u_i$、$v_i$ 和 $w_i$ ，代表第 i $i$ i 条道路连接 $u_i$ 路口和 $v_i$路口，并且通过这条道路需要缴纳 $w_i$ 元的过路费。 接下来的 $k$ 行，每行首先是两个整数 $b_i$ 和 $t_i$ ，代表第 $i$ 路公交车的上车费用为 $b_i$ 元，而且公交线路共有 $t_i$ 个停靠路口。接下来同一行内有 $t_i$ 个整数，按顺序给出了这路公交车的各个停靠路口。 【输出描述】一行 $n$ 个整数，表示从路口 $s$ 到每个路口的最小费用。 【题解】明显是最短路，重点是车站怎么处理，只要给车站建一个虚拟点，从可以坐车的地方到车站连一条边权为上车费用的边，车站虚拟点到每个可以停车的点连一条边权为$0$的边，跑最短路即可 【代码】123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100#include &lt;cstdio&gt;#include &lt;algorithm&gt;#include &lt;queue&gt;#include &lt;utility&gt;#include &lt;functional&gt;#include &lt;vector&gt;#include &lt;climits&gt;const int MAXN = 200000 + 10;const int MAXK = 5000 + 10;struct Node;struct Edge;struct Node &#123; Edge *edges; long long dis; Node() : edges(NULL), dis(LLONG_MAX) &#123;&#125;&#125; nodes[MAXN + MAXK];struct Edge &#123; Node *fr, *to; long long w; Edge *next; Edge(Node *fr, Node *to, long long w) : fr(fr), to(to), w(w) &#123; next = fr-&gt;edges; &#125;&#125;;void addEdge(Node *u, Node *v, long long w) &#123; u-&gt;edges = new Edge(u, v, w);&#125;void dijkstra(Node *x) &#123; typedef std::pair&lt;long long, Node*&gt; info; std::priority_queue&lt;info, std::vector&lt;info&gt;, std::greater&lt;info&gt; &gt; pq; x-&gt;dis = 0; pq.push(std::make_pair(0, x)); while (!pq.empty()) &#123; info x = pq.top(); pq.pop(); if (x.second-&gt;dis != x.first) continue; for (Edge *e = x.second-&gt;edges; e; e = e-&gt;next) &#123; if (e-&gt;to-&gt;dis &gt; e-&gt;w + x.second-&gt;dis) &#123; e-&gt;to-&gt;dis = e-&gt;w + x.second-&gt;dis; pq.push(std::make_pair(e-&gt;to-&gt;dis, e-&gt;to)); &#125; &#125; &#125;&#125;int main() &#123;#ifndef tst freopen("lyx_tst.in", "r", stdin); freopen("lyx_tst.out", "w", stdout);#endif int n, m, k, s; scanf("%d%d%d%d", &amp;n, &amp;m, &amp;k, &amp;s); for (int i = 1; i &lt;= m; i++) &#123; int u, v; long long w; scanf("%d%d%lld", &amp;u, &amp;v, &amp;w); addEdge(nodes + u, nodes + v, w); addEdge(nodes + v, nodes + u, w); &#125; for (int i = n + 1; i &lt;= n + k; i++) &#123; long long b; int t; scanf("%lld%d", &amp;b, &amp;t); while (t--) &#123; int tmp; scanf("%d", &amp;tmp); addEdge(nodes + tmp, nodes + i, b); addEdge(nodes + i, nodes + tmp, 0); &#125; &#125; dijkstra(nodes + s); for (int i = 1; i &lt;= n; i++) &#123; printf("%lld ", nodes[i].dis); &#125; printf("\n");#ifndef tst fclose(stdin); fclose(stdout);#endif return 0;&#125;]]></content>
@@ -627,6 +621,20 @@
         <tag>图论</tag>
         <tag>最短路</tag>
         <tag>这是一个系列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[POJ 2777] Count Color - 线段树 + 状态压缩]]></title>
+    <url>%2F2017%2F11%2F05%2FPOJ_2777%2F</url>
+    <content type="text"><![CDATA[【链接】POJ 2777 Count Color 【题目描述】给出一个区间，每次选择一个子区间染色，每次询问某个区间内颜色种类数 【题解】线段树，发现颜色 种类 数在合并的时候不能简单相加，而是 并集 操作，想到愤怒的小鸟一题中取并集的方法，考虑状态压缩，因为颜色种类数并不多，所以可以把状态压入一个int里面，建立线段树即可 调了很久发现是自己手算算错 【代码】123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153#include &lt;cstdio&gt;#include &lt;algorithm&gt;const int MAXN = 100000 + 10;int a[MAXN];int count(int n) &#123; //0xAAAAAAAA，0x55555555分别是以“1位”为单位提取奇偶位 n = ((n &amp; 0xAAAAAAAA) &gt;&gt; 1) + (n &amp; 0x55555555); //0xCCCCCCCC，0x33333333分别是以“2位”为单位提取奇偶位 n = ((n &amp; 0xCCCCCCCC) &gt;&gt; 2) + (n &amp; 0x33333333); //0xF0F0F0F0，0x0F0F0F0F分别是以“4位”为单位提取奇偶位 n = ((n &amp; 0xF0F0F0F0) &gt;&gt; 4) + (n &amp; 0x0F0F0F0F); //0xFF00FF00，0x00FF00FF分别是以“8位”为单位提取奇偶位 n = ((n &amp; 0xFF00FF00) &gt;&gt; 8) + (n &amp; 0x00FF00FF); //0xFFFF0000，0x0000FFFF分别是以“16位”为单位提取奇偶位 n = ((n &amp; 0xFFFF0000) &gt;&gt; 16) + (n &amp; 0x0000FFFF); return n; &#125;void printBinary(int x) &#123; while (x &gt; 0) &#123; printf("%d", x % 2); x /= 2; &#125; printf("\n");&#125;struct SegmentTree &#123; int l, r, mid; SegmentTree *lc, *rc; int tag; int color; SegmentTree(int l, int r) : l(l), r(r) &#123; mid = (l + r) / 2; lc = rc = NULL; color = 0; tag = 0; &#125; void update() &#123; color = 0; if (lc) color |= lc-&gt;color; if (rc) color |= rc-&gt;color; &#125; void build() &#123; if (r - l == 1) color = a[l]; else &#123; lc = new SegmentTree(l, mid); lc-&gt;build(); rc = new SegmentTree(mid, r); rc-&gt;build(); update(); &#125; &#125; void addTag(int tag) &#123; this-&gt;tag = tag; color = 0; color |= (1 &lt;&lt; (tag - 1)); &#125; void pushDown() &#123; if (tag) &#123; if (lc) lc-&gt;addTag(tag); if (rc) rc-&gt;addTag(tag); tag = 0; &#125; &#125; int query(int l, int r) &#123; // int ans = 0; // if (this-&gt;l == l &amp;&amp; this-&gt;r == r) return count(color); // else &#123; // pushDown(); // if (l &lt; mid) ans += lc-&gt;query(l, std::min(mid, r)); // if (r &gt; mid) ans += rc-&gt;query(std::max(l, mid), r); // return ans; // &#125; int ans = 0; if (this-&gt;l == l &amp;&amp; this-&gt;r == r) return color; else &#123; pushDown(); if (l &lt; mid) ans |= lc-&gt;query(l, std::min(mid, r)); if (r &gt; mid) ans |= rc-&gt;query(std::max(l, mid), r); return ans; &#125; &#125; void modify(int l, int r, int delta) &#123; if (this-&gt;l == l &amp;&amp; this-&gt;r == r) &#123; addTag(delta); &#125; else &#123; pushDown(); if (l &lt; mid) lc-&gt;modify(l, std::min(mid, r), delta); if (r &gt; mid) rc-&gt;modify(std::max(l, mid), r, delta); update(); &#125; &#125;&#125;;void printColor(SegmentTree *x) &#123; printf("[%d, %d]:\n", x-&gt;l, x-&gt;r - 1); printf(" tag = %d\n", x-&gt;tag); printf(" color = %d =&gt;", x-&gt;color); printBinary(x-&gt;color); if (x-&gt;lc) printColor(x-&gt;lc); if (x-&gt;rc) printColor(x-&gt;rc);&#125;int main() &#123; int l, t, o; while (scanf("%d%d%d", &amp;l, &amp;t, &amp;o) == 3) &#123; std::fill(a + 1, a + l + 1, 1); SegmentTree root(1, l + 1); root.build(); getchar(); for (int i = 1; i &lt;= o; i++) &#123; char op; op = getchar(); if (op == 'C') &#123; int l, r, delta; if (r &lt; l) std::swap(l ,r); scanf("%d%d%d", &amp;l, &amp;r, &amp;delta); root.modify(l, r + 1, delta);#ifdef DBG printf("---------\n"); printColor(&amp;root); printf("---------\n");#endif &#125; else &#123; int l, r; scanf("%d%d", &amp;l, &amp;r); if (r &lt; l) std::swap(l, r); printf("%d\n", count(root.query(l, r + 1))); &#125; getchar(); &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>数据结构</tag>
+        <tag>线段树</tag>
+        <tag>状态压缩</tag>
       </tags>
   </entry>
   <entry>
@@ -732,16 +740,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[[Codevs 1378]选课 - 树形DP]]></title>
-    <url>%2F2017%2F10%2F28%2FCodevs_1378%2F</url>
-    <content type="text"><![CDATA[【链接】Codevs 1378 选课 【题目描述】给出$n$个课程之间的关系(是否有先修课，有的话是谁)以及每一个课程的学分，和$m$个选课名额，问如何选课使得最后能获得的学分最多 【输入描述】输入文件的第一行包括两个整数$n$、$m$（中间用一个空格隔开）其中$1 \le n \le 300,1 \le m \le n$。 以下N行每行代表一门课。课号依次为$1，2, \cdots n$。每行有两个数（用一个空格隔开），第一个数为这门课先修课的课号（若不存在先修课则该项为$0$），第二个数为这门课的学分。学分是不超过$10$的正整数。 【输出描述】输出文件只有一个数,实际所选课程的学分总数。 【题解】树形DP 设状态$f(i, m)$表示在$i$及$i$的兄弟 或 儿子节点分配$m$个名额能得到的最大学分，则转移为： f(i, m) = \max \{f(ch(i), k) + f(bra(i), m - k - 1), f(bra(i), m) \mid k \in [0, m - 1]\}其中$ch(i)$表示$i$号点的 最后一个加入的 孩子，$bra(i)$表示$i$号点最后一个加入的兄弟 （感觉怪怪的） 上述方程直观表示出转移的两种情况： 如果选这门课， 那么有一个名额留给自己，剩下的分$i$个名额给孩子，分$m - i - 1$个名额给兄弟 如果不选这门课，那么就把所有的$m$个名额让给兄弟 在建树的时候用的是一种类似邻接表的表示方法，每个点里存的是 最后一个加入的 孩子，和 最后一个加入的兄弟 ，通过next指针链接成链表。 值得注意的是对于每一个点的状态是有很多种的（取决与兄弟和孩子的不同分配方案），所以在记录的时候不能只简单记录一个ans，而是应该用一个数组保存所有的状态值 另外数据中可能会有一些课程是没有先修课的，也就是说题目中给出的是一个森林，这个时候我们增加一个虚拟节点$0$号点，把所有的点都连到以这个虚拟节点为根的树上，但是这样的话总的可选课程数就要加一，因为$0$号点显然是必须要选的。 代码使用了记忆化搜索，因为树形结构本身具有的层次关系，记忆化搜索往往要比递推要容易实现 【代码】123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778#include &lt;cstdio&gt;#include &lt;algorithm&gt;const int MAXN = 300 + 10;struct Node &#123; Node *fa, *ch, *next; int value; bool solved[MAXN]; int ans[MAXN]; Node() : fa(NULL), ch(NULL), next(NULL), value(0) &#123; std::fill(ans, ans + MAXN, 0); std::fill(solved, solved + MAXN, 0); &#125;&#125; nodes[MAXN];void addEdge(Node *a, Node *b) &#123; if (!a-&gt;ch) a-&gt;ch = b; else &#123; b-&gt;next = a-&gt;ch; a-&gt;ch = b; &#125;&#125;int dp(Node *x, int m) &#123; if (!x || m &lt;= 0) return 0; if (x-&gt;solved[m]) return x-&gt;ans[m]; else x-&gt;solved[m] = true; x-&gt;ans[m] = 0; for (int i = 0; i &lt; m; i++) &#123; x-&gt;ans[m] = std::max(dp(x-&gt;ch, i) + dp(x-&gt;next, m - i - 1) + x-&gt;value, x-&gt;ans[m]); &#125; if (x != nodes) &#123; x-&gt;ans[m] = std::max(dp(x-&gt;next, m), x-&gt;ans[m]); &#125; return x-&gt;ans[m];&#125;int main() &#123; int n, m; scanf("%d%d", &amp;n, &amp;m); for (int i = 1; i &lt;= n; i++) &#123; int x, y; scanf("%d%d", &amp;x, &amp;y); addEdge(nodes + x, nodes + i); nodes[i].value = y; &#125;#ifdef DBG for (int i = 0; i &lt;= n; i++) &#123; printf("Node %d :\n", i); printf(" value = %d\n", nodes[i].ans); if (nodes[i].ch) &#123; printf(" ch = %d\n", nodes[i].ch - nodes); &#125; else &#123; printf(" ch = NULL\n"); &#125; printf("brothers : "); Node *v = nodes[i].ch; while (v != NULL) &#123; printf("%d ", v - nodes); v = v-&gt;next; &#125; printf("\n"); &#125;#endif printf("%d\n", dp(nodes, m + 1)); return 0;&#125;]]></content>
+    <title><![CDATA[状态压缩中常见的位运算技巧]]></title>
+    <url>%2F2017%2F10%2F28%2FbitCalc%2F</url>
+    <content type="text"><![CDATA[在学习状态压缩DP之前先来看看这些位运算的处理方法 【基本运算】 &amp; 「按位与」运算，返回两个数在二进制下进行按位与运算后的结果的十进制表示形式，对应到集合运算中为交运算 | 「按位或」运算，返回两个数在二进制下进行按位或运算后的结果的十进制表示形式，对应到集合运算中为并运算 ^ 「按位异或」运算，返回两个数在二进制下进行按位异或运算后的结果的十进制表示形式，对应到集合运算中为对称差运算 ~ 「按位取反」运算，返回一个数在二进制下进行按位取反运算后的结果的十进制表示形式 &lt;&lt; 「左移」运算，返回一个数在二进制下丢掉最高位并在最低位补零之后的结果的十进制表示(看上去就是向左错开了一位)，在十进制下表现为扩大为原数的两倍 &gt;&gt; 「右移」运算，返回一个数在二进制下丢掉最低位并在最高位补零之后的结果的十进制表示(看上去就是向右错开了一位)，在十进制下表现为缩小到原数的二分之一 【应用】 判断一个数字x二进制下第i位是否等于1 if (((1 &lt;&lt; (i - 1)) &amp; x ) &gt; 0) 将一个数字x二进制下第i位更改成1 x = x | (1 &lt;&lt; (i - 1)) 将一个数字x二进制下第i位更改成0 n &amp; ~(1 &lt;&lt; (m - 1)) 把一个数字二进制下最靠右的第一个1去掉 x = x &amp; (x - 1) 判断一个数的是否为偶数 if(x &amp; 1) 判断一个数是否为$2$的整数次幂 if(!(n &amp; (n - 1) &amp;&amp; n) = 1 || n == 1) 获得一个$n$位的全$1$二进制数 (1 &lt;&lt; n) - 1 统计一个数在二进制下$1$的个数 123456789101112131415 int CountOne(unsigned int n) &#123; //0xAAAAAAAA，0x55555555分别是以“1位”为单位提取奇偶位 n = ((n &amp; 0xAAAAAAAA) &gt;&gt; 1) + (n &amp; 0x55555555); //0xCCCCCCCC，0x33333333分别是以“2位”为单位提取奇偶位 n = ((n &amp; 0xCCCCCCCC) &gt;&gt; 2) + (n &amp; 0x33333333); //0xF0F0F0F0，0x0F0F0F0F分别是以“4位”为单位提取奇偶位 n = ((n &amp; 0xF0F0F0F0) &gt;&gt; 4) + (n &amp; 0x0F0F0F0F); //0xFF00FF00，0x00FF00FF分别是以“8位”为单位提取奇偶位 n = ((n &amp; 0xFF00FF00) &gt;&gt; 8) + (n &amp; 0x00FF00FF); //0xFFFF0000，0x0000FFFF分别是以“16位”为单位提取奇偶位 n = ((n &amp; 0xFFFF0000) &gt;&gt; 16) + (n &amp; 0x0000FFFF); return n; &#125; 【注意事项】 多用括号 【参考资料】 动态规划之状态压缩dp入门 编程技巧—位运算的巧妙运用 优秀程序员不得不知道的20个位运算技巧]]></content>
       <categories>
         <category>OI</category>
       </categories>
       <tags>
-        <tag>算法</tag>
-        <tag>DP</tag>
-        <tag>树形DP</tag>
+        <tag>整理</tag>
       </tags>
   </entry>
   <entry>
@@ -758,9 +764,22 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[状态压缩中常见的位运算技巧]]></title>
-    <url>%2F2017%2F10%2F28%2FbitCalc%2F</url>
-    <content type="text"><![CDATA[在学习状态压缩DP之前先来看看这些位运算的处理方法 【基本运算】 &amp; 「按位与」运算，返回两个数在二进制下进行按位与运算后的结果的十进制表示形式，对应到集合运算中为交运算 | 「按位或」运算，返回两个数在二进制下进行按位或运算后的结果的十进制表示形式，对应到集合运算中为并运算 ^ 「按位异或」运算，返回两个数在二进制下进行按位异或运算后的结果的十进制表示形式，对应到集合运算中为对称差运算 ~ 「按位取反」运算，返回一个数在二进制下进行按位取反运算后的结果的十进制表示形式 &lt;&lt; 「左移」运算，返回一个数在二进制下丢掉最高位并在最低位补零之后的结果的十进制表示(看上去就是向左错开了一位)，在十进制下表现为扩大为原数的两倍 &gt;&gt; 「右移」运算，返回一个数在二进制下丢掉最低位并在最高位补零之后的结果的十进制表示(看上去就是向右错开了一位)，在十进制下表现为缩小到原数的二分之一 【应用】 判断一个数字x二进制下第i位是否等于1 if (((1 &lt;&lt; (i - 1)) &amp; x ) &gt; 0) 将一个数字x二进制下第i位更改成1 x = x | (1 &lt;&lt; (i - 1)) 将一个数字x二进制下第i位更改成0 n &amp; ~(1 &lt;&lt; (m - 1)) 把一个数字二进制下最靠右的第一个1去掉 x = x &amp; (x - 1) 判断一个数的是否为偶数 if(x &amp; 1) 判断一个数是否为$2$的整数次幂 if(!(n &amp; (n - 1) &amp;&amp; n) = 1 || n == 1) 获得一个$n$位的全$1$二进制数 (1 &lt;&lt; n) - 1 统计一个数在二进制下$1$的个数 123456789101112131415 int CountOne(unsigned int n) &#123; //0xAAAAAAAA，0x55555555分别是以“1位”为单位提取奇偶位 n = ((n &amp; 0xAAAAAAAA) &gt;&gt; 1) + (n &amp; 0x55555555); //0xCCCCCCCC，0x33333333分别是以“2位”为单位提取奇偶位 n = ((n &amp; 0xCCCCCCCC) &gt;&gt; 2) + (n &amp; 0x33333333); //0xF0F0F0F0，0x0F0F0F0F分别是以“4位”为单位提取奇偶位 n = ((n &amp; 0xF0F0F0F0) &gt;&gt; 4) + (n &amp; 0x0F0F0F0F); //0xFF00FF00，0x00FF00FF分别是以“8位”为单位提取奇偶位 n = ((n &amp; 0xFF00FF00) &gt;&gt; 8) + (n &amp; 0x00FF00FF); //0xFFFF0000，0x0000FFFF分别是以“16位”为单位提取奇偶位 n = ((n &amp; 0xFFFF0000) &gt;&gt; 16) + (n &amp; 0x0000FFFF); return n; &#125; 【注意事项】 多用括号 【参考资料】 动态规划之状态压缩dp入门 编程技巧—位运算的巧妙运用 优秀程序员不得不知道的20个位运算技巧]]></content>
+    <title><![CDATA[[Codevs 1378]选课 - 树形DP]]></title>
+    <url>%2F2017%2F10%2F28%2FCodevs_1378%2F</url>
+    <content type="text"><![CDATA[【链接】Codevs 1378 选课 【题目描述】给出$n$个课程之间的关系(是否有先修课，有的话是谁)以及每一个课程的学分，和$m$个选课名额，问如何选课使得最后能获得的学分最多 【输入描述】输入文件的第一行包括两个整数$n$、$m$（中间用一个空格隔开）其中$1 \le n \le 300,1 \le m \le n$。 以下N行每行代表一门课。课号依次为$1，2, \cdots n$。每行有两个数（用一个空格隔开），第一个数为这门课先修课的课号（若不存在先修课则该项为$0$），第二个数为这门课的学分。学分是不超过$10$的正整数。 【输出描述】输出文件只有一个数,实际所选课程的学分总数。 【题解】树形DP 设状态$f(i, m)$表示在$i$及$i$的兄弟 或 儿子节点分配$m$个名额能得到的最大学分，则转移为： f(i, m) = \max \{f(ch(i), k) + f(bra(i), m - k - 1), f(bra(i), m) \mid k \in [0, m - 1]\}其中$ch(i)$表示$i$号点的 最后一个加入的 孩子，$bra(i)$表示$i$号点最后一个加入的兄弟 （感觉怪怪的） 上述方程直观表示出转移的两种情况： 如果选这门课， 那么有一个名额留给自己，剩下的分$i$个名额给孩子，分$m - i - 1$个名额给兄弟 如果不选这门课，那么就把所有的$m$个名额让给兄弟 在建树的时候用的是一种类似邻接表的表示方法，每个点里存的是 最后一个加入的 孩子，和 最后一个加入的兄弟 ，通过next指针链接成链表。 值得注意的是对于每一个点的状态是有很多种的（取决与兄弟和孩子的不同分配方案），所以在记录的时候不能只简单记录一个ans，而是应该用一个数组保存所有的状态值 另外数据中可能会有一些课程是没有先修课的，也就是说题目中给出的是一个森林，这个时候我们增加一个虚拟节点$0$号点，把所有的点都连到以这个虚拟节点为根的树上，但是这样的话总的可选课程数就要加一，因为$0$号点显然是必须要选的。 代码使用了记忆化搜索，因为树形结构本身具有的层次关系，记忆化搜索往往要比递推要容易实现 【代码】123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778#include &lt;cstdio&gt;#include &lt;algorithm&gt;const int MAXN = 300 + 10;struct Node &#123; Node *fa, *ch, *next; int value; bool solved[MAXN]; int ans[MAXN]; Node() : fa(NULL), ch(NULL), next(NULL), value(0) &#123; std::fill(ans, ans + MAXN, 0); std::fill(solved, solved + MAXN, 0); &#125;&#125; nodes[MAXN];void addEdge(Node *a, Node *b) &#123; if (!a-&gt;ch) a-&gt;ch = b; else &#123; b-&gt;next = a-&gt;ch; a-&gt;ch = b; &#125;&#125;int dp(Node *x, int m) &#123; if (!x || m &lt;= 0) return 0; if (x-&gt;solved[m]) return x-&gt;ans[m]; else x-&gt;solved[m] = true; x-&gt;ans[m] = 0; for (int i = 0; i &lt; m; i++) &#123; x-&gt;ans[m] = std::max(dp(x-&gt;ch, i) + dp(x-&gt;next, m - i - 1) + x-&gt;value, x-&gt;ans[m]); &#125; if (x != nodes) &#123; x-&gt;ans[m] = std::max(dp(x-&gt;next, m), x-&gt;ans[m]); &#125; return x-&gt;ans[m];&#125;int main() &#123; int n, m; scanf("%d%d", &amp;n, &amp;m); for (int i = 1; i &lt;= n; i++) &#123; int x, y; scanf("%d%d", &amp;x, &amp;y); addEdge(nodes + x, nodes + i); nodes[i].value = y; &#125;#ifdef DBG for (int i = 0; i &lt;= n; i++) &#123; printf("Node %d :\n", i); printf(" value = %d\n", nodes[i].ans); if (nodes[i].ch) &#123; printf(" ch = %d\n", nodes[i].ch - nodes); &#125; else &#123; printf(" ch = NULL\n"); &#125; printf("brothers : "); Node *v = nodes[i].ch; while (v != NULL) &#123; printf("%d ", v - nodes); v = v-&gt;next; &#125; printf("\n"); &#125;#endif printf("%d\n", dp(nodes, m + 1)); return 0;&#125;]]></content>
+      <categories>
+        <category>OI</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>DP</tag>
+        <tag>树形DP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用矩阵快速幂优化递推时转移矩阵的构造]]></title>
+    <url>%2F2017%2F10%2F27%2Fcons%2F</url>
+    <content type="text"><![CDATA[在使用矩阵快速幂优化递推时最重要最核心的一步就是构造出关键的转移矩阵，这篇文章介绍了一种构造方法 我们以LyOJ #77小澳的坐标系一题为例，说明如何构造转移矩阵 已知递推式为 f(n) = f(n - 2) + 2f(n - 1)也就是说我们要构造一个矩阵使得 \begin{bmatrix} f(n - 2) & f(n - 1) \end{bmatrix} \times \begin{bmatrix} a & b \\ c & d \end{bmatrix} = \begin{bmatrix} f(n - 1) & f(n) \end{bmatrix}根据矩阵乘法的定义可以得到 \begin{bmatrix} f(n - 2) & f(n - 1) \end{bmatrix} \times \begin{bmatrix} a & b \\ c & d \end{bmatrix} = \begin{bmatrix} af(n - 2) + cf(n - 1) & bf(n - 2) + df(n - 1) \end{bmatrix}然后与我们的目标结果做一下对应，便可以得到转移矩阵为 \begin{bmatrix} 0 & 1 \\ 1 & 2 \end{bmatrix}]]></content>
       <categories>
         <category>OI</category>
       </categories>
@@ -791,17 +810,6 @@
       <tags>
         <tag>算法</tag>
         <tag>矩阵乘法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[使用矩阵快速幂优化递推时转移矩阵的构造]]></title>
-    <url>%2F2017%2F10%2F27%2Fcons%2F</url>
-    <content type="text"><![CDATA[在使用矩阵快速幂优化递推时最重要最核心的一步就是构造出关键的转移矩阵，这篇文章介绍了一种构造方法 我们以LyOJ #77小澳的坐标系一题为例，说明如何构造转移矩阵 已知递推式为 f(n) = f(n - 2) + 2f(n - 1)也就是说我们要构造一个矩阵使得 \begin{bmatrix} f(n - 2) & f(n - 1) \end{bmatrix} \times \begin{bmatrix} a & b \\ c & d \end{bmatrix} = \begin{bmatrix} f(n - 1) & f(n) \end{bmatrix}根据矩阵乘法的定义可以得到 \begin{bmatrix} f(n - 2) & f(n - 1) \end{bmatrix} \times \begin{bmatrix} a & b \\ c & d \end{bmatrix} = \begin{bmatrix} af(n - 2) + cf(n - 1) & bf(n - 2) + df(n - 1) \end{bmatrix}然后与我们的目标结果做一下对应，便可以得到转移矩阵为 \begin{bmatrix} 0 & 1 \\ 1 & 2 \end{bmatrix}]]></content>
-      <categories>
-        <category>OI</category>
-      </categories>
-      <tags>
-        <tag>整理</tag>
       </tags>
   </entry>
   <entry>
