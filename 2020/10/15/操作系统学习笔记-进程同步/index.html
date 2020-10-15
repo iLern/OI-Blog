@@ -34,7 +34,11 @@
 <ul>
 <li><p>There exists a bound on the number of times that other processes are allowed to enter their critical sections after a process has made a request to enter its critical section and before that request is granted.</p>
 </li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gantt         </span><br><span class="line">       section Figure1</span><br><span class="line">       请求进入临界区            :des1, 1d</span><br><span class="line">       等待          :des2, after des1, 3d</span><br><span class="line">       被授权进入临界区            :des3, after des2, 5d</span><br></pre></td></tr></table></figure>
+<li><pre class="mermaid">    gantt         
+       section Figure1
+       请求进入临界区            :des1, 1d
+       等待          :des2, after des1, 3d
+       被授权进入临界区            :des3, after des2, 5d</pre>
 </li>
 <li><p>如上图，在等待的过程中其他进程被允许进入临界区的次数是有限的</p>
 </li>
