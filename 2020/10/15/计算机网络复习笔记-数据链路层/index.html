@@ -7,7 +7,7 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#链路层的基本功能"><span class="toc-number">1.</span> <span class="toc-text">链路层的基本功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#封装成帧"><span class="toc-number">1.1.</span> <span class="toc-text">封装成帧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#透明传输"><span class="toc-number">1.2.</span> <span class="toc-text">透明传输</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#差错控制-差错检测"><span class="toc-number">1.3.</span> <span class="toc-text">差错控制 / 差错检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRC"><span class="toc-number">1.4.</span> <span class="toc-text">CRC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#点对点协议-PPP"><span class="toc-number">2.</span> <span class="toc-text">点对点协议 PPP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#需要满足的要求"><span class="toc-number">2.1.</span> <span class="toc-text">需要满足的要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不需要的功能"><span class="toc-number">2.2.</span> <span class="toc-text">不需要的功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组成部分"><span class="toc-number">2.3.</span> <span class="toc-text">组成部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#帧格式"><span class="toc-number">2.4.</span> <span class="toc-text">帧格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字节填充"><span class="toc-number">2.4.1.</span> <span class="toc-text">　字节填充</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#零比特填充"><span class="toc-number">2.4.2.</span> <span class="toc-text">零比特填充</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同步传输"><span class="toc-number">2.4.3.</span> <span class="toc-text">同步传输</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#异步传输"><span class="toc-number">2.4.4.</span> <span class="toc-text">异步传输</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作流程"><span class="toc-number">2.5.</span> <span class="toc-text">工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#挑战握手认证协议-CHAP"><span class="toc-number">2.6.</span> <span class="toc-text">挑战握手认证协议 CHAP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用广播信道的数据链路层"><span class="toc-number">3.</span> <span class="toc-text">使用广播信道的数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#以太网"><span class="toc-number">3.1.</span> <span class="toc-text">以太网</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么说以太网很简便"><span class="toc-number">3.1.1.</span> <span class="toc-text">为什么说以太网很简便</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#适配器"><span class="toc-number">3.2.</span> <span class="toc-text">适配器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSMA-CD协议"><span class="toc-number">4.</span> <span class="toc-text">CSMA/CD协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#站模型"><span class="toc-number">4.1.</span> <span class="toc-text">　站模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单信道假设"><span class="toc-number">4.2.</span> <span class="toc-text">单信道假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冲突假设"><span class="toc-number">4.3.</span> <span class="toc-text">冲突假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#时间假设"><span class="toc-number">4.4.</span> <span class="toc-text">时间假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#侦听假设"><span class="toc-number">4.5.</span> <span class="toc-text">　侦听假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传播时延对载波侦听的影响"><span class="toc-number">4.6.</span> <span class="toc-text">传播时延对载波侦听的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSMA-CD的重要特性"><span class="toc-number">4.7.</span> <span class="toc-text">CSMA/CD的重要特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于碰撞"><span class="toc-number">4.8.</span> <span class="toc-text">关于碰撞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#争用期"><span class="toc-number">4.8.1.</span> <span class="toc-text">争用期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#截断二进制指数类型退避算法"><span class="toc-number">4.8.2.</span> <span class="toc-text">截断二进制指数类型退避算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#碰撞发生后"><span class="toc-number">4.8.3.</span> <span class="toc-text">碰撞发生后</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#整个发送过程"><span class="toc-number">4.9.</span> <span class="toc-text">整个发送过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">4.10.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用广播信道的以太网"><span class="toc-number">5.</span> <span class="toc-text">使用广播信道的以太网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#以太网物理设备的演进"><span class="toc-number">5.1.</span> <span class="toc-text">以太网物理设备的演进</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RJ45连接头"><span class="toc-number">5.2.</span> <span class="toc-text">RJ45连接头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集线器的特点"><span class="toc-number">5.3.</span> <span class="toc-text">集线器的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以太网的信道利用率"><span class="toc-number">5.4.</span> <span class="toc-text">以太网的信道利用率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以太网的MAC层"><span class="toc-number">5.5.</span> <span class="toc-text">以太网的MAC层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MAC帧的格式"><span class="toc-number">5.6.</span> <span class="toc-text">MAC帧的格式</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://s2.ax1x.com/2019/01/26/knOvb8.png"></div><div class="author-info__name text-center">iLern</div><div class="author-info__description text-center">功名沉浮不必提，稚志初衷别忘记</div><div class="follow-button"><a href="https://github.com/iLern">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">152</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">76</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" href="http://blog.csdn.net/lyx_2016/article/">lyx</a><a class="author-info-links__name text-center" href="https://oi.men.ci/">Menci</a><a class="author-info-links__name text-center" href="https://5261.github.io">Hellc</a><a class="author-info-links__name text-center" href="https://sulfur6.github.io/">团长</a><a class="author-info-links__name text-center" href="http://iovo7.com">iovo7</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">iLern's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/about">About</a></span></div><div id="post-info"><div id="post-title">计算机网络复习笔记-数据链路层</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-15</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/计算机网络/">计算机网络</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><ul>
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#链路层的基本功能"><span class="toc-number">1.</span> <span class="toc-text">链路层的基本功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#封装成帧"><span class="toc-number">1.1.</span> <span class="toc-text">封装成帧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#透明传输"><span class="toc-number">1.2.</span> <span class="toc-text">透明传输</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#差错控制-差错检测"><span class="toc-number">1.3.</span> <span class="toc-text">差错控制 / 差错检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRC"><span class="toc-number">1.4.</span> <span class="toc-text">CRC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#点对点协议-PPP"><span class="toc-number">2.</span> <span class="toc-text">点对点协议 PPP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#需要满足的要求"><span class="toc-number">2.1.</span> <span class="toc-text">需要满足的要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不需要的功能"><span class="toc-number">2.2.</span> <span class="toc-text">不需要的功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组成部分"><span class="toc-number">2.3.</span> <span class="toc-text">组成部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#帧格式"><span class="toc-number">2.4.</span> <span class="toc-text">帧格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字节填充"><span class="toc-number">2.4.1.</span> <span class="toc-text">　字节填充</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#零比特填充"><span class="toc-number">2.4.2.</span> <span class="toc-text">零比特填充</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同步传输"><span class="toc-number">2.4.3.</span> <span class="toc-text">同步传输</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#异步传输"><span class="toc-number">2.4.4.</span> <span class="toc-text">异步传输</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作流程"><span class="toc-number">2.5.</span> <span class="toc-text">工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#挑战握手认证协议-CHAP"><span class="toc-number">2.6.</span> <span class="toc-text">挑战握手认证协议 CHAP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用广播信道的数据链路层"><span class="toc-number">3.</span> <span class="toc-text">使用广播信道的数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#以太网"><span class="toc-number">3.1.</span> <span class="toc-text">以太网</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么说以太网很简便"><span class="toc-number">3.1.1.</span> <span class="toc-text">为什么说以太网很简便</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#适配器"><span class="toc-number">3.2.</span> <span class="toc-text">适配器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSMA-CD协议"><span class="toc-number">4.</span> <span class="toc-text">CSMA/CD协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#站模型"><span class="toc-number">4.1.</span> <span class="toc-text">　站模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单信道假设"><span class="toc-number">4.2.</span> <span class="toc-text">单信道假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冲突假设"><span class="toc-number">4.3.</span> <span class="toc-text">冲突假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#时间假设"><span class="toc-number">4.4.</span> <span class="toc-text">时间假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#侦听假设"><span class="toc-number">4.5.</span> <span class="toc-text">　侦听假设</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传播时延对载波侦听的影响"><span class="toc-number">4.6.</span> <span class="toc-text">传播时延对载波侦听的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSMA-CD的重要特性"><span class="toc-number">4.7.</span> <span class="toc-text">CSMA/CD的重要特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于碰撞"><span class="toc-number">4.8.</span> <span class="toc-text">关于碰撞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#争用期"><span class="toc-number">4.8.1.</span> <span class="toc-text">争用期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#截断二进制指数类型退避算法"><span class="toc-number">4.8.2.</span> <span class="toc-text">截断二进制指数类型退避算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#碰撞发生后"><span class="toc-number">4.8.3.</span> <span class="toc-text">碰撞发生后</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#整个发送过程"><span class="toc-number">4.9.</span> <span class="toc-text">整个发送过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">4.10.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用广播信道的以太网"><span class="toc-number">5.</span> <span class="toc-text">使用广播信道的以太网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#以太网物理设备的演进"><span class="toc-number">5.1.</span> <span class="toc-text">以太网物理设备的演进</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RJ45连接头"><span class="toc-number">5.2.</span> <span class="toc-text">RJ45连接头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集线器的特点"><span class="toc-number">5.3.</span> <span class="toc-text">集线器的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以太网的信道利用率"><span class="toc-number">5.4.</span> <span class="toc-text">以太网的信道利用率</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#以太网的MAC层"><span class="toc-number">6.</span> <span class="toc-text">以太网的MAC层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MAC帧的格式"><span class="toc-number">6.1.</span> <span class="toc-text">MAC帧的格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IEEE-802-3的MAC协议"><span class="toc-number">6.2.</span> <span class="toc-text">IEEE 802.3的MAC协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无效的MAC帧"><span class="toc-number">6.3.</span> <span class="toc-text">无效的MAC帧</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展以太网"><span class="toc-number">7.</span> <span class="toc-text">扩展以太网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在物理层扩展以太网"><span class="toc-number">7.1.</span> <span class="toc-text">在物理层扩展以太网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在数据链路层扩展以太网"><span class="toc-number">7.2.</span> <span class="toc-text">在数据链路层扩展以太网</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#广播风暴"><span class="toc-number">7.2.1.</span> <span class="toc-text">广播风暴</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://s2.ax1x.com/2019/01/26/knOvb8.png"></div><div class="author-info__name text-center">iLern</div><div class="author-info__description text-center">功名沉浮不必提，稚志初衷别忘记</div><div class="follow-button"><a href="https://github.com/iLern">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">152</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">76</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" href="http://blog.csdn.net/lyx_2016/article/">lyx</a><a class="author-info-links__name text-center" href="https://oi.men.ci/">Menci</a><a class="author-info-links__name text-center" href="https://5261.github.io">Hellc</a><a class="author-info-links__name text-center" href="https://sulfur6.github.io/">团长</a><a class="author-info-links__name text-center" href="http://iovo7.com">iovo7</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">iLern's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/about">About</a></span></div><div id="post-info"><div id="post-title">计算机网络复习笔记-数据链路层</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-15</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/计算机网络/">计算机网络</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><ul>
 <li><p>数据链路层的信道种类</p>
 <ul>
 <li>点对点信道<ul>
@@ -466,7 +466,7 @@
 <script type="math/tex; mode=display">
 S_{\text{max}} = \frac{T_0}{T_0 + \tau} = \frac{1}{1 + a}</script></li>
 </ul>
-<h3 id="以太网的MAC层"><a href="#以太网的MAC层" class="headerlink" title="以太网的MAC层"></a>以太网的MAC层</h3><ul>
+<h2 id="以太网的MAC层"><a href="#以太网的MAC层" class="headerlink" title="以太网的MAC层"></a>以太网的MAC层</h2><ul>
 <li>硬件地址 / 物理地址 / MAC地址</li>
 <li>一个主机多个网卡的话就有多个MAC地址</li>
 <li>MAC地址应当理解为某个接口的标识符</li>
@@ -475,32 +475,39 @@ S_{\text{max}} = \frac{T_0}{T_0 + \tau} = \frac{1}{1 + a}</script></li>
 <h3 id="MAC帧的格式"><a href="#MAC帧的格式" class="headerlink" title="MAC帧的格式"></a>MAC帧的格式</h3><p>最常用的是以太网V2标准的格式，IEEE802.3的格式和V2相差无几，我们研究的重点是以太网的V2协议。</p>
 <p><img src="IMG_4834.PNG" alt="img4834"></p>
 <ul>
-<li>类型字段用来表示上一层使用的是什么协议<ul>
+<li><p>类型字段用来表示上一层使用的是什么协议</p>
+<ul>
 <li>不一定是<strong>网络层</strong>，比如PPP协议，PPPoE</li>
 </ul>
 </li>
-<li>为什么先是目的地址再是源地址<ul>
+<li><p>为什么先是目的地址再是源地址</p>
+<ul>
 <li>方便解析，能快速判断是不是发给自己的</li>
 </ul>
 </li>
-<li>在使用VLAN虚拟局域网的时候MAC帧的长度可能会超过1518<ul>
+<li><p>在使用VLAN虚拟局域网的时候MAC帧的长度可能会超过1518</p>
+<ul>
 <li>1500字节的数据部分</li>
 <li>目的地址6，源地址6，类型2，FCS 4</li>
 </ul>
 </li>
-<li><code>0x0800</code>表示IP，<code>0x0806</code>表示ARP</li>
-<li>最后的FCS校验全部的内容<ul>
+<li><p><code>0x0800</code>表示IP，<code>0x0806</code>表示ARP</p>
+</li>
+<li><p>最后的FCS校验全部的内容</p>
+<ul>
 <li>不包含帧定界符，因为使用曼彻斯特编码，时钟周期中间不跳变即标明发送结束，不需要帧定界符</li>
 <li>不需要帧定界符也就不需要使用字节插入来实现透明传输</li>
 </ul>
 </li>
-<li>当数据字段的长度小于46字节时，再数据字段后面加入整数字节的填充字段<ul>
+<li><p>当数据字段的长度小于46字节时，再数据字段后面加入整数字节的填充字段</p>
+<ul>
 <li>MAC层因为没有长度计数，所以MAC层并不知道有填充，填充也不发生在MAC层</li>
 <li>填充发生在网络层或者有长度指征的层</li>
 <li>例如IP协议有一个总长度字段，表示MAC层的真实数据字段</li>
 </ul>
 </li>
-<li>如何计算传输效率<ul>
+<li><p>如何计算传输效率</p>
+<ul>
 <li>$ \frac{X}{X + 18 + 2 + 8 + 12}$</li>
 <li>18字节的控制信息，8字节的前同步码，12字节的帧间隔IFG<ul>
 <li>前同步码是一串规律的01序列，用于告知接收方发送方的时钟序列，最后两个11表示准备发送</li>
@@ -509,7 +516,8 @@ S_{\text{max}} = \frac{T_0}{T_0 + \tau} = \frac{1}{1 + a}</script></li>
 </li>
 </ul>
 </li>
-<li>无效的MAC帧<ul>
+<li><p>无效的MAC帧</p>
+<ul>
 <li>数据字段长度不在46 ~ 1500字节之间<ul>
 <li>46 + 18 = 64，恰好是可以接受的最短帧长</li>
 <li>参看 CSMA/CD  /  关于碰撞 / 争用期</li>
@@ -519,7 +527,59 @@ S_{\text{max}} = \frac{T_0}{T_0 + \tau} = \frac{1}{1 + a}</script></li>
 <li>无效帧的出现不一定因为发生了碰撞。例如断电。</li>
 </ul>
 </li>
-<li>802.3的MAC协议</li>
+</ul>
+<h3 id="IEEE-802-3的MAC协议"><a href="#IEEE-802-3的MAC协议" class="headerlink" title="IEEE 802.3的MAC协议"></a>IEEE 802.3的MAC协议</h3><ul>
+<li>区别仅在于，第三个字段是长度<strong>或</strong>类型。长度和类型只能有一个，大于<code>0x6000</code>时表示类型， 小于<code>0x6000</code>时表示长度</li>
+<li>因为长度最大不会超过<code>0x6000</code></li>
+<li>当实际长度与长度字段不同时被视为无效帧</li>
+<li>强行让LLC发挥作用</li>
+</ul>
+<h3 id="无效的MAC帧"><a href="#无效的MAC帧" class="headerlink" title="无效的MAC帧"></a>无效的MAC帧</h3><ul>
+<li>802.3协议中数据字段的长度与长度字段不一致</li>
+<li>帧的长度不是整数个字节</li>
+<li>FCS检测出错</li>
+<li>数据字段的长度不在46 ~ 1500字节之间</li>
+</ul>
+<h2 id="扩展以太网"><a href="#扩展以太网" class="headerlink" title="扩展以太网"></a>扩展以太网</h2><h3 id="在物理层扩展以太网"><a href="#在物理层扩展以太网" class="headerlink" title="在物理层扩展以太网"></a>在物理层扩展以太网</h3><ul>
+<li>使用多个集线器级联</li>
+<li>把多个碰撞域合并成一个碰撞域<ul>
+<li>Collision Domain</li>
+<li>所有可能发生冲突的站点的集合</li>
+<li>冲突域被看作物理层的感念</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>通信效率会下降，但是使得不同局域网可以通信，扩大了以太网覆盖的地理范围</li>
+<li>总的吞吐量没有提高</li>
+<li>数据率不同的碰撞域连接起来会使得较快的无法发挥出自己的吞吐量</li>
+</ul>
+</li>
+</ul>
+<h3 id="在数据链路层扩展以太网"><a href="#在数据链路层扩展以太网" class="headerlink" title="在数据链路层扩展以太网"></a>在数据链路层扩展以太网</h3><ul>
+<li><p>使用网桥 / 转发器</p>
+<ul>
+<li>根据MAC地址进行转发和过滤</li>
+</ul>
+</li>
+<li><p>过滤通信量、增大吞吐量、划分冲突域 / 碰撞域</p>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>需要存储转发，增加了时延</li>
+<li>转发前执行CSMA/CD算法</li>
+<li>没有流量控制，帧多的时候会导致缓存空间不够，发生帧丢失</li>
+<li>不同MAC子层的网段桥接在一起时延更大</li>
+<li>只适合用户数不太多，通信量不太大的局域网</li>
+</ul>
+</li>
+</ul>
+<h4 id="广播风暴"><a href="#广播风暴" class="headerlink" title="广播风暴"></a>广播风暴</h4><ul>
+<li>广播域<ul>
+<li>数据能广播到的范围，能收到同样广播的设备的集合</li>
+<li>是链路层的概念（冲突域是物理层的概念）</li>
+</ul>
+</li>
+<li>产生于网络拓扑的设计和连接问题</li>
 </ul>
 </div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">iLern</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://ilern.github.io/2020/10/15/计算机网络复习笔记-数据链路层/">http://ilern.github.io/2020/10/15/计算机网络复习笔记-数据链路层/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/网络/">网络</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2020/10/15/操作系统学习笔记-进程同步/"><i class="fa fa-chevron-left">  </i><span>操作系统学习笔记-进程同步</span></a></div><div class="next-post pull-right"><a href="/2020/02/22/learn_SQL/"><span>SQL学习笔记</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2016 - 2020 By iLern</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://ilern.github.io/">blog</a>!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
   tex2jax: {
