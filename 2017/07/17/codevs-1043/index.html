@@ -19,16 +19,16 @@
 <p>设状态 $f[i][j][k][l]$ 表示第一次走到 $(i, j)$ 第二次走到 $(k, l)$ 所得到的最大价值</p>
 <p>状态转移方程为：</p>
 <script type="math/tex; mode=display">
- f[i][j][k][l] = \max 
+f[i][j][k][l] = \max 
 \begin{cases}
- f[i - 1][j][k - 1][l] \\\[2ex]
- f[i - 1][j][k][l - 1] \\\[2ex]
- f[i][j - 1][k - 1][l] \\\[2ex]
+ f[i - 1][j][k - 1][l] \\[2ex]
+ f[i - 1][j][k][l - 1] \\[2ex]
+ f[i][j - 1][k - 1][l] \\[2ex]
  f[i][j - 1][k][l - 1]
 \end{cases}
 +
 \begin{cases}
-num[i][j] , &\text{$i = k \land j = l$}\\\[2ex]
+num[i][j] , &\text{$i = k \land j = l$}\\[2ex]
 num[i][j] + num[k][l] , &\text{$i \neq k \land j \neq l$}
 \end{cases}</script><p>最后要保证如果两条路线经过同一个点的话只把格子中的数取一次。</p>
 <p>复杂度$O(n^4)$，对于原题的$n \leq 10$来说足够了</p>
