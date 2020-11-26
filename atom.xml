@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2020-11-26T03:01:27.030Z</updated>
+  <updated>2020-11-26T03:04:05.954Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://ilern.github.io/2020/11/26/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
     <id>http://ilern.github.io/2020/11/26/操作系统实验笔记（二）/</id>
     <published>2020-11-26T02:24:17.000Z</published>
-    <updated>2020-11-26T03:01:27.030Z</updated>
+    <updated>2020-11-26T03:04:05.954Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><p>中断被封装成信号，多个不同的中断被封装成一个信号。</p><a id="more"></a><div class="table-container"><table><thead><tr><th style="text-align:center">层次</th><th style="text-align:center">称呼</th></tr></thead><tbody><tr><td style="text-align:center">硬件层次</td><td style="text-align:center">中断</td></tr><tr><td style="text-align:center">操作系统层次</td><td style="text-align:center">信号</td></tr><tr><td style="text-align:center">应用程序层次</td><td style="text-align:center">事件</td></tr></tbody></table></div><p>信号可以用编号、名称表示，名称是编号的宏。</p><p><img src="1.png" alt></p><h2 id="mask"><a href="#mask" class="headerlink" title="mask"></a>mask</h2><p>过滤信号，每个进程都有对signal的mask，滤掉的就忽略，没有滤掉的就响应</p><h2 id="signal"><a href="#signal" class="headerlink" title="signal()"></a>signal()</h2><p><img src="2.png" alt></p><p>返回信号处理程序的入口指针，<code>signal()</code>根据编号设置信号处理程序</p><p><img src="3.JPG" alt></p><p>实际是修改进程PCB中的信号表中的函数指针</p><p><img src="3.png" alt></p><p>注意唤醒的时刻，4和alarm有一秒停顿，alarm和5没有间隔，说明收到信号之后进程被立即唤醒</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><p>中断被封装成信号，多个不同的中断被封装成一个信号。</p><a id="more"></a><div class="table-container"><table><thead><tr><th style="text-align:center">层次</th><th style="text-align:center">称呼</th></tr></thead><tbody><tr><td style="text-align:center">硬件层次</td><td style="text-align:center">中断</td></tr><tr><td style="text-align:center">操作系统层次</td><td style="text-align:center">信号</td></tr><tr><td style="text-align:center">应用程序层次</td><td style="text-align:center">事件</td></tr></tbody></table></div><p>信号可以用编号、名称表示，名称是编号的宏。</p><p><img src="1.png" alt></p><h2 id="mask"><a href="#mask" class="headerlink" title="mask"></a>mask</h2><p>过滤信号，每个进程都有对signal的mask，滤掉的就忽略，没有滤掉的就响应</p><h2 id="signal"><a href="#signal" class="headerlink" title="signal()"></a>signal()</h2><p><img src="2.png" alt></p><p>返回信号处理程序的入口指针，<code>signal()</code>根据编号设置信号处理程序</p><p><img src="3.JPG" alt></p><p>实际是修改进程PCB中的信号表中的函数指针</p><p><img src="3.png" alt></p><p>注意唤醒的时刻，4和alarm有一秒停顿，alarm和5没有间隔，说明收到信号之后进程被立即唤醒</p><p>信号什么时候到来和<code>signal()</code>没有关系</p>]]></content>
     
     <summary type="html">
     

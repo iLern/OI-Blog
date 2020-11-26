@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[操作系统实验笔记（二）]]></title>
     <url>%2F2020%2F11%2F26%2F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[信号中断被封装成信号，多个不同的中断被封装成一个信号。 层次 称呼 硬件层次 中断 操作系统层次 信号 应用程序层次 事件 信号可以用编号、名称表示，名称是编号的宏。 mask过滤信号，每个进程都有对signal的mask，滤掉的就忽略，没有滤掉的就响应 signal() 返回信号处理程序的入口指针，signal()根据编号设置信号处理程序 实际是修改进程PCB中的信号表中的函数指针 注意唤醒的时刻，4和alarm有一秒停顿，alarm和5没有间隔，说明收到信号之后进程被立即唤醒]]></content>
+    <content type="text"><![CDATA[信号中断被封装成信号，多个不同的中断被封装成一个信号。 层次 称呼 硬件层次 中断 操作系统层次 信号 应用程序层次 事件 信号可以用编号、名称表示，名称是编号的宏。 mask过滤信号，每个进程都有对signal的mask，滤掉的就忽略，没有滤掉的就响应 signal() 返回信号处理程序的入口指针，signal()根据编号设置信号处理程序 实际是修改进程PCB中的信号表中的函数指针 注意唤醒的时刻，4和alarm有一秒停顿，alarm和5没有间隔，说明收到信号之后进程被立即唤醒 信号什么时候到来和signal()没有关系]]></content>
       <categories>
         <category>操作系统</category>
       </categories>
