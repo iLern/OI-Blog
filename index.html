@@ -825,7 +825,53 @@
 <h3 id="MPLS格式"><a href="#MPLS格式" class="headerlink" title="MPLS格式"></a>MPLS格式</h3><p>在IP数据报被封装成以太网帧之前，先插入一个MPLS首部</p>
 <p><img src="IMG_1592.PNG" alt></p>
 <p>生存时间用于防止兜圈子</p>
-<h3 id="LSP隧道-lt-第三个隧道-gt"><a href="#LSP隧道-lt-第三个隧道-gt" class="headerlink" title="LSP隧道  &lt;第三个隧道&gt; "></a>LSP隧道 <font color="blue"> &lt;第三个隧道&gt; </font></h3><h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/10/15/操作系统学习笔记-进程同步/">操作系统学习笔记-进程同步</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/操作系统/">操作系统</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/进程同步/">进程同步</a></span><div class="content"><h2 id="The-Critical-Section-Problem"><a href="#The-Critical-Section-Problem" class="headerlink" title="The Critical-Section Problem"></a>The Critical-Section Problem</h2><h3 id="About-Critical-Section"><a href="#About-Critical-Section" class="headerlink" title="About Critical Section"></a>About Critical Section</h3><ul>
+<h3 id="LSP隧道-lt-第三个隧道-gt"><a href="#LSP隧道-lt-第三个隧道-gt" class="headerlink" title="LSP隧道  &lt;第三个隧道&gt; "></a>LSP隧道 <font color="blue"> &lt;第三个隧道&gt; </font></h3><h2 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h2><h3 id="主要变化"><a href="#主要变化" class="headerlink" title="主要变化"></a>主要变化</h3><p>允许协议继续扩充</p>
+<p>支持即插即用自动配置</p>
+<p>支持资源预分配</p>
+<p>首部由四字节对齐改为八字节对齐</p>
+<h3 id="一般形式"><a href="#一般形式" class="headerlink" title="一般形式"></a>一般形式</h3><p><img src="IMG_1593.PNG" alt></p>
+<ul>
+<li>版本<ul>
+<li>4位，目前版本6</li>
+</ul>
+</li>
+<li>通信量类<ul>
+<li>8位，相当于区分服务</li>
+</ul>
+</li>
+<li>流标号</li>
+<li>有效载荷长度</li>
+<li>下一个首部<ul>
+<li>8位，指向扩展首部，串出一个列表</li>
+</ul>
+</li>
+<li>跳数限制<ul>
+<li>8位</li>
+</ul>
+</li>
+</ul>
+<h3 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h3><p>128位</p>
+<p>除Unicast、Multicast外支持Anycast</p>
+<ul>
+<li>对于一组主机，只要找到最近的一个即可</li>
+<li>发向一组，其中只要有一个接收到即可</li>
+</ul>
+<p>使用冒号十六进制记法</p>
+<p>允许把数字前面的0省略</p>
+<p>一串零可以使用零压缩压缩成一对冒号，地址中只能压缩一次</p>
+<p>CIDR斜线表示法仍然适用</p>
+<h4 id="特殊地址"><a href="#特殊地址" class="headerlink" title="特殊地址"></a>特殊地址</h4><p><code>::/128</code> 未指明</p>
+<p><code>::1/128</code> 环回</p>
+<p><code>FF00::/8</code> 多播</p>
+<p><code>FE80::/10</code> 本地链路单播</p>
+<h3 id="v4-to-v6"><a href="#v4-to-v6" class="headerlink" title="v4 to v6"></a>v4 to v6</h3><ul>
+<li>双协议栈</li>
+<li>隧道技术 <font color="blue"> &lt;第四种隧道&gt; </font><ul>
+<li>把v6数据报封装进v4数据报</li>
+</ul>
+</li>
+</ul>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/10/15/操作系统学习笔记-进程同步/">操作系统学习笔记-进程同步</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/操作系统/">操作系统</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/进程同步/">进程同步</a></span><div class="content"><h2 id="The-Critical-Section-Problem"><a href="#The-Critical-Section-Problem" class="headerlink" title="The Critical-Section Problem"></a>The Critical-Section Problem</h2><h3 id="About-Critical-Section"><a href="#About-Critical-Section" class="headerlink" title="About Critical Section"></a>About Critical Section</h3><ul>
 <li><p>An atomic action is required in a critical section.</p>
 </li>
 <li><p>When one process is executing in its critical section, no other process is to be allowed to execute in its critical section.</p>
