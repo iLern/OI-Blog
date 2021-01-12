@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2021-01-12T12:18:53.251Z</updated>
+  <updated>2021-01-12T12:28:45.095Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://ilern.github.io/2021/01/12/NJU-ics-2020-%E6%A6%82%E8%A6%81/"/>
     <id>http://ilern.github.io/2021/01/12/NJU-ics-2020-概要/</id>
     <published>2021-01-12T12:12:26.000Z</published>
-    <updated>2021-01-12T12:18:53.251Z</updated>
+    <updated>2021-01-12T12:28:45.095Z</updated>
     
     <content type="html"><![CDATA[<p>填坑</p><a id="more"></a><h1 id="实现x86的寄存器"><a href="#实现x86的寄存器" class="headerlink" title="实现x86的寄存器"></a>实现x86的寄存器</h1><p>很关键的一张图</p><p><img src="1.png" alt></p>]]></content>
     
@@ -31,10 +31,14 @@
     
     </summary>
     
-      <category term="计算机基础" scheme="http://ilern.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+      <category term="计算机系统基础" scheme="http://ilern.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="计算机基础" scheme="http://ilern.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+      <category term="计算机系统基础" scheme="http://ilern.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="计算机组成原理" scheme="http://ilern.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
+    
+      <category term="操作系统" scheme="http://ilern.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
