@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2021-01-12T12:16:35.868Z</updated>
+  <updated>2021-01-12T12:18:53.251Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -21,9 +21,13 @@
     <link href="http://ilern.github.io/2021/01/12/NJU-ics-2020-%E6%A6%82%E8%A6%81/"/>
     <id>http://ilern.github.io/2021/01/12/NJU-ics-2020-概要/</id>
     <published>2021-01-12T12:12:26.000Z</published>
-    <updated>2021-01-12T12:16:35.868Z</updated>
+    <updated>2021-01-12T12:18:53.251Z</updated>
+    
+    <content type="html"><![CDATA[<p>填坑</p><a id="more"></a><h1 id="实现x86的寄存器"><a href="#实现x86的寄存器" class="headerlink" title="实现x86的寄存器"></a>实现x86的寄存器</h1><p>很关键的一张图</p><p><img src="1.png" alt></p>]]></content>
     
     <summary type="html">
+    
+      &lt;p&gt;填坑&lt;/p&gt;
     
     </summary>
     
