@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[NJU ics 2020 概要]]></title>
     <url>%2F2021%2F01%2F12%2FNJU-ics-2020-%E6%A6%82%E8%A6%81%2F</url>
-    <content type="text"><![CDATA[填坑 实现x86的寄存器很关键的一张图 123456789101112typedef struct &#123; struct &#123; uint32_t _32; uint16_t _16; uint8_t _8[2]; &#125; gpr[8]; //relreg_t === uint32_t rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi; vaddr_t pc;&#125; x86_CPU_state; 希望下面的每一个寄存器（eax…）能和上面结构体中的结构进行对应 x86寄存器的这种结构很适合用union来表达 123456789101112131415161718typedef struct &#123; union &#123; struct &#123; union &#123; uint32_t _32; uint16_t _16; uint8_t _8[2]; &#125; &#125; gpr[8]; //relreg_t === uint32_t struct &#123; rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi; &#125;; &#125;; vaddr_t pc;&#125; x86_CPU_state;]]></content>
+    <content type="text"><![CDATA[填坑 实现x86的寄存器很关键的一张图 123456789101112typedef struct &#123; struct &#123; uint32_t _32; uint16_t _16; uint8_t _8[2]; &#125; gpr[8]; //relreg_t === uint32_t rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi; vaddr_t pc;&#125; x86_CPU_state; 希望下面的每一个寄存器（eax…）能和上面结构体中的结构进行对应 x86寄存器的这种结构很适合用union来表达 123456789101112131415161718typedef struct &#123; union &#123; struct &#123; union &#123; uint32_t _32; uint16_t _16; uint8_t _8[2]; &#125; &#125; gpr[8]; //relreg_t === uint32_t struct &#123; rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi; &#125;; &#125;; vaddr_t pc;&#125; x86_CPU_state; reg_test()是如何测试你的实现的?]]></content>
       <categories>
         <category>计算机系统基础</category>
       </categories>
