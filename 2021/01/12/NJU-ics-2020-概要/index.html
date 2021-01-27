@@ -69,27 +69,33 @@
 </ul>
 <h3 id="断点的工作原理"><a href="#断点的工作原理" class="headerlink" title="断点的工作原理"></a>断点的工作原理</h3><p>在PA中可以用<code>w pc == ADDR</code>来模拟断点，但是这样会影响效率</p>
 <p><a href="https://eli.thegreenplace.net/2011/01/27/how-debuggers-work-part-2-breakpoints" target="_blank" rel="noopener">How debuggers work: Part 2 - Breakpoints</a></p>
-<p>这篇文章介绍了GDB打断点的原理，简要概括如下</p>
+<p>这篇文章介绍了GDB打断点的原理，简要概括如下：</p>
 <ul>
 <li>断点通过软中断（trap / software interrupts）实现<ul>
 <li>发生中断时，CPU会保存当前的状态，跳转到一个事先确定的处理相应中断的程序的位置</li>
 <li>硬件中断和软件中断都是如此</li>
 </ul>
 </li>
-<li>断点通过一种特殊的trap——<code>int 3</code>来实现<ul>
-<li>这里的<code>int</code>不是类型，而是x86对于trap指令的一种术语，指的是对预先定义的处理程序的调用</li>
-<li><code>int</code>指令可以跟一个8位的操作数，这个操作数表明了中断的编号，理论上可以有$2^8 = 256$种中断，我们关心的中断是三号中断<code>int 3</code></li>
-<li><code>int 3</code>称为<code>trap to debugger</code></li>
+<li>断点通过一种特殊的trap——<code>int3</code>来实现<ul>
+<li>这里的<code>int</code>不是类型，而是x86对于trap指令的一种术语，指的是对预先定义的处理程序的调用，<code>interrupt</code></li>
+<li><code>int</code>指令可以跟一个8位的操作数，这个操作数表明了中断的编号，理论上可以有$2^8 = 256$种中断，我们关心的中断是三号中断<code>int3</code></li>
+<li><code>int3</code>称为<code>trap to debugger</code></li>
 </ul>
 </li>
 <li>当进程执行<code>int3</code>指令时，OS会停止当前的进程，并向他发送一个<code>SIGTRAP</code>信号</li>
+</ul>
+<p>思考题：</p>
+<ul>
+<li>x86的<code>int3</code>指令不带任何操作数, 操作码为1个字节, 因此指令的长度是1个字节. 这是必须的吗? 假设有一种x86体系结构的变种my-x86, 除了<code>int3</code>指令的长度变成了2个字节之外, 其余指令和x86相同. 在my-x86中, 上述文章中的断点机制还可以正常工作吗? 为什么?</li>
 </ul>
 <h2 id="如何阅读手册"><a href="#如何阅读手册" class="headerlink" title="如何阅读手册"></a>如何阅读手册</h2><h3 id="查阅手册回答"><a href="#查阅手册回答" class="headerlink" title="查阅手册回答"></a>查阅手册回答</h3><ul>
 <li>EFLAGS寄存器中的CF位是什么意思?</li>
 <li>ModR/M字节是什么?</li>
 <li>mov指令的具体格式是怎么样的?</li>
 </ul>
-<h3 id="统计代码行数"><a href="#统计代码行数" class="headerlink" title="统计代码行数"></a>统计代码行数</h3><p>PA1到此结束</p>
+<h3 id="统计代码行数"><a href="#统计代码行数" class="headerlink" title="统计代码行数"></a>统计代码行数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name "*.[ch]" | xargs wc -l &gt; statistic</span><br></pre></td></tr></table></figure>
+<p><img src="6.png" alt></p>
+<p>PA1到此结束</p>
 <h1 id="PA2-简单复杂的机器-冯诺依曼计算机系统"><a href="#PA2-简单复杂的机器-冯诺依曼计算机系统" class="headerlink" title="PA2 - 简单复杂的机器: 冯诺依曼计算机系统"></a>PA2 - 简单复杂的机器: 冯诺依曼计算机系统</h1></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">iLern</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://ilern.github.io/2021/01/12/NJU-ics-2020-概要/">http://ilern.github.io/2021/01/12/NJU-ics-2020-概要/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/计算机系统基础/">计算机系统基础</a><a class="post-meta__tags" href="/tags/计算机组成原理/">计算机组成原理</a><a class="post-meta__tags" href="/tags/操作系统/">操作系统</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2021/01/19/七和弦/"><i class="fa fa-chevron-left">  </i><span>七和弦</span></a></div><div class="next-post pull-right"><a href="/2020/12/30/计算机网络复习笔记-物理层/"><span>计算机网络复习笔记 物理层</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2016 - 2021 By iLern</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://ilern.github.io/">blog</a>!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
   tex2jax: {
     inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
