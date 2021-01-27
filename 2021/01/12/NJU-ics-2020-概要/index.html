@@ -89,9 +89,35 @@
 <li>x86的<code>int3</code>指令不带任何操作数, 操作码为1个字节, 因此指令的长度是1个字节. 这是必须的吗? 假设有一种x86体系结构的变种my-x86, 除了<code>int3</code>指令的长度变成了2个字节之外, 其余指令和x86相同. 在my-x86中, 上述文章中的断点机制还可以正常工作吗? 为什么?</li>
 </ul>
 <h2 id="如何阅读手册"><a href="#如何阅读手册" class="headerlink" title="如何阅读手册"></a>如何阅读手册</h2><h3 id="查阅手册回答"><a href="#查阅手册回答" class="headerlink" title="查阅手册回答"></a>查阅手册回答</h3><ul>
-<li>EFLAGS寄存器中的CF位是什么意思?</li>
-<li>ModR/M字节是什么?</li>
-<li>mov指令的具体格式是怎么样的?</li>
+<li><p>EFLAGS寄存器中的CF位是什么意思?</p>
+<p><a href="https://nju-projectn.github.io/i386-manual/s02_03.htm#fig2-8" target="_blank" rel="noopener">Figure 2-8.  EFLAGS Register  </a></p>
+<p>CF：Carry Flag 进位标志</p>
+<p><img src="8.png" alt></p>
+</li>
+<li><p>ModR/M字节是什么?</p>
+<p>ModR/M是x86指令中的一个字节</p>
+<p>x86指令的一般格式如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+-----------+-----------+-----------+--------+------+------+------+------------+-----------+</span><br><span class="line">|instruction| address-  |  operand- |segment |opcode|ModR/M| SIB  |displacement| immediate |</span><br><span class="line">|  prefix   |size prefix|size prefix|override|      |      |      |            |           |</span><br><span class="line">|-----------+-----------+-----------+--------+------+------+------+------------+-----------|</span><br><span class="line">|   0 OR 1  |  0 OR 1   |   0 OR 1  | 0 OR 1 |1 OR 2|0 OR 1|0 OR 1| 0,1,2 OR 4 |0,1,2 OR 4 |</span><br><span class="line">| - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|</span><br><span class="line">|                                     number of bytes                                      |</span><br><span class="line">+------------------------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>除了opcode(操作码)必定出现之外, 其余组成部分可能不出现, 而对于某些组成部分, 其长度并不是固定的. 但给定一条具体指令的二进制形式, 其组成部分的划分是有办法确定的, 不会产生歧义(即把一串比特串看成指令的时候, 不会出现两种不同的解释). </p>
+<p>去手册中查询指令的一般格式 <code>17.2 Instruction Format</code></p>
+<ul>
+<li>ModR/M 和 SIB 字节跟在 opcode 后面， 包括以下信息<ul>
+<li>指令中要使用的索引类型或者寄存器号</li>
+<li>要使用的寄存器或者用来选择指令的更多信息</li>
+<li>base, index, 和 scale 的相关信息</li>
+</ul>
+</li>
+<li>ModR/M 字节包括三部分信息:<ul>
+<li>mod field, 占用字节的两个最高位, 和 r/m field 结合表示32个可能的值: 8个寄存器和和24个 index mode。</li>
+<li>The reg field, 占用 mod field 接下来的三位，决定是寄存器号还是 opdode 的额外3位，取决于 opcode 的第一个字节。</li>
+<li>The r/m field, 占用三个最低位, 决定寄存器是操作数的位置或者可以与上述字段结合形成寻址模式编码的一部分。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>mov指令的具体格式是怎么样的?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Opcode   Instruction       Clocks        Description</span><br><span class="line"></span><br><span class="line">88  /r   MOV r/m8,r8       2/2           Move byte register to r/m byte</span><br><span class="line">89  /r   MOV r/m16,r16     2/2           Move word register to r/m word</span><br><span class="line">89  /r   MOV r/m32,r32     2/2           Move dword register to r/m dword</span><br><span class="line">8A  /r   MOV r8,r/m8       2/4           Move r/m byte to byte register</span><br><span class="line">8B  /r   MOV r16,r/m16     2/4           Move r/m word to word register</span><br><span class="line">8B  /r   MOV r32,r/m32     2/4           Move r/m dword to dword register</span><br><span class="line">8C  /r   MOV r/m16,Sreg    2/2           Move segment register to r/m word</span><br><span class="line">8E  /r   MOV Sreg,r/m16    2/5,pm=18/19  Move r/m word to segment register</span><br><span class="line">A0       MOV AL,moffs8     4             Move byte at (seg:offset) to AL</span><br><span class="line">A1       MOV AX,moffs16    4             Move word at (seg:offset) to AX</span><br><span class="line">A1       MOV EAX,moffs32   4             Move dword at (seg:offset) to EAX</span><br><span class="line">A2       MOV moffs8,AL     2             Move AL to (seg:offset)</span><br><span class="line">A3       MOV moffs16,AX    2             Move AX to (seg:offset)</span><br><span class="line">A3       MOV moffs32,EAX   2             Move EAX to (seg:offset)</span><br><span class="line">B0 + rb ib  MOV reg8,imm8     2          Move immediate byte to register</span><br><span class="line">B8 + rw iw  MOV reg16,imm16   2          Move immediate word to register</span><br><span class="line">B8 + rd id  MOV reg32,imm32   2          Move immediate dword to register</span><br><span class="line">C6 ib    MOV r/m8,imm8     2/2           Move immediate byte to r/m byte</span><br><span class="line">C7 iw    MOV r/m16,imm16   2/2           Move immediate word to r/m word</span><br><span class="line">C7 id    MOV r/m32,imm32   2/2           Move immediate dword to r/m dword</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <h3 id="统计代码行数"><a href="#统计代码行数" class="headerlink" title="统计代码行数"></a>统计代码行数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -name "*.[ch]" | xargs wc -l &gt; statistic</span><br></pre></td></tr></table></figure>
 <p><img src="6.png" alt></p>
