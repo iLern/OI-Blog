@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[基本初等函数的导数]]></title>
     <url>%2F2021%2F03%2F05%2F%E5%9F%BA%E6%9C%AC%E5%88%9D%E7%AD%89%E5%87%BD%E6%95%B0%E7%9A%84%E5%AF%BC%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[基本初等函数导数的证明 / 推导 很大程度上是因为手痒想写 $\LaTeX$ 了 指数函数 \begin{align} (a^x)’ &= \lim_{\Delta x \to 0} \frac{a^{x + \Delta x} - a^x}{\Delta x} \\[2ex] &= \lim_{\Delta x \to 0} \frac{a^x(a^{\Delta x} - 1)}{\Delta x} \label{con:2} \\[2ex] &= \lim_{\Delta x \to 0} \frac{a^x \cdot \Delta x \ln a}{\Delta x} \label{con:3} \\[2ex] &= a^x \ln a \\ \end{align} \\公式 $\ref{con:2}$ 到公式 $\ref{con:3} $ 使用了等价无穷小替换 $\lim_{x \to 0} a^x - 1 \sim a^x \ln a$ 幂函数对数函数三角函数]]></content>
+    <content type="text"><![CDATA[基本初等函数导数的证明 / 推导 很大程度上是因为手痒想写 $\LaTeX$ 了 指数函数 \begin{align} (a^x)’ &= \lim_{\Delta x \to 0} \frac{a^{x + \Delta x} - a^x}{\Delta x} \\[2ex] &= \lim_{\Delta x \to 0} \frac{a^x(a^{\Delta x} - 1)}{\Delta x} \label{con:2} \\[2ex] &= \lim_{\Delta x \to 0} \frac{a^x \cdot \Delta x \ln a}{\Delta x} \label{con:3} \\[2ex] &= a^x \ln a \\ \end{align} \\幂函数对数函数三角函数]]></content>
       <tags>
         <tag>数学</tag>
       </tags>

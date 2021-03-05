@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2021-03-05T12:27:36.580Z</updated>
+  <updated>2021-03-05T12:29:06.402Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://ilern.github.io/2021/03/05/%E5%9F%BA%E6%9C%AC%E5%88%9D%E7%AD%89%E5%87%BD%E6%95%B0%E7%9A%84%E5%AF%BC%E6%95%B0/"/>
     <id>http://ilern.github.io/2021/03/05/基本初等函数的导数/</id>
     <published>2021-03-05T11:36:58.000Z</published>
-    <updated>2021-03-05T12:27:36.580Z</updated>
+    <updated>2021-03-05T12:29:06.402Z</updated>
     
-    <content type="html"><![CDATA[<p>基本初等函数导数的证明 / 推导</p><p>很大程度上是因为手痒想写 $\LaTeX$ 了</p><a id="more"></a><h1 id="指数函数"><a href="#指数函数" class="headerlink" title="指数函数"></a>指数函数</h1><script type="math/tex; mode=display">\begin{align}(a^x)’ &= \lim_{\Delta x \to 0} \frac{a^{x + \Delta x} - a^x}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{a^x(a^{\Delta x} - 1)}{\Delta x} \label{con:2} \\[2ex]&= \lim_{\Delta x \to 0} \frac{a^x \cdot \Delta x \ln a}{\Delta x} \label{con:3} \\[2ex]&= a^x \ln a \\\end{align} \\</script><p>公式 $\ref{con:2}$ 到公式 $\ref{con:3} $ 使用了等价无穷小替换 $\lim_{x \to 0} a^x - 1 \sim a^x \ln a$</p><h1 id="幂函数"><a href="#幂函数" class="headerlink" title="幂函数"></a>幂函数</h1><h1 id="对数函数"><a href="#对数函数" class="headerlink" title="对数函数"></a>对数函数</h1><h1 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h1>]]></content>
+    <content type="html"><![CDATA[<p>基本初等函数导数的证明 / 推导</p><p>很大程度上是因为手痒想写 $\LaTeX$ 了</p><a id="more"></a><h1 id="指数函数"><a href="#指数函数" class="headerlink" title="指数函数"></a>指数函数</h1><script type="math/tex; mode=display">\begin{align}(a^x)’ &= \lim_{\Delta x \to 0} \frac{a^{x + \Delta x} - a^x}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{a^x(a^{\Delta x} - 1)}{\Delta x} \label{con:2} \\[2ex]&= \lim_{\Delta x \to 0} \frac{a^x \cdot \Delta x \ln a}{\Delta x} \label{con:3} \\[2ex]&= a^x \ln a \\\end{align} \\</script><h1 id="幂函数"><a href="#幂函数" class="headerlink" title="幂函数"></a>幂函数</h1><h1 id="对数函数"><a href="#对数函数" class="headerlink" title="对数函数"></a>对数函数</h1><h1 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h1>]]></content>
     
     <summary type="html">
     
