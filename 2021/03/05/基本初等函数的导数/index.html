@@ -21,7 +21,12 @@
 <h1 id="幂函数"><a href="#幂函数" class="headerlink" title="幂函数"></a>幂函数</h1><h1 id="对数函数"><a href="#对数函数" class="headerlink" title="对数函数"></a>对数函数</h1><script type="math/tex; mode=display">
 \begin{align}
 (\log_ax)'
-&= 
+&= \lim_{\Delta x \to 0} \frac{\log_a (x + \Delta x) - \log_a x}{\Delta x} \\[2ex]
+&= \lim_{\Delta x \to 0} \frac{\log_a \frac{x + \Delta x}{x}}{\Delta x} \\[2ex]
+&= \lim_{\Delta x \to 0} \frac{\frac{\ln \frac{x + \Delta x}{x}}{\ln a}}{\Delta x} \\[2ex]
+&= \frac{1}{\ln a} \lim_{\Delta x \to 0} \frac{\ln \frac{x + \Delta x}{x}}{\Delta x} \\[2ex]
+&= \frac{1}{\ln a} \lim_{\Delta x \to 0} \frac{\ln (1 + \frac{\Delta x}{x})}{\Delta x} \\[2ex]
+&= \frac{1}{x\ln a}
 \end{align}</script><p>特殊地，$(\ln x)’ = \frac{1}{x}$</p>
 <h1 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h1><p>三角函数的导数证明需要熟悉以下三角变换 / 恒等式：</p>
 <script type="math/tex; mode=display">
