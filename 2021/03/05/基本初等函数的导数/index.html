@@ -18,10 +18,19 @@
 &= a^x \lim_{\Delta x \to 0} \frac{\Delta x \ln a}{\Delta x} \\[2ex]
 &= a^x \ln a \\
 \end{align}</script><p>特殊地，$(e^x)’ = e^x$</p>
-<h1 id="幂函数"><a href="#幂函数" class="headerlink" title="幂函数"></a>幂函数</h1><script type="math/tex; mode=display">
+<p>另外也可两边取对数然后同时求导</p>
+<script type="math/tex; mode=display">
 \begin{align}
-& y = x^a,\text{两端同时取对数}\\
-& \ln y = \ln x^a = a\ln x ,\text{两侧对}x\text{求导}\\
+& y = a^x \\
+& \ln y = x \ln a \\
+& \frac{\mathrm{d}}{\mathrm{d} x} \ln y = \frac{\mathrm{d}}{\mathrm{d} x} x \ln a\\
+& \frac{1}{y} \cdot \frac{\mathrm{d} y}{\mathrm{d} x} = \ln a\\
+& \frac{\mathrm{d} y}{\mathrm{d} x} = y \ln a = a^x \ln a
+\end{align}</script><h1 id="幂函数"><a href="#幂函数" class="headerlink" title="幂函数"></a>幂函数</h1><p>两边取对数然后同时求导</p>
+<script type="math/tex; mode=display">
+\begin{align}
+& y = x^a\\
+& \ln y = \ln x^a = a\ln x\\
 & \frac{\mathrm{d}}{\mathrm{d} x} \ln y = \frac{\mathrm{d}}{\mathrm{d} x} a \ln x\\
 & \frac{1}{y} \cdot \frac{\mathrm{d} y}{\mathrm{d} x} = \frac{a}{x}\\
 & \frac{\mathrm{d} y}{\mathrm{d} x} = \frac{ay}{x} = \frac{a x^a}{x} = ax^{a - 1}
