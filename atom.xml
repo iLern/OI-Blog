@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2021-03-05T13:59:33.047Z</updated>
+  <updated>2021-03-06T14:16:33.091Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>导数的四则运算法则</title>
+    <link href="http://ilern.github.io/2021/03/06/%E5%AF%BC%E6%95%B0%E7%9A%84%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99/"/>
+    <id>http://ilern.github.io/2021/03/06/导数的四则运算法则/</id>
+    <published>2021-03-06T13:44:05.000Z</published>
+    <updated>2021-03-06T14:16:33.091Z</updated>
+    
+    <content type="html"><![CDATA[<p>导数四则运算法则的推导</p><a id="more"></a><h1 id="加减"><a href="#加减" class="headerlink" title="加减"></a>加减</h1><script type="math/tex; mode=display">\begin{align}(u \pm v)'&= \lim_{\Delta x \to 0} \frac{(u(x + \Delta x) - u(x)) \pm (v(x + \Delta x) - v(x))}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{(u(x + \Delta x) - u(x)) }{\Delta x} \pm \lim_{\Delta x \to 0} \frac{(v(x + \Delta x) - v(x))}{\Delta x} \\[2ex]&= u' \pm v'\end{align}</script><h1 id="乘"><a href="#乘" class="headerlink" title="乘"></a>乘</h1><p>乘法和除法都是凑了一项，感觉很依靠人类智慧</p><script type="math/tex; mode=display">\begin{align}(uv)'&= \lim_{\Delta x \to 0} \frac{(u(x + \Delta x) - u(x)) \cdot (v(x + \Delta x) - v(x))}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{u(x + \Delta x)v(x + \Delta x) - u(x + \Delta x)v(x) - u(x)v(x + \Delta x) + u(x)v(x)}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{}{\Delta x}\end{align}</script><h1 id="除"><a href="#除" class="headerlink" title="除"></a>除</h1><script type="math/tex; mode=display">\begin{align}(\frac{u}{v})'&= \lim_{\Delta x \to 0} \frac{\frac{u(x + \Delta x) - u(x)}{\Delta x}}{\frac{v(x + \Delta x) - v(x)}{\Delta x}} \\[2ex]&= \lim_{\Delta x \to 0} \frac{u(x + \Delta x) - u(x)}{v(x + \Delta x) - v(x)} \\[2ex]&= \lim_{\Delta x \to 0} \frac{}{\Delta x}\end{align}</script>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;导数四则运算法则的推导&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数学" scheme="http://ilern.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+    
+      <category term="微积分" scheme="http://ilern.github.io/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"/>
+    
+  </entry>
+  
+  <entry>
     <title>基本初等函数的导数</title>
     <link href="http://ilern.github.io/2021/03/05/%E5%9F%BA%E6%9C%AC%E5%88%9D%E7%AD%89%E5%87%BD%E6%95%B0%E7%9A%84%E5%AF%BC%E6%95%B0/"/>
     <id>http://ilern.github.io/2021/03/05/基本初等函数的导数/</id>
     <published>2021-03-05T11:36:58.000Z</published>
-    <updated>2021-03-05T13:59:33.047Z</updated>
+    <updated>2021-03-06T01:13:37.991Z</updated>
     
     <content type="html"><![CDATA[<p>基本初等函数导数的证明 / 推导</p><p>很大程度上是因为手痒想写 $\LaTeX$ 了</p><a id="more"></a><h1 id="指数函数"><a href="#指数函数" class="headerlink" title="指数函数"></a>指数函数</h1><script type="math/tex; mode=display">\begin{align}(a^x)'&= \lim_{\Delta x \to 0} \frac{a^{x + \Delta x} - a^x}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{a^x(a^{\Delta x} - 1)}{\Delta x} \\[2ex]&= a^x \lim_{\Delta x \to 0} \frac{\Delta x \ln a}{\Delta x} \\[2ex]&= a^x \ln a \\\end{align}</script><p>特殊地，$(e^x)’ = e^x$</p><p>另外也可两边取对数然后同时求导</p><script type="math/tex; mode=display">\begin{align}& y = a^x \\& \ln y = x \ln a \\& \frac{\mathrm{d}}{\mathrm{d} x} \ln y = \frac{\mathrm{d}}{\mathrm{d} x} x \ln a\\& \frac{1}{y} \cdot \frac{\mathrm{d} y}{\mathrm{d} x} = \ln a\\& \frac{\mathrm{d} y}{\mathrm{d} x} = y \ln a = a^x \ln a\end{align}</script><h1 id="幂函数"><a href="#幂函数" class="headerlink" title="幂函数"></a>幂函数</h1><p>两边取对数然后同时求导</p><script type="math/tex; mode=display">\begin{align}& y = x^a\\& \ln y = \ln x^a = a\ln x\\& \frac{\mathrm{d}}{\mathrm{d} x} \ln y = \frac{\mathrm{d}}{\mathrm{d} x} a \ln x\\& \frac{1}{y} \cdot \frac{\mathrm{d} y}{\mathrm{d} x} = \frac{a}{x}\\& \frac{\mathrm{d} y}{\mathrm{d} x} = \frac{ay}{x} = \frac{a x^a}{x} = ax^{a - 1}\end{align}</script><h1 id="对数函数"><a href="#对数函数" class="headerlink" title="对数函数"></a>对数函数</h1><script type="math/tex; mode=display">\begin{align}(\log_ax)'&= \lim_{\Delta x \to 0} \frac{\log_a (x + \Delta x) - \log_a x}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{\log_a \frac{x + \Delta x}{x}}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{\frac{\ln \frac{x + \Delta x}{x}}{\ln a}}{\Delta x} \\[2ex]&= \frac{1}{\ln a} \lim_{\Delta x \to 0} \frac{\ln \frac{x + \Delta x}{x}}{\Delta x} \\[2ex]&= \frac{1}{\ln a} \lim_{\Delta x \to 0} \frac{\ln (1 + \frac{\Delta x}{x})}{\Delta x} \\[2ex]&= \frac{1}{x\ln a}\end{align}</script><p>特殊地，$(\ln x)’ = \frac{1}{x}$</p><h1 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h1><p>三角函数的导数证明需要熟悉以下三角变换 / 恒等式：</p><script type="math/tex; mode=display">\sin(\alpha \pm \beta) = \sin \alpha \cos \beta \pm \cos \alpha \sin \beta</script><script type="math/tex; mode=display">\cos(\alpha \pm \beta) = \cos \alpha \cos \beta \mp \sin \alpha \sin \beta</script><script type="math/tex; mode=display">\sin^2 x + \cos^2 x = 1</script><script type="math/tex; mode=display">\sec^2 x = 1 + \tan^2 x = \frac{\cos^2 x}{\cos^2 x} + \frac{\sin^2 x}{\cos^2 x} = \frac{1}{\cos^2 x}</script><script type="math/tex; mode=display">\csc^2 x = 1 + \cot^2 x = \frac{\sin^2 x}{\sin^2 x} + \frac{\cos^2 x}{\sin^2 x} = \frac{1}{\sin^2 x}</script><p>先证明“正”相关函数，对应的“余”相关函数在其基础上略微修改即可，思路相似。</p><h2 id="正"><a href="#正" class="headerlink" title="正"></a>正</h2><h3 id="正弦"><a href="#正弦" class="headerlink" title="正弦"></a>正弦</h3><script type="math/tex; mode=display">\begin{align}(\sin x)'&= \lim_{\Delta x \to 0} \frac{\sin(x + \Delta x) - \sin x}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{\sin x \cos \Delta x + \cos x \sin \Delta x - \sin x}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{\sin x(\cos \Delta x - 1) + \cos x \sin \Delta x}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0}  \frac{\sin x(\cos \Delta x - 1)}{\Delta x} +  \lim_{\Delta x \to 0}  \frac{\cos x \sin \Delta x}{\Delta x} \\[2ex]&= \sin x \lim_{\Delta x \to 0}  \frac{\cos \Delta x - 1}{\Delta x} + \cos x \\[2ex]&= \cos x\end{align}</script><h3 id="正切"><a href="#正切" class="headerlink" title="正切"></a>正切</h3><script type="math/tex; mode=display">\begin{align}(\tan x)'&= (\frac{\sin x}{\cos x})' \\[2ex]&= \frac{\cos x \cos x - \sin x (-\sin x)}{\cos^2x} \\[2ex]&= \frac{1}{\cos^2 x} \\[2ex]&= \sec^2x\end{align}</script><h3 id="正割"><a href="#正割" class="headerlink" title="正割"></a>正割</h3><script type="math/tex; mode=display">\begin{align}(\sec x)' &= (\frac{1}{\cos x})' \\[2ex]&= \frac{\sin x}{\cos^2 x} \\[3ex]&= \tan x \sec x\end{align}</script><h3 id="反正弦"><a href="#反正弦" class="headerlink" title="反正弦"></a>反正弦</h3><script type="math/tex; mode=display">\begin{align}& y = \arcsin x, x = \sin y \\& \frac{\mathrm{d} y }{\mathrm{d} x} = \frac{1}{\frac{\mathrm{d} x }{\mathrm{d} y}} = \frac{1}{\cos y} = \frac{1}{\sqrt{1 - \sin^2 y}} = \frac{1}{\sqrt{1 - x^2}}\end{align}</script><h3 id="反正切"><a href="#反正切" class="headerlink" title="反正切"></a>反正切</h3><script type="math/tex; mode=display">\begin{align}& y = \arctan x, x = \tan y \\& \frac{\mathrm{d} y }{\mathrm{d} x} = \frac{1}{\frac{\mathrm{d} x }{\mathrm{d} y}} = \frac{1}{\sec^2 y} = \frac{1}{1 + \tan^2 y} = \frac{1}{1 + x^2}\end{align}</script><h2 id="余"><a href="#余" class="headerlink" title="余"></a>余</h2><h3 id="余弦"><a href="#余弦" class="headerlink" title="余弦"></a>余弦</h3><script type="math/tex; mode=display">\begin{align}(\cos x)'&= \lim_{\Delta x \to 0} \frac{\cos(x + \Delta x) - cos x}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{\cos x \cos \Delta x - \sin x \sin \Delta x - \cos x}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{\cos x(\cos \Delta x - 1) - \sin x \sin \Delta x}{\Delta x} \\[2ex]&= \lim_{\Delta x \to 0} \frac{\cos x(\cos \Delta x - 1)}{\Delta x} -  \lim_{\Delta x \to 0}  \frac{\sin x \sin \Delta x}{\Delta x} \\[2ex]&= \cos x \lim_{\Delta x \to 0}  \frac{\cos \Delta x - 1}{\Delta x} - \sin x \\[2ex]&= -\sin x\end{align}</script><h3 id="余切"><a href="#余切" class="headerlink" title="余切"></a>余切</h3><script type="math/tex; mode=display">\begin{align}(\cot x)'&= (\frac{\cos x}{\sin x})' \\[2ex]&= \frac{-\sin x \sin x - \cos x \cos x}{\sin^2x} \\[2ex]&= -\frac{1}{\sin^2 x} \\[2ex]&= -\csc^2x\end{align}</script><h3 id="余割"><a href="#余割" class="headerlink" title="余割"></a>余割</h3><script type="math/tex; mode=display">\begin{align}(\csc x)' &= (\frac{1}{\sin x})' \\[2ex]&= \frac{-\cos x}{\sin^2 x} \\[3ex]&= -\cot x \csc x\end{align}</script><h3 id="反余弦"><a href="#反余弦" class="headerlink" title="反余弦"></a>反余弦</h3><script type="math/tex; mode=display">\begin{align}& y = \arccos x, x = \cos y \\& \frac{\mathrm{d} y }{\mathrm{d} x} = \frac{1}{\frac{\mathrm{d} x }{\mathrm{d} y}} = \frac{1}{-\sin y} = -\frac{1}{\sqrt{1 - \cos^2 y}} = -\frac{1}{\sqrt{1 - x^2}}\end{align}</script><h3 id="反余切"><a href="#反余切" class="headerlink" title="反余切"></a>反余切</h3><script type="math/tex; mode=display">\DeclareMathOperator{\arccot}{arccot}\begin{align}& y = \arccot x, x = \cot y \\& \frac{\mathrm{d} y }{\mathrm{d} x} = \frac{1}{\frac{\mathrm{d} x }{\mathrm{d} y}} = \frac{1}{-\csc^2 y} = -\frac{1}{1 + \cot^2 y} = -\frac{1}{1 + x^2}\end{align}</script>]]></content>
     
@@ -467,30 +489,6 @@
     <summary type="html">
     
       &lt;p&gt;《计算机网络-自顶向下方法》 Socket编程作业三&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="计算机网络" scheme="http://ilern.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-    
-      <category term="Web" scheme="http://ilern.github.io/tags/Web/"/>
-    
-      <category term="网络" scheme="http://ilern.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title> 《计算机网络-自顶向下方法》 编程作业二 UDP ping 程序</title>
-    <link href="http://ilern.github.io/2019/11/16/Computer-Networking-Lab-2/"/>
-    <id>http://ilern.github.io/2019/11/16/Computer-Networking-Lab-2/</id>
-    <published>2019-11-15T16:00:00.000Z</published>
-    <updated>2019-11-17T02:44:16.302Z</updated>
-    
-    <content type="html"><![CDATA[<p>《计算机网络-自顶向下方法》 Socket编程作业二</p><a id="more"></a><p>本作业完整代码可在我的这个<a href="https://github.com/iLern/Computer-Networking-Lab" target="_blank" rel="noopener">Github仓库</a>中找到。</p><h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>在这个编程作业中，你将用Python编写一个客户ping程序。该客户将发送一个简单的ping报文，接受一个从服务器返回的pong报文，并确定从该客户发送ping报文到接收到pong报文为止的时延。该时延称为往返时延（RTT）。由该客户和服务器提供的功能类似于在现代操作系统中可用的标准ping程序，然而，标准的ping使用互联网控制报文协议（ICMP）（我们将在第4章中学习ICMP）。此时我们将创建一个非标准（但简单）的基于UDP的ping程序。</p><p>你的ping程序经UDP向目标服务器发送10个ping报文，对于每个报文，当对应的pong报文返回时，你的客户要确定和打印RTT。因为UDP是一个不可靠协议，由客户发送的分组可能会丢失。为此，客户不能无限期地等待对ping报文的回答。客户等待服务器回答的时间至多为1秒；如果没有收到回答，客户假定该分组丢失并相应地打印一条报文。</p><p>在此作业中，我们给出服务器的完整代码（在配套网站中可以找到。你的任务是编写客户代码，该代码与服务器代码非常类似。建议你先仔细学习服务器的代码，然后编写你的客户代码，可以不受限制地从服务器代码中剪贴代码行。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul><li>在服务端与客户端建立UDP连接</li><li>循环发送十条信息，在发出和接收的位置分别计时</li><li>每接收到一条回复，把两个时间相减得到RTT</li></ul><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ul><li>在判断超时的时候，<code>socket</code>自带了一个时长限定，当超出这个时间之后会抛出<code>timeout</code>异常。</li><li><code>time.perf_counter()</code>是以秒为单位的计时。</li><li>服务端模拟丢包率为 $30 \%$ ，实际结果与其格外吻合。</li></ul><h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>【客户端】<br><img src="https://s2.ax1x.com/2019/11/16/MBnItH.png" alt="cilent"></p><p>【服务端】<br><img src="https://s2.ax1x.com/2019/11/16/MBuShj.md.png" alt="server"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;《计算机网络-自顶向下方法》 Socket编程作业二&lt;/p&gt;
     
     </summary>
     
