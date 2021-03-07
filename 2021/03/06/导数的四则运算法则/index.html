@@ -12,22 +12,30 @@
 <h1 id="加减"><a href="#加减" class="headerlink" title="加减"></a>加减</h1><script type="math/tex; mode=display">
 \begin{align}
 (u \pm v)'
-&= \lim_{\Delta x \to 0} \frac{(u(x + \Delta x) - u(x)) \pm (v(x + \Delta x) - v(x))}{\Delta x} \\[2ex]
+&= \lim_{\Delta x \to 0} \frac{(u(x + \Delta x) \pm v(x + \Delta x)) - (u(x) \pm v(x))}{\Delta x} \\[2ex]
 &= \lim_{\Delta x \to 0} \frac{(u(x + \Delta x) - u(x)) }{\Delta x} \pm \lim_{\Delta x \to 0} \frac{(v(x + \Delta x) - v(x))}{\Delta x} \\[2ex]
 &= u' \pm v'
 \end{align}</script><h1 id="乘"><a href="#乘" class="headerlink" title="乘"></a>乘</h1><p>乘法和除法都是凑了一项，感觉很依靠人类智慧</p>
 <script type="math/tex; mode=display">
 \begin{align}
 (uv)'
-&= \lim_{\Delta x \to 0} \frac{(u(x + \Delta x) - u(x)) \cdot (v(x + \Delta x) - v(x))}{\Delta x} \\[2ex]
-&= \lim_{\Delta x \to 0} \frac{u(x + \Delta x)v(x + \Delta x) - u(x + \Delta x)v(x) - u(x)v(x + \Delta x) + u(x)v(x)}{\Delta x} \\[2ex]
-&= \lim_{\Delta x \to 0} \frac{}{\Delta x}
-\end{align}</script><h1 id="除"><a href="#除" class="headerlink" title="除"></a>除</h1><script type="math/tex; mode=display">
+&= \lim_{\Delta x \to 0} \frac{u(x + \Delta x)v(x + \Delta x) - u(x)v(x)}{\Delta x} \\[2ex]
+&= \lim_{\Delta x \to 0} \frac{u(x + \Delta x)v(x + \Delta x) - u(x + \Delta x)v(x)}{\Delta x} + \lim_{\Delta x \to 0} \frac{u(x + \Delta x)v(x) - u(x)v(x)}{\Delta x}\\[2ex]
+&= \lim_{\Delta x \to 0} \frac{u(x + \Delta x)[v(x + \Delta x) - v(x)]}{\Delta x} + \lim_{\Delta x \to 0} \frac{v(x)[u(x + \Delta x) - u(x)]}{\Delta x} \\[2ex]
+&= u(x) \lim_{\Delta x \to 0} \frac{v(x + \Delta x) - v(x)}{\Delta x} + v(x) \lim_{\Delta x \to 0} \frac{u(x + \Delta x) - u(x)}{\Delta x} \\[2ex]
+&= uv' + vu'
+\end{align}</script><p>第三步到第四步，因为$v(x)$与极限中的变量$\Delta x$无关，因此可以提到极限的外面，这样右边的式子容易看出就是$v(x)u’(x)$，问题在于左边的部分。</p>
+<p>根据连续的定义，$\lim_{\Delta x \to 0}u(x + \Delta x) = u(x)$，这样就可以先计算这个因子的极限然后提到外面来，得到和右边相同的结构了。</p>
+<h1 id="除"><a href="#除" class="headerlink" title="除"></a>除</h1><script type="math/tex; mode=display">
 \begin{align}
 (\frac{u}{v})'
-&= \lim_{\Delta x \to 0} \frac{\frac{u(x + \Delta x) - u(x)}{\Delta x}}{\frac{v(x + \Delta x) - v(x)}{\Delta x}} \\[2ex]
-&= \lim_{\Delta x \to 0} \frac{u(x + \Delta x) - u(x)}{v(x + \Delta x) - v(x)} \\[2ex]
-&= \lim_{\Delta x \to 0} \frac{}{\Delta x}
+&= \lim_{\Delta x \to 0} \frac{\frac{u(x + \Delta x)}{v(x + \Delta x)} - \frac{u(x)}{v(x)}}{\Delta x} \\[2ex]
+&= \lim_{\Delta x \to 0} \frac{u(x + \Delta x)v(x) - v(x + \Delta x)u(x)}{\Delta x \cdot v(x + \Delta x)v(x)} \\[2ex]
+&= \frac{1}{v^2(x)} \lim_{\Delta x \to 0} \frac{u(x + \Delta x)v(x) - v(x + \Delta x)u(x)}{\Delta x} \\[2ex]
+&= \frac{1}{v^2(x)} [\lim_{\Delta x \to 0} \frac{u(x + \Delta x)v(x) - u(x)v(x)}{\Delta x} + \frac{u(x)v(x) - v(x + \Delta x)u(x)}{\Delta x}] \\[2ex]
+&= \frac{1}{v^2(x)} [v(x)\lim_{\Delta x \to 0} \frac{u(x + \Delta x) - u(x)}{\Delta x} + u(x)\lim_{\Delta x \to 0} \frac{v(x) - v(x + \Delta x)}{\Delta x}] \\[2ex]
+&= \frac{1}{v^2(x)} [v(x)\lim_{\Delta x \to 0} \frac{u(x + \Delta x) - u(x)}{\Delta x} - u(x)\lim_{\Delta x \to 0} \frac{v(x + \Delta x) - v(x)}{\Delta x}] \\[2ex]
+&= \frac{vu' - uv'}{v^2}
 \end{align}</script></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">iLern</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://ilern.github.io/2021/03/06/导数的四则运算法则/">http://ilern.github.io/2021/03/06/导数的四则运算法则/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/微积分/">微积分</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2021/03/05/基本初等函数的导数/"><span>基本初等函数的导数</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2016 - 2021 By iLern</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://ilern.github.io/">blog</a>!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
   tex2jax: {
     inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
