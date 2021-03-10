@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2021-03-10T09:49:15.082Z</updated>
+  <updated>2021-03-10T10:56:36.004Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://ilern.github.io/2021/03/10/%E5%87%B9%E5%87%B8%E6%80%A7%E4%B8%8E%E6%8B%90%E7%82%B9/"/>
     <id>http://ilern.github.io/2021/03/10/凹凸性与拐点/</id>
     <published>2021-03-10T08:52:58.000Z</published>
-    <updated>2021-03-10T09:49:15.082Z</updated>
+    <updated>2021-03-10T10:56:36.004Z</updated>
     
-    <content type="html"><![CDATA[<p>函数的二阶导数值如何影响函数的凹凸性</p><a id="more"></a><p>定理一：</p><blockquote><p>设函数$f(x)$在区间$[a,b]$上连续，$(a,b)$内二阶可导，</p><ol><li>如果在区间$(a,b)$上$f’’(x)&gt;0$，那么$f(x)$在$[a,b]$上是凸函数（图像为凹的）</li><li>如果在区间$(a,b)$上$f’’(x)&lt;0$，那么$f(x)$在$[a,b]$上是凹函数（图像为凸的）</li></ol></blockquote><p>证明：</p><p>设$f’’(x) &gt; 0$，则对于 $\forall x_1 &lt; x_2 \in I$，取$\xi_1 \in (x_1, \frac{x_1 + x_2}{2}), \xi_2 \in (\frac{x_1 + x_2}{2}, x_2)$<br>根据拉格朗日中值定理</p><script type="math/tex; mode=display">\exist \xi_1 \in (x_1, \frac{x_1 + x_2}{2}), f(\frac{x_1 + x_2}{2}) - f(x_1) = f'(\xi_1)\frac{x_2 - x_1}{2} \\\exist \xi_2 \in (\frac{x_1 + x_2}{2}, x_2), f(x_2) - f(\frac{x_1 + x_2}{2}) = f'(\xi_2)\frac{x_2 - x_1}{2}</script><p>两式相减</p><script type="math/tex; mode=display">f(x_1) + f(x_2) - 2f(\frac{x_1 + x_2}{2}) = [f'(\xi_2) - f'(\xi_1)]\frac{x_2 - x_1}{2}</script><p>又</p><script type="math/tex; mode=display">\begin{align}& \because f''(x) > 0, \xi_1 < \xi_2\\[2ex]& \therefore f'(\xi_1) < f'(\xi_2) \\[2ex]& \therefore f'(\xi_2) - f'(\xi_1) > 0 \\[2ex]& \therefore [f'(\xi_2) - f'(\xi_1)]\frac{x_1 + x_2}{2} >0 \\[2ex]& \therefore f(x_1) + f(x_2) - 2f(\frac{x_1 + x_2}{2}) > 0 \\[2ex]& \therefore f(x_1) + f(x_2) > 2f(\frac{x_1 + x_2}{2})\end{align}</script><p>满足凸函数定义</p>]]></content>
+    <content type="html"><![CDATA[<p>函数的二阶导数值如何影响函数的凹凸性</p><a id="more"></a><p>定理一：</p><blockquote><p>设函数$f(x)$在区间$[a,b]$上连续，$(a,b)$内二阶可导，</p><ol><li>如果在区间$(a,b)$上$f’’(x)&gt;0$，那么$f(x)$在$[a,b]$上是凸函数（图像为凹的）</li><li>如果在区间$(a,b)$上$f’’(x)&lt;0$，那么$f(x)$在$[a,b]$上是凹函数（图像为凸的）</li></ol></blockquote><p>证明：</p><p>设$f’’(x) &gt; 0$，则对于 $\forall x_1 &lt; x_2 \in I$，取$\xi_1 \in (x_1, \frac{x_1 + x_2}{2}), \xi_2 \in (\frac{x_1 + x_2}{2}, x_2)$<br>根据拉格朗日中值定理</p><script type="math/tex; mode=display">\exists \xi_1 \in (x_1, \frac{x_1 + x_2}{2}), f(\frac{x_1 + x_2}{2}) - f(x_1) = f'(\xi_1)\frac{x_2 - x_1}{2} \\\exists \xi_2 \in (\frac{x_1 + x_2}{2}, x_2), f(x_2) - f(\frac{x_1 + x_2}{2}) = f'(\xi_2)\frac{x_2 - x_1}{2}</script><p>两式相减</p><script type="math/tex; mode=display">f(x_1) + f(x_2) - 2f(\frac{x_1 + x_2}{2}) = [f'(\xi_2) - f'(\xi_1)]\frac{x_2 - x_1}{2}</script><p>又</p><script type="math/tex; mode=display">\begin{align}& \because f''(x) > 0, \xi_1 < \xi_2\\[2ex]& \therefore f'(\xi_1) < f'(\xi_2) \\[2ex]& \therefore f'(\xi_2) - f'(\xi_1) > 0 \\[2ex]& \therefore [f'(\xi_2) - f'(\xi_1)]\frac{x_1 + x_2}{2} >0 \\[2ex]& \therefore f(x_1) + f(x_2) - 2f(\frac{x_1 + x_2}{2}) > 0 \\[2ex]& \therefore f(x_1) + f(x_2) > 2f(\frac{x_1 + x_2}{2})\end{align}</script><p>满足凸函数定义</p>]]></content>
     
     <summary type="html">
     
