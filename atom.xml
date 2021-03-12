@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2021-03-10T10:56:36.004Z</updated>
+  <updated>2021-03-12T09:14:04.748Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基本积分公式</title>
+    <link href="http://ilern.github.io/2021/03/12/%E5%9F%BA%E6%9C%AC%E7%A7%AF%E5%88%86%E5%85%AC%E5%BC%8F/"/>
+    <id>http://ilern.github.io/2021/03/12/基本积分公式/</id>
+    <published>2021-03-12T08:13:03.000Z</published>
+    <updated>2021-03-12T09:14:04.748Z</updated>
+    
+    <content type="html"><![CDATA[<p>积分学的基础，基本积分公式</p><a id="more"></a><h1 id="幂函数"><a href="#幂函数" class="headerlink" title="幂函数"></a>幂函数</h1><script type="math/tex; mode=display">\int x^\alpha \mathop{}\!\mathrm{d}x = \frac{1}{\alpha + 1} x^{\alpha+1} + C</script><p>非常简单，最容易想到的求导逆运算。注意其中$\alpha \neq -1$</p><p>特别地，</p><script type="math/tex; mode=display">\int x^{-1} \mathop{}\!\mathrm{d}x = \int \frac{1}{x} \mathrm{d}x = \ln |x| + C</script><h1 id="指数函数"><a href="#指数函数" class="headerlink" title="指数函数"></a>指数函数</h1><script type="math/tex; mode=display">\int a^x \mathop{}\!\mathrm{d}x = \frac{1}{\ln a}a^x + C</script><p>特别地，</p><script type="math/tex; mode=display">\int e^x \mathop{}\!\mathrm{d}x = e^x + C</script><h1 id="对数函数"><a href="#对数函数" class="headerlink" title="对数函数"></a>对数函数</h1><script type="math/tex; mode=display">\int \ln x \mathop{}\!\mathrm{d}x = x \ln x - \int x \mathop{}\!\mathrm{d} \ln x = x \ln x - \int x \cdot\frac{1}{x} \mathop{}\!\mathrm{d}x = x\ln x - x + C</script><p>用到了分部积分法</p><h1 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h1><script type="math/tex; mode=display">\begin{align}\int \sin x \mathop{}\!\mathrm{d}x &= -\cos x + C \\\int \cos x \mathop{}\!\mathrm{d}x &= \sin x + C \\\int \tan x \mathop{}\!\mathrm{d}x &= \int \frac{\sin x}{\cos x} \mathop{}\!\mathrm{d}x = -\int \frac{1}{\cos x} \mathop{}\!\mathrm{d}\cos x = -\ln |\cos x| + C \\\int \cot x \mathop{}\!\mathrm{d}x &= \int \frac{\cos x}{\sin x} \mathop{}\!\mathrm{d}x = \int \frac{1}{\sin x} \mathop{}\!\mathrm{d}x = \ln |\sin x| + C \\\int \sec x\mathop{}\!\mathrm{d}x &= \int \frac{\sec x(\sec x + \tan x)}{\sec x + \tan x}\mathop{}\!\mathrm{d}x = \int \frac{\mathop{}\!\mathrm{d}(\sec x + \tan x)}{\sec x + \tan x} = \ln |\sec x + \tan x| + C \\\int \csc x\mathop{}\!\mathrm{d}x &= \int \frac{\csc x(\csc x + \cot x)}{\csc x + \cot x}\mathop{}\!\mathrm{d}x = \int \frac{\mathop{}\!\mathrm{d}(\csc x + \cot x)}{\csc x + \cot x} = -\ln |\csc x + \cot x| + C \\\end{align}</script><p>前两条非常简单</p><p>中间两条用到了凑微分的方法</p><p>最后两条常人难以想到，很依靠人类智慧</p><h1 id="1-x-2-or-1-x-2"><a href="#1-x-2-or-1-x-2" class="headerlink" title="$1+x^2 \or 1-x^2$"></a>$1+x^2 \or 1-x^2$</h1><h2 id="1-x-2"><a href="#1-x-2" class="headerlink" title="$1 + x^2$"></a>$1 + x^2$</h2><script type="math/tex; mode=display">\int \frac{1}{1 + x^2} \mathop{}\!\mathrm{d}x = \arctan x + C</script><p>推广：</p><script type="math/tex; mode=display">\int \frac{1}{a^2 + x^2} \mathop{}\!\mathrm{d} x = \int \frac{1}{a^2(1 + \frac{x^2}{a^2})}\mathop{}\!\mathrm{d}x = \frac{1}{a^2} \int \frac{1}{1 + (\frac{x}{a})^2}\mathop{}\!\mathrm{d}x = \frac{1}{a^2} \cdot a \cdot \frac{\mathop{}\!\mathrm{d}(\frac{x}{a})}{1 + (\frac{x}{a})^2} = \frac{1}{a} \arctan \frac{x}{a} + C(a > 0)</script><h2 id="1-x-2-1"><a href="#1-x-2-1" class="headerlink" title="$1 - x^2$"></a>$1 - x^2$</h2><script type="math/tex; mode=display">\int \frac{1}{1 - x^2} \mathop{}\!\mathrm{d}x = \frac{1}{2} \int (\frac{1}{1 - x} + \frac{1}{1 + x}) \mathop{}\!\mathrm{d}x = \frac{1}{2}(-\ln|1 - x| + \ln|1 + x|) + C = \frac{1}{2} \ln|\frac{1 + x}{1 - x}| + C</script><p>推广：</p><script type="math/tex; mode=display">\int \frac{1}{a^2 - x^2} \mathop{}\!\mathrm{d}x = \frac{1}{2a} \int (\frac{1}{a-x} + \frac{1}{a+x}) \mathop{}\!\mathrm{d}x = \frac{1}{2a}\ln|\frac{a+x}{a-x}| + C</script><h1 id="sqrt-1-x-2"><a href="#sqrt-1-x-2" class="headerlink" title="$\sqrt{1-x^2}$"></a>$\sqrt{1-x^2}$</h1><script type="math/tex; mode=display">\int \frac{1}{\sqrt{1-x^2}} \mathop{}\!\mathrm{d}x = \arcsin x + C</script><p>推广：</p><script type="math/tex; mode=display">\int \frac{1}{\sqrt{a^2 - x^2}} \mathop{}\!\mathrm{d}x = \frac{1}{a}\int \frac{1}{\sqrt{1-(\frac{x}{a})^2}} \mathop{}\!\mathrm{d}x = \int \frac{\mathop{}\!\mathrm{d}(\frac{x}{a})}{\sqrt{1-(\frac{x}{a})^2}} = \arcsin \frac{x}{a} + C</script><script type="math/tex; mode=display">\int \frac{1}{\sqrt{x^2 + a^2}} \mathop{}\!\mathrm{d}x = \ln(x + \sqrt{x^2 + a^2}) + C</script><script type="math/tex; mode=display">\int \frac{1}{\sqrt{x^2 - a^2}} \mathop{}\!\mathrm{d}x = \ln |x + \sqrt{x^2 - a^2}| + C</script>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;积分学的基础，基本积分公式&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="高等数学" scheme="http://ilern.github.io/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/"/>
+    
+    
+      <category term="微积分" scheme="http://ilern.github.io/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"/>
+    
+  </entry>
   
   <entry>
     <title>凹凸性与拐点</title>
@@ -471,31 +493,6 @@
     
     
       <category term="SQL" scheme="http://ilern.github.io/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何实现减法</title>
-    <link href="http://ilern.github.io/2020/01/22/how_to_diff/"/>
-    <id>http://ilern.github.io/2020/01/22/how_to_diff/</id>
-    <published>2020-01-22T13:33:00.000Z</published>
-    <updated>2020-03-11T00:08:20.027Z</updated>
-    
-    <content type="html"><![CDATA[<p>对于一个半加器，我们用一个异或门表示加和输出，一个与门表示进位输出，可以实现两个二进制数中一位的加法。</p><p>将和与前一位运算的进位通过一个半加器连接在一起就构成了全加器。</p><p>至此就实现了二进制加法。</p><p>每一个全加器只能计算<strong>一位</strong>二进制数，要进行多位二进制数的加法就需要串联多个全加器。</p><a id="more"></a><h2 id="大数减小数"><a href="#大数减小数" class="headerlink" title="大数减小数"></a>大数减小数</h2><p>对于减法而言，不存在进位，但是有借位。</p><p>为了避免借位，提出<strong>补数</strong>的概念</p><blockquote><p>对于一个 $k$ 进制数 $a$ ，从一串 $k$ 中（个数等于 $k$ 进制下 $a$ 的位数）减去 $a$ 得到的数，称为 $a$ 对 $k$ 的补数</p></blockquote><p>提出补数的好处是计算补数的过程不需要借位</p><p>当计算出补数之后，将补数与被减数<strong>相加</strong>，把结果加一，再减去$10^n$，$n$为$a$的位数。</p><p>为什么这样可行？举个例子</p><script type="math/tex; mode=display">\begin{align}   253 - 176 &= 253 - 176 + 1000 - 1000 \\   &= 253 - 176 + 999 + 1 - 1000  \\   &= 253 + (999 - 176) + 1 - 1000\\\end{align}</script><p>二进制的减法与之类似。</p><p>注意到现在式子中唯一的减法其实就是求这个数的补数。</p><p>对于一个二进制数，计算它的补数只需要对其按位取反，也就是它的<strong>反码</strong>(inverse)。</p><p>并且，对于最后一步减法，也是不必真的做的，最高位会自然溢出，作为进位被丢掉。</p><p>至此，大数减小数的减法就实现了。</p><h2 id="表示负数"><a href="#表示负数" class="headerlink" title="表示负数"></a>表示负数</h2><p>首先明确一点，计算机处理的位数是有限的，超过最高位的数将会溢出。</p><h2 id="小数减大数"><a href="#小数减大数" class="headerlink" title="小数减大数"></a>小数减大数</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;对于一个半加器，我们用一个异或门表示加和输出，一个与门表示进位输出，可以实现两个二进制数中一位的加法。&lt;/p&gt;
-&lt;p&gt;将和与前一位运算的进位通过一个半加器连接在一起就构成了全加器。&lt;/p&gt;
-&lt;p&gt;至此就实现了二进制加法。&lt;/p&gt;
-&lt;p&gt;每一个全加器只能计算&lt;strong&gt;一位&lt;/strong&gt;二进制数，要进行多位二进制数的加法就需要串联多个全加器。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="计算机组成原理" scheme="http://ilern.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
-    
-    
-      <category term="《编码》笔记" scheme="http://ilern.github.io/tags/%E3%80%8A%E7%BC%96%E7%A0%81%E3%80%8B%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
