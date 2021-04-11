@@ -72,10 +72,43 @@ s_n &= \sum_{i=1}^n \ln(\frac{i+1}{i}) \\
 <li>$l = 0$，下面的更大，一般方法</li>
 <li>$l = \infty$，上面的更大，一般方法</li>
 </ul>
-<h3 id="比值法-根值法"><a href="#比值法-根值法" class="headerlink" title="比值法 / 根值法"></a>比值法 / 根值法</h3><script type="math/tex; mode=display">
+<p>通常需要将已知敛散性的级数作为一个参照标准，最常用的：</p>
+<script type="math/tex; mode=display">
+\sum_{n=1}^\infty \frac{1}{n^p}, p > 1 \text{收敛}，p \leq 1 \text{发散}</script><script type="math/tex; mode=display">
+\sum_{n=1}^\infty aq^n, q < 1 \text{收敛}，q \geq 1 \text{发散}</script><h3 id="比值法-根值法"><a href="#比值法-根值法" class="headerlink" title="比值法 / 根值法"></a>比值法 / 根值法</h3><p>不需要依赖别的已知级数</p>
+<script type="math/tex; mode=display">
 \lim_{n\to\infty} \frac{u_{n+1}}{u_n} = \rho</script><script type="math/tex; mode=display">
 \lim_{n\to\infty} \sqrt[n]{u_n} = \rho</script><p>大于一发散，小于一收敛，等于一不确定</p>
-<h3 id="方法的选择"><a href="#方法的选择" class="headerlink" title="方法的选择"></a>方法的选择</h3><h2 id="交错级数"><a href="#交错级数" class="headerlink" title="交错级数"></a>交错级数</h2><script type="math/tex; mode=display">
+<p>带有$n!$ 用比值</p>
+<p>带有$a^n, n^n$ 用根值</p>
+<h3 id="方法的选择"><a href="#方法的选择" class="headerlink" title="方法的选择"></a>方法的选择</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1， 2</td>
+<td style="text-align:center">适用范围广</td>
+<td style="text-align:center">需要找别的级数还要找的恰当，不方便</td>
+<td>$n^p, \ln n$</td>
+</tr>
+<tr>
+<td style="text-align:center">3， 4</td>
+<td style="text-align:center">方便，不需要依赖其他级数</td>
+<td style="text-align:center">适用范围狭窄，有些简单的级数无法判断</td>
+<td>$a^n, n^n, n!$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>拿到题目先考虑34，不能再考虑12</p>
+<h2 id="交错级数"><a href="#交错级数" class="headerlink" title="交错级数"></a>交错级数</h2><script type="math/tex; mode=display">
 \sum_{n=1}^\infty (-1)^{n-1} u_n</script><p>只有一种方法，莱布尼茨准则</p>
 <p>两个条件：</p>
 <ul>
