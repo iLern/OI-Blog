@@ -137,9 +137,11 @@ s_n &= \sum_{i=1}^n \ln(\frac{i+1}{i}) \\
 <li><p>可以使用等价</p>
 <script type="math/tex; mode=display">
 \begin{align}
-  \sum_{n=1}^\infty \frac{1}{\sqrt{n}} \ln(1 + \frac{1}{n}) &= \sum_{n=1}^\infty \frac{1}{\sqrt{n}} \cdot \frac{1}{n} \\
-  &= \sum_{n=1}^\infty \frac{1}{n^{3/2}}
-  \end{align}</script><p>接下来利用P级数判定</p>
+  \sum_{n=1}^\infty \frac{1}{\sqrt{n}} \ln(1 + \frac{1}{n}) 
+  &= \lim_{n \to \infty} \sum_{k = 1}^n \frac{1}{\sqrt{k}} \ln(1+\frac{1}{k})\\
+  &= \lim_{n \to \infty} \sum_{k=1}^n \frac{1}{\sqrt{k}} \cdot \frac{1}{k} \\
+  &= \lim_{n \to \infty} \sum_{k=1}^n \frac{1}{k^{3/2}}
+  \end{align}</script><p>  接下来利用P级数判定</p>
 </li>
 <li><p>拆项，利用两个级数和差的性质</p>
 </li>
