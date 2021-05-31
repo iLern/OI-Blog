@@ -162,20 +162,34 @@
 <li><code>cpu_exec(n=1) at src/monitor/cpu_exec.c</code></li>
 <li><code>isa_exec_once() at src/isa/x86/exec/exec.c</code></li>
 <li><code>fetch_decode_exec (s=0x7ffffffed860) at src/isa/x86/exec/exec.c:144</code><ul>
-<li><code>instr_fetch (len=1, pc=0x7ffffffed864) at src/isa/x86/exec/exec.c:144</code> 取指</li>
+<li><code>instr_fetch (len=1, pc=0x7ffffffed864) at src/isa/x86/exec/exec.c:144</code> 取指<ul>
+<li>此时<code>s-&gt;seq_pc</code>往后移动了一个字节</li>
+<li>读到了<code>opcode</code>，放在<code>s</code>中的<code>opcode</code>中</li>
+</ul>
+</li>
 <li><code>IDEX(0xb8, mov_I2r, mov)</code> 指令是移动立即数到寄存器<ul>
 <li><code>set_width (width=0, s=0x7ffffffed860) at src/isa/x86/exec/exec.c:108</code></li>
 <li><code>s-&gt;src1.width = s-&gt;dest.width = s-&gt;src2.width = width; //width = 4</code> 设置操作数宽度</li>
 <li><code>decode_mov_I2r (s=0x7ffffffed860) at src/isa/x86/exec/../local-include/decode.h:166</code> 开始译码操作数</li>
-<li><code>decode_op_r (load_val=0 &#39;\000&#39;, op=0x7ffffffed8b8, s=0x7ffffffed860) at src/isa/x86/exec/../local-include/decode.h:167</code> load_val = 0表示这个操作数不需要存储到<code>s</code>中供后续使用</li>
-<li><code>operand_reg (s=0x7ffffffed860, width=4, r=0, load_val=0 &#39;\000&#39;, op=0x7ffffffed8b8) at src/isa/x86/exec/../local-include/decode.h:8</code> 找出要用到的寄存器</li>
-<li><code>decode_op_I (load_val=1 &#39;\001&#39;, op=0x7ffffffed870, s=0x7ffffffed860) at src/isa/x86/exec/../local-include/decode.h:168</code></li>
-<li><code>operand_imm (width=&lt;optimized out&gt;, imm=&lt;optimized out&gt;, load_val=&lt;optimized out&gt;,op=&lt;optimized out&gt;, s=&lt;optimized out&gt;) at src/isa/x86/exec/../local-include/decode.h:40</code> 找出立即数，用到一条<code>rtl_li</code></li>
-<li></li>
+<li><code>decode_op_r (load_val=0 &#39;\000&#39;, op=0x7ffffffed8b8, s=0x7ffffffed860) at src/isa/x86/exec/../local-include/decode.h:167</code> load_val = 0表示这个操作数不需要存储到<code>s</code>中供后续使用<ul>
+<li><code>operand_reg (s=0x7ffffffed860, width=4, r=0, load_val=0 &#39;\000&#39;, op=0x7ffffffed8b8) at src/isa/x86/exec/../local-include/decode.h:8</code> 找出要用到的寄存器<ul>
+<li>在x86中, 通用寄存器都有自己的编号,<code>I2r</code>形式的指令把寄存器编号也放在指令的第一个字节里面, 我们可以通过位运算将寄存器编号抽取出来;</li>
+<li><code>r = s-&gt;opcode &amp; 0x7  == 0</code></li>
 </ul>
 </li>
 </ul>
 </li>
+<li><code>decode_op_I (load_val=1 &#39;\001&#39;, op=0x7ffffffed870, s=0x7ffffffed860) at src/isa/x86/exec/../local-include/decode.h:168</code><ul>
+<li><code>imm</code>即为指令中的立即数，是指令的后四个字节，使用<code>instr_fetch(&amp;s-&gt;seq_pc, op-&gt;width)</code>获取，此时<code>seq_pc</code>又往后移动了四个字节。</li>
+<li><code>operand_imm (width=&lt;optimized out&gt;, imm=&lt;optimized out&gt;, load_val=&lt;optimized out&gt;,op=&lt;optimized out&gt;, s=&lt;optimized out&gt;) at src/isa/x86/exec/../local-include/decode.h:40</code> 把立即数写到<code>s</code>中合理的位置</li>
+</ul>
+</li>
+<li>执行指令调用<code>exec_move()</code>，位于<code>/src/isa/x86/exec/data-mov.h</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>更新PC</li>
 </ul>
 <h2 id="实现指令"><a href="#实现指令" class="headerlink" title="实现指令"></a>实现指令</h2><h2 id="运行第一个C程序"><a href="#运行第一个C程序" class="headerlink" title="运行第一个C程序"></a>运行第一个C程序</h2></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">iLern</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://ilern.github.io/2021/01/12/NJU-ics-2020-概要/">http://ilern.github.io/2021/01/12/NJU-ics-2020-概要/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/计算机系统基础/">计算机系统基础</a><a class="post-meta__tags" href="/tags/计算机组成原理/">计算机组成原理</a><a class="post-meta__tags" href="/tags/操作系统/">操作系统</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2021/01/19/七和弦/"><i class="fa fa-chevron-left">  </i><span>七和弦</span></a></div><div class="next-post pull-right"><a href="/2020/12/30/计算机网络复习笔记-物理层/"><span>计算机网络复习笔记 物理层</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2016 - 2021 By iLern</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://ilern.github.io/">blog</a>!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
   tex2jax: {
