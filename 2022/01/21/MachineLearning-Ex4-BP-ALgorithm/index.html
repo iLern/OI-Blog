@@ -17,7 +17,7 @@
 <script type="math/tex; mode=display">
 J = J(\Theta) = \frac{1}{m}\sum_{i = 1}^m\sum_{k=1}^K \left[-y_k^{(i)} \log(h_{\theta}(x^{i})_k)  - (1-y_k^{(i)}) \log(1-h_\theta(x^{i})_k) \right] + \frac{\lambda}{2m}\left[\sum_{j=1}^{25}\sum_{k=1}^{400}(\Theta_{jk}^{(1)})^2 + \sum_{j=1}^{25}\sum_{k=1}^{400}(\Theta_{jk}^{(2)})^2\right]</script><ul>
 <li>$i$是第$i$组数据, $k$是第$k$个标签, $h_{\theta}$是输出层的值</li>
-<li>第二项的作用是标准化</li>
+<li>第二项是正则化项, 目的是防止过拟合. 简单地说，就是在代价函数后面加一个小尾巴<strong>惩罚项</strong>，比如在线性回归函数中：$\displaystyle J(\theta) = \frac{1}{2m}\left[\sum_{i=1}^m(h(x_i) - y_i)^2 + \frac{\lambda}{2m} \theta^2\right]$其中 $\lambda$ 称为惩罚项系数。小尾巴前面那项是我们原本的代价函数，现在加上了惩罚项后，我们要使得代价函数最小，则后面的小尾巴也必须要小，小尾巴小的话，那么 $\theta$ 就不能太大，如果 $\theta$ 很小的话，那么那个 $\theta$ 所在的项就接近于0了，也就可以近似地看成没有了那个特征。</li>
 </ul>
 </li>
 <li><p>$\Theta^{(1)}$是输入层到隐层中每条线的权值, $25$行 $401$列, 因为输入层有$400$个节点, 隐藏层有$25$个节点</p>
