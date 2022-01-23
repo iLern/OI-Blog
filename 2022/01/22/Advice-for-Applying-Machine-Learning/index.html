@@ -1,0 +1,130 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Advice for Applying Machine Learning"><meta name="keywords" content="机器学习"><meta name="author" content="iLern"><meta name="copyright" content="iLern"><title>Advice for Applying Machine Learning | iLern's Blog</title><link rel="shortcut icon" href="/ilern.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#评价模型"><span class="toc-number">1.</span> <span class="toc-text">评价模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#训练集-交叉验证集-测试集"><span class="toc-number">2.</span> <span class="toc-text">训练集 交叉验证集 测试集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bias-and-variance"><span class="toc-number">3.</span> <span class="toc-text">Bias and variance</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两种错误的诊断"><span class="toc-number">3.1.</span> <span class="toc-text">两种错误的诊断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#规格化项与两种错误"><span class="toc-number">3.2.</span> <span class="toc-text">规格化项与两种错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#学习曲线"><span class="toc-number">3.3.</span> <span class="toc-text">学习曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对于神经网络"><span class="toc-number">3.4.</span> <span class="toc-text">对于神经网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">3.5.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://s2.ax1x.com/2019/01/26/knOvb8.png"></div><div class="author-info__name text-center">iLern</div><div class="author-info__description text-center">功名沉浮不必提，稚志初衷别忘记</div><div class="follow-button"><a href="https://github.com/iLern">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">178</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">1</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">19</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" href="http://blog.csdn.net/lyx_2016/article/">lyx</a><a class="author-info-links__name text-center" href="https://oi.men.ci/">Menci</a><a class="author-info-links__name text-center" href="https://5261.github.io">Hellc</a><a class="author-info-links__name text-center" href="https://sulfur6.github.io/">团长</a><a class="author-info-links__name text-center" href="https://yxa0.xyz/">yxa</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43618924">LordR</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/Loi_Meiko">MeiCo</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">iLern's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/about">About</a></span></div><div id="post-info"><div id="post-title">Advice for Applying Machine Learning</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2022-01-22</time></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>评价与修正机器学习算法的一些方法</p>
+<a id="more"></a>
+<h2 id="评价模型"><a href="#评价模型" class="headerlink" title="评价模型"></a>评价模型</h2><p>对于回归问题, 利用测试数据计算代价函数, 例如</p>
+<script type="math/tex; mode=display">
+J(\Theta) = \frac{1}{2m_{test}} \sum^{m_{test}}_{i=1} (h_\Theta(x_{test}^{(i)}) - y_{test}^{(i)}) ^ 2</script><p>代价函数越小, 则说明模型越好.</p>
+<p>对于分类问题, 定义一个误差函数, 表明分类错误的情况</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+err(h_{\Theta}(x), y) = 
+\begin{cases}
+1 &(h_{\Theta}(x) > 0.5 \and y = 0) \or (h_{\Theta}(x) < 0.5 \and y = 1) \\
+0 &\text{otherwise}
+\end{cases}
+\end{equation}</script><p>最终的代价函数为</p>
+<script type="math/tex; mode=display">
+\text{TestError} = \frac{1}{m_{test}} \sum^{m_{test}}_{i=1} err(h_\Theta(x_{test}^{(i)}) - y_{test}^{(i)})</script><p>代价函数越小表示分类错误越少, 模型越好</p>
+<h2 id="训练集-交叉验证集-测试集"><a href="#训练集-交叉验证集-测试集" class="headerlink" title="训练集 交叉验证集 测试集"></a>训练集 交叉验证集 测试集</h2><p>训练集用于计算代价函数, 利用梯度下降等方法, 来找到使代价函数最小的参数</p>
+<p>交叉验证集验证用于模型的选择，更具体地来说，验证集并不参与学习参数的确定，也就是验证集并没有参与梯度下降的过程。验证集只是为了选择超参数，比如网络层数、网络节点数、迭代次数、学习率这些都叫超参数。比如在<code>k-NN</code>算法中，$k$值就是一个超参数。所以可以使用验证集来求出误差率最小的$k$。</p>
+<p><img src="Advice-for-Applying-Machine-Learning/SouthEast.png" alt="cv"></p>
+<p>图上面的部分表示我们拥有的数据，而后我们对数据进行了再次分割，主要是对训练集，假设将训练集分成5份（该数目被称为折数，5-fold交叉验证），每次都用其中4份来训练模型，粉红色的那份用来验证4份训练出来的模型的准确率，记下准确率。然后在这5份中取另外4份做训练集，1份做验证集，再次得到一个模型的准确率。直到所有5份都做过1次验证集，也即验证集名额循环了一圈，交叉验证的过程就结束。算得这5次准确率的均值。留下准确率最高的模型，即该模型的超参数是什么样的最终模型的超参数就是这个样的。</p>
+<p>测试集仅在最后作为评估模型训练结果时使用, 不参与训练与交叉验证</p>
+<h2 id="Bias-and-variance"><a href="#Bias-and-variance" class="headerlink" title="Bias and variance"></a>Bias and variance</h2><h3 id="两种错误的诊断"><a href="#两种错误的诊断" class="headerlink" title="两种错误的诊断"></a>两种错误的诊断</h3><p>当多项式次数过低, 就会导致对数据的拟合程度差, 导致欠拟合</p>
+<p>随着增加多项式次数, 训练误差会逐渐减小, 但是在超过某个最佳值时, 会导致交叉验证误差上升, 也就是拟合程度过高, 泛化能力差, 导致过拟合</p>
+<p><img src="I4dRkz_pEeeHpAqQsW8qwg_bed7efdd48c13e8f75624c817fb39684_fixed.png" alt="img"></p>
+<h3 id="规格化项与两种错误"><a href="#规格化项与两种错误" class="headerlink" title="规格化项与两种错误"></a>规格化项与两种错误</h3><p><img src="3XyCytntEeataRJ74fuL6g_3b6c06d065d24e0bf8d557e59027e87a_Screenshot-2017-01-13-16.09.36.png" alt="img"></p>
+<p>上图中的规格化项应为</p>
+<script type="math/tex; mode=display">
+\frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2</script><p>$m$为数据组数, $n$为参数个数</p>
+<p>过大的$\lambda$导致误差函数总是很大, 造成欠拟合</p>
+<p>过小的$\lambda$相当于没有这个规格化项, 会造成过拟合</p>
+<h3 id="学习曲线"><a href="#学习曲线" class="headerlink" title="学习曲线"></a>学习曲线</h3><p>训练集的大小对与上述两个问题也有影响</p>
+<p><img src="bpAOvt9uEeaQlg5FcsXQDA_ecad653e01ee824b231ff8b5df7208d9_2-am.png" alt="img"></p>
+<p><img src="vqlG7t9uEeaizBK307J26A_3e3e9f42b5e3ce9e3466a0416c4368ee_ITu3antfEeam4BLcQYZr8Q_37fe6be97e7b0740d1871ba99d4c2ed9_300px-Learning1-16429502184516.png" alt="img"></p>
+<h3 id="对于神经网络"><a href="#对于神经网络" class="headerlink" title="对于神经网络"></a>对于神经网络</h3><p>参数较少 - 可能会欠拟合 - 计算量小</p>
+<p>参数较多 - 可能会过拟合 - 计算量大 - 利用规格化项增加$\lambda$可以解决过拟合</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">High Bias</th>
+<th style="text-align:center">High Variance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">表现</td>
+<td style="text-align:center">欠拟合</td>
+<td style="text-align:center">过拟合</td>
+</tr>
+<tr>
+<td style="text-align:center">原因</td>
+<td style="text-align:center">多项式次数低 / 规格化项参数大</td>
+<td style="text-align:center">多项式次数高 / 规格化项参数小(接近0)</td>
+</tr>
+<tr>
+<td style="text-align:center">训练误差$J_{train}(\Theta)$</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">低</td>
+</tr>
+<tr>
+<td style="text-align:center">交叉验证误差$J_{CV}(\Theta)$</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">高</td>
+</tr>
+<tr>
+<td style="text-align:center">随着训练集的增大</td>
+<td style="text-align:center">测试误差下降, 训练误差升高, 最后两者相仿, 高于期望的错误率</td>
+<td style="text-align:center">测试误差下降, 训练误差升高, 最后两者仍有区别, 但训练误差接近于期望的错误率</td>
+</tr>
+<tr>
+<td style="text-align:center">解决方法</td>
+<td style="text-align:center">更多特征 / 高次数的多项式 / 减少$\lambda$</td>
+<td style="text-align:center">更多训练数据 / 更少的特征 / 增加$\lambda$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">低复杂度</th>
+<th style="text-align:center">高复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">high bias</td>
+<td style="text-align:center">low bias</td>
+</tr>
+<tr>
+<td style="text-align:center">low variance</td>
+<td style="text-align:center">high variance</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">iLern</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://ilern.github.io/2022/01/22/Advice-for-Applying-Machine-Learning/">http://ilern.github.io/2022/01/22/Advice-for-Applying-Machine-Learning/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/机器学习/">机器学习</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2022/01/21/MachineLearning-Ex4-BP-ALgorithm/"><span>MachineLearning Ex4 BP ALgorithm</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2016 - 2022 By iLern</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://ilern.github.io/">blog</a>!</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="/js/search/local-search.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

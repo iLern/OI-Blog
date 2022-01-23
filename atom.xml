@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ilern.github.io/"/>
-  <updated>2022-01-21T13:15:40.901Z</updated>
+  <updated>2022-01-23T15:27:01.195Z</updated>
   <id>http://ilern.github.io/</id>
   
   <author>
@@ -17,11 +17,31 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Advice for Applying Machine Learning</title>
+    <link href="http://ilern.github.io/2022/01/22/Advice-for-Applying-Machine-Learning/"/>
+    <id>http://ilern.github.io/2022/01/22/Advice-for-Applying-Machine-Learning/</id>
+    <published>2022-01-22T14:17:45.000Z</published>
+    <updated>2022-01-23T15:27:01.195Z</updated>
+    
+    <content type="html"><![CDATA[<p>评价与修正机器学习算法的一些方法</p><a id="more"></a><h2 id="评价模型"><a href="#评价模型" class="headerlink" title="评价模型"></a>评价模型</h2><p>对于回归问题, 利用测试数据计算代价函数, 例如</p><script type="math/tex; mode=display">J(\Theta) = \frac{1}{2m_{test}} \sum^{m_{test}}_{i=1} (h_\Theta(x_{test}^{(i)}) - y_{test}^{(i)}) ^ 2</script><p>代价函数越小, 则说明模型越好.</p><p>对于分类问题, 定义一个误差函数, 表明分类错误的情况</p><script type="math/tex; mode=display">\begin{equation}err(h_{\Theta}(x), y) = \begin{cases}1 &(h_{\Theta}(x) > 0.5 \and y = 0) \or (h_{\Theta}(x) < 0.5 \and y = 1) \\0 &\text{otherwise}\end{cases}\end{equation}</script><p>最终的代价函数为</p><script type="math/tex; mode=display">\text{TestError} = \frac{1}{m_{test}} \sum^{m_{test}}_{i=1} err(h_\Theta(x_{test}^{(i)}) - y_{test}^{(i)})</script><p>代价函数越小表示分类错误越少, 模型越好</p><h2 id="训练集-交叉验证集-测试集"><a href="#训练集-交叉验证集-测试集" class="headerlink" title="训练集 交叉验证集 测试集"></a>训练集 交叉验证集 测试集</h2><p>训练集用于计算代价函数, 利用梯度下降等方法, 来找到使代价函数最小的参数</p><p>交叉验证集验证用于模型的选择，更具体地来说，验证集并不参与学习参数的确定，也就是验证集并没有参与梯度下降的过程。验证集只是为了选择超参数，比如网络层数、网络节点数、迭代次数、学习率这些都叫超参数。比如在<code>k-NN</code>算法中，$k$值就是一个超参数。所以可以使用验证集来求出误差率最小的$k$。</p><p><img src="Advice-for-Applying-Machine-Learning/SouthEast.png" alt="cv"></p><p>图上面的部分表示我们拥有的数据，而后我们对数据进行了再次分割，主要是对训练集，假设将训练集分成5份（该数目被称为折数，5-fold交叉验证），每次都用其中4份来训练模型，粉红色的那份用来验证4份训练出来的模型的准确率，记下准确率。然后在这5份中取另外4份做训练集，1份做验证集，再次得到一个模型的准确率。直到所有5份都做过1次验证集，也即验证集名额循环了一圈，交叉验证的过程就结束。算得这5次准确率的均值。留下准确率最高的模型，即该模型的超参数是什么样的最终模型的超参数就是这个样的。</p><p>测试集仅在最后作为评估模型训练结果时使用, 不参与训练与交叉验证</p><h2 id="Bias-and-variance"><a href="#Bias-and-variance" class="headerlink" title="Bias and variance"></a>Bias and variance</h2><h3 id="两种错误的诊断"><a href="#两种错误的诊断" class="headerlink" title="两种错误的诊断"></a>两种错误的诊断</h3><p>当多项式次数过低, 就会导致对数据的拟合程度差, 导致欠拟合</p><p>随着增加多项式次数, 训练误差会逐渐减小, 但是在超过某个最佳值时, 会导致交叉验证误差上升, 也就是拟合程度过高, 泛化能力差, 导致过拟合</p><p><img src="I4dRkz_pEeeHpAqQsW8qwg_bed7efdd48c13e8f75624c817fb39684_fixed.png" alt="img"></p><h3 id="规格化项与两种错误"><a href="#规格化项与两种错误" class="headerlink" title="规格化项与两种错误"></a>规格化项与两种错误</h3><p><img src="3XyCytntEeataRJ74fuL6g_3b6c06d065d24e0bf8d557e59027e87a_Screenshot-2017-01-13-16.09.36.png" alt="img"></p><p>上图中的规格化项应为</p><script type="math/tex; mode=display">\frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2</script><p>$m$为数据组数, $n$为参数个数</p><p>过大的$\lambda$导致误差函数总是很大, 造成欠拟合</p><p>过小的$\lambda$相当于没有这个规格化项, 会造成过拟合</p><h3 id="学习曲线"><a href="#学习曲线" class="headerlink" title="学习曲线"></a>学习曲线</h3><p>训练集的大小对与上述两个问题也有影响</p><p><img src="bpAOvt9uEeaQlg5FcsXQDA_ecad653e01ee824b231ff8b5df7208d9_2-am.png" alt="img"></p><p><img src="vqlG7t9uEeaizBK307J26A_3e3e9f42b5e3ce9e3466a0416c4368ee_ITu3antfEeam4BLcQYZr8Q_37fe6be97e7b0740d1871ba99d4c2ed9_300px-Learning1-16429502184516.png" alt="img"></p><h3 id="对于神经网络"><a href="#对于神经网络" class="headerlink" title="对于神经网络"></a>对于神经网络</h3><p>参数较少 - 可能会欠拟合 - 计算量小</p><p>参数较多 - 可能会过拟合 - 计算量大 - 利用规格化项增加$\lambda$可以解决过拟合</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><div class="table-container"><table><thead><tr><th style="text-align:center"></th><th style="text-align:center">High Bias</th><th style="text-align:center">High Variance</th></tr></thead><tbody><tr><td style="text-align:center">表现</td><td style="text-align:center">欠拟合</td><td style="text-align:center">过拟合</td></tr><tr><td style="text-align:center">原因</td><td style="text-align:center">多项式次数低 / 规格化项参数大</td><td style="text-align:center">多项式次数高 / 规格化项参数小(接近0)</td></tr><tr><td style="text-align:center">训练误差$J_{train}(\Theta)$</td><td style="text-align:center">高</td><td style="text-align:center">低</td></tr><tr><td style="text-align:center">交叉验证误差$J_{CV}(\Theta)$</td><td style="text-align:center">高</td><td style="text-align:center">高</td></tr><tr><td style="text-align:center">随着训练集的增大</td><td style="text-align:center">测试误差下降, 训练误差升高, 最后两者相仿, 高于期望的错误率</td><td style="text-align:center">测试误差下降, 训练误差升高, 最后两者仍有区别, 但训练误差接近于期望的错误率</td></tr><tr><td style="text-align:center">解决方法</td><td style="text-align:center">更多特征 / 高次数的多项式 / 减少$\lambda$</td><td style="text-align:center">更多训练数据 / 更少的特征 / 增加$\lambda$</td></tr></tbody></table></div><div class="table-container"><table><thead><tr><th style="text-align:center">低复杂度</th><th style="text-align:center">高复杂度</th></tr></thead><tbody><tr><td style="text-align:center">high bias</td><td style="text-align:center">low bias</td></tr><tr><td style="text-align:center">low variance</td><td style="text-align:center">high variance</td></tr></tbody></table></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;评价与修正机器学习算法的一些方法&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="http://ilern.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>MachineLearning Ex4 BP ALgorithm</title>
     <link href="http://ilern.github.io/2022/01/21/MachineLearning-Ex4-BP-ALgorithm/"/>
     <id>http://ilern.github.io/2022/01/21/MachineLearning-Ex4-BP-ALgorithm/</id>
     <published>2022-01-21T12:04:54.000Z</published>
-    <updated>2022-01-21T13:15:40.901Z</updated>
+    <updated>2022-01-21T13:18:32.193Z</updated>
     
     <content type="html"><![CDATA[<p>实现反向传播算法实现手写数字识别</p><a id="more"></a><p><img src="image-20220121201654046.png" alt="image-20220121201654046"></p><p>每一个数字是一个$20 \times 20$像素的灰度图片, 展开输入为$400$维列向量, 输出为一个数字, 一共$5000$组数据作为训练集.</p><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p><img src="image-20220121202351298.png" alt="image-20220121202351298"></p><ul><li><p>$J$ 是代价函数$J(\Theta)$​的值, 定义</p><script type="math/tex; mode=display">J = J(\Theta) = \frac{1}{m}\sum_{i = 1}^m\sum_{k=1}^K \left[-y_k^{(i)} \log(h_{\theta}(x^{i})_k)  - (1-y_k^{(i)}) \log(1-h_\theta(x^{i})_k) \right] + \frac{\lambda}{2m}\left[\sum_{j=1}^{25}\sum_{k=1}^{400}(\Theta_{jk}^{(1)})^2 + \sum_{j=1}^{25}\sum_{k=1}^{400}(\Theta_{jk}^{(2)})^2\right]</script><ul><li>$i$是第$i$组数据, $k$是第$k$个标签, $h_{\theta}$是输出层的值</li><li>第二项是正则化项, 目的是防止过拟合. 简单地说，就是在代价函数后面加一个小尾巴<strong>惩罚项</strong>，比如在线性回归函数中：$\displaystyle J(\theta) = \frac{1}{2m}\left[\sum_{i=1}^m(h(x_i) - y_i)^2 + \frac{\lambda}{2m} \theta^2\right]$其中 $\lambda$ 称为惩罚项系数。小尾巴前面那项是我们原本的代价函数，现在加上了惩罚项后，我们要使得代价函数最小，则后面的小尾巴也必须要小，小尾巴小的话，那么 $\theta$ 就不能太大，如果 $\theta$ 很小的话，那么那个 $\theta$ 所在的项就接近于0了，也就可以近似地看成没有了那个特征。</li></ul></li><li><p>$\Theta^{(1)}$是输入层到隐层中每条线的权值, $25$行 $401$列, 因为输入层有$400$个节点, 隐藏层有$25$个节点</p></li><li><p>$\Theta^{(2)}$是隐层到输出层中每条线的权值, $10$行 $26$列, 因为隐藏层有 $25$ 个节点, 输出层有 $10$ 个节点</p></li><li><p>$X$是所有训练集, 一组数据是一个行向量</p></li></ul><p><img src="image-20220121205233974.png" alt="image-20220121205233974"></p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% nnCostFunction.m</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[J grad]</span> = <span class="title">nnCostFunction</span><span class="params">(nn_params, ...</span></span></span><br><span class="line"><span class="function"><span class="params">                                   input_layer_size, ...</span></span></span><br><span class="line"><span class="function"><span class="params">                                   hidden_layer_size, ...</span></span></span><br><span class="line"><span class="function"><span class="params">                                   num_labels, ...</span></span></span><br><span class="line"><span class="function"><span class="params">                                   X, y, lambda)</span></span></span><br><span class="line"><span class="comment">%NNCOSTFUNCTION Implements the neural network cost function for a two layer</span></span><br><span class="line"><span class="comment">%neural network which performs classification</span></span><br><span class="line"><span class="comment">%   [J grad] = NNCOSTFUNCTON(nn_params, hidden_layer_size, num_labels, ...</span></span><br><span class="line"><span class="comment">%   X, y, lambda) computes the cost and gradient of the neural network. The</span></span><br><span class="line"><span class="comment">%   parameters for the neural network are "unrolled" into the vector</span></span><br><span class="line"><span class="comment">%   nn_params and need to be converted back into the weight matrices. </span></span><br><span class="line"><span class="comment">% </span></span><br><span class="line"><span class="comment">%   The returned parameter grad should be a "unrolled" vector of the</span></span><br><span class="line"><span class="comment">%   partial derivatives of the neural network.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% Reshape nn_params back into the parameters Theta1 and Theta2, the weight matrices</span></span><br><span class="line"><span class="comment">% for our 2 layer neural network</span></span><br><span class="line">Theta1 = <span class="built_in">reshape</span>(nn_params(<span class="number">1</span>:hidden_layer_size * (input_layer_size + <span class="number">1</span>)), ...</span><br><span class="line">                 hidden_layer_size, (input_layer_size + <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">Theta2 = <span class="built_in">reshape</span>(nn_params((<span class="number">1</span> + (hidden_layer_size * (input_layer_size + <span class="number">1</span>))):<span class="keyword">end</span>), ...</span><br><span class="line">                 num_labels, (hidden_layer_size + <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% Setup some useful variables</span></span><br><span class="line"><span class="comment">% 训练集的大小</span></span><br><span class="line">m = <span class="built_in">size</span>(X, <span class="number">1</span>);</span><br><span class="line">         </span><br><span class="line"><span class="comment">% You need to return the following variables correctly </span></span><br><span class="line">J = <span class="number">0</span>;</span><br><span class="line">Theta1_grad = <span class="built_in">zeros</span>(<span class="built_in">size</span>(Theta1));</span><br><span class="line">Theta2_grad = <span class="built_in">zeros</span>(<span class="built_in">size</span>(Theta2));</span><br><span class="line"></span><br><span class="line"><span class="comment">% ====================== YOUR CODE HERE ======================</span></span><br><span class="line"><span class="comment">% Instructions: You should complete the code by working through the</span></span><br><span class="line"><span class="comment">%               following parts.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Part 1: Feedforward the neural network and return the cost in the</span></span><br><span class="line"><span class="comment">%         variable J. After implementing Part 1, you can verify that your</span></span><br><span class="line"><span class="comment">%         cost function computation is correct by verifying the cost</span></span><br><span class="line"><span class="comment">%         computed in ex4.m</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Part 2: Implement the backpropagation algorithm to compute the gradients</span></span><br><span class="line"><span class="comment">%         Theta1_grad and Theta2_grad. You should return the partial derivatives of</span></span><br><span class="line"><span class="comment">%         the cost function with respect to Theta1 and Theta2 in Theta1_grad and</span></span><br><span class="line"><span class="comment">%         Theta2_grad, respectively. After implementing Part 2, you can check</span></span><br><span class="line"><span class="comment">%         that your implementation is correct by running checkNNGradients</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%         Note: The vector y passed into the function is a vector of labels</span></span><br><span class="line"><span class="comment">%               containing values from 1..K. You need to map this vector into a </span></span><br><span class="line"><span class="comment">%               binary vector of 1's and 0's to be used with the neural network</span></span><br><span class="line"><span class="comment">%               cost function.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%         Hint: We recommend implementing backpropagation using a for-loop</span></span><br><span class="line"><span class="comment">%               over the training examples if you are implementing it for the </span></span><br><span class="line"><span class="comment">%               first time.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Part 3: Implement regularization with the cost function and gradients.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%         Hint: You can implement this around the code for</span></span><br><span class="line"><span class="comment">%               backpropagation. That is, you can compute the gradients for</span></span><br><span class="line"><span class="comment">%               the regularization separately and then add them to Theta1_grad</span></span><br><span class="line"><span class="comment">%               and Theta2_grad from Part 2.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:m <span class="comment">% m组训练数据</span></span><br><span class="line">  a1 = [<span class="number">1</span>; X(<span class="built_in">i</span>, :)']; <span class="comment">% a1 (401 * 1)</span></span><br><span class="line"></span><br><span class="line">  z2 = Theta1 * a1; <span class="comment">% Theta1 (25 * 401) a1 (401 * 1) z2 (25 * 1)</span></span><br><span class="line">  a2 = [<span class="number">1</span>; sigmoid(z2)]; <span class="comment">% a2 (26 * 1)</span></span><br><span class="line"></span><br><span class="line">  z3 = Theta2 * a2; <span class="comment">% Theta2 (10 * 26) a2 (26 * 1) z3 (10 * 1)</span></span><br><span class="line">  h = sigmoid(z3);</span><br><span class="line"></span><br><span class="line">  yy = <span class="built_in">zeros</span>(num_labels, <span class="number">1</span>);</span><br><span class="line">  yy(y(<span class="built_in">i</span>)) = <span class="number">1</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> k = <span class="number">1</span>:num_labels</span><br><span class="line">    J = J + (-yy(k) * <span class="built_in">log</span>(h(k)) - ((<span class="number">1</span> - yy(k)) * <span class="built_in">log</span>(<span class="number">1</span> - h(k))));</span><br><span class="line">  endfor</span><br><span class="line">endfor</span><br><span class="line"></span><br><span class="line">J = J * (<span class="number">1</span> / m);</span><br><span class="line"></span><br><span class="line"><span class="comment">% -------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">oldTheta1 = Theta1(:, <span class="number">2</span>:<span class="keyword">end</span>);</span><br><span class="line">oldTheta2 = Theta2(:, <span class="number">2</span>:<span class="keyword">end</span>);</span><br><span class="line">J = J + (lambda / (<span class="number">2</span> * m)) * (trace(oldTheta1 * oldTheta1') + trace(oldTheta2 * oldTheta2'));</span><br><span class="line"></span><br><span class="line"><span class="comment">% -------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> t = <span class="number">1</span>:m</span><br><span class="line">  a1 = [<span class="number">1</span>; X(t, :)']; <span class="comment">% a1 (401 * 1)</span></span><br><span class="line"></span><br><span class="line">  z2 = Theta1 * a1; <span class="comment">% Theta1 (25 * 401) a1 (401 * 1) z2 (25 * 1)</span></span><br><span class="line">  a2 = [<span class="number">1</span>; sigmoid(z2)]; <span class="comment">% a2 (26 * 1)</span></span><br><span class="line"></span><br><span class="line">  z3 = Theta2 * a2; <span class="comment">% Theta2 (10 * 26) a2 (26 * 1) z3 (10 * 1)</span></span><br><span class="line">  a3 = sigmoid(z3); <span class="comment">% a3 10 * 1</span></span><br><span class="line"></span><br><span class="line">  yy = <span class="built_in">zeros</span>(num_labels, <span class="number">1</span>);</span><br><span class="line">  yy(y(t)) = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  delta3 = a3 - yy; <span class="comment">% delta3 10 * 1</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">% delta2 = Theta2(:, 2 : end)' * delta3;</span></span><br><span class="line">  delta2 = Theta2' * delta3;</span><br><span class="line">  delta2 = delta2(<span class="number">2</span>:<span class="keyword">end</span>);</span><br><span class="line">  delta2 = delta2 .* sigmoidGradient(z2); <span class="comment">% Theta2' 26 * 10 delta3 10 * 1 z2 25 * 1</span></span><br><span class="line"></span><br><span class="line">  Theta1_grad = Theta1_grad + delta2 * a1';</span><br><span class="line">  Theta2_grad = Theta2_grad + delta3 * a2';</span><br><span class="line">endfor</span><br><span class="line"></span><br><span class="line">Theta1_grad = Theta1_grad ./ m;</span><br><span class="line">Theta2_grad = Theta2_grad ./ m;</span><br><span class="line"></span><br><span class="line"><span class="comment">% -------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">Theta1(:, <span class="number">1</span>) = <span class="number">0</span>;</span><br><span class="line">Theta2(:, <span class="number">1</span>) = <span class="number">0</span>;</span><br><span class="line">Theta1_grad = Theta1_grad + (lambda / m) * Theta1;</span><br><span class="line">Theta2_grad = Theta2_grad + (lambda / m) * Theta2;</span><br><span class="line"></span><br><span class="line"><span class="comment">% =========================================================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% Unroll gradients</span></span><br><span class="line">grad = [Theta1_grad(:) ; Theta2_grad(:)];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% sigmoidGradient</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">g</span> = <span class="title">sigmoidGradient</span><span class="params">(z)</span></span></span><br><span class="line"><span class="comment">%SIGMOIDGRADIENT returns the gradient of the sigmoid function</span></span><br><span class="line"><span class="comment">%evaluated at z</span></span><br><span class="line"><span class="comment">%   g = SIGMOIDGRADIENT(z) computes the gradient of the sigmoid function</span></span><br><span class="line"><span class="comment">%   evaluated at z. This should work regardless if z is a matrix or a</span></span><br><span class="line"><span class="comment">%   vector. In particular, if z is a vector or matrix, you should return</span></span><br><span class="line"><span class="comment">%   the gradient for each element.</span></span><br><span class="line"></span><br><span class="line">g = <span class="built_in">zeros</span>(<span class="built_in">size</span>(z));</span><br><span class="line"></span><br><span class="line"><span class="comment">% ====================== YOUR CODE HERE ======================</span></span><br><span class="line"><span class="comment">% Instructions: Compute the gradient of the sigmoid function evaluated at</span></span><br><span class="line"><span class="comment">%               each value of z (z can be a matrix, vector or scalar).</span></span><br><span class="line"></span><br><span class="line">g = sigmoid(z) .* (<span class="number">1</span> - sigmoid(z));</span><br><span class="line"><span class="comment">% =============================================================</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% randInitalizeWeights.m</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">W</span> = <span class="title">randInitializeWeights</span><span class="params">(L_in, L_out)</span></span></span><br><span class="line"><span class="comment">%RANDINITIALIZEWEIGHTS Randomly initialize the weights of a layer with L_in</span></span><br><span class="line"><span class="comment">%incoming connections and L_out outgoing connections</span></span><br><span class="line"><span class="comment">%   W = RANDINITIALIZEWEIGHTS(L_in, L_out) randomly initializes the weights </span></span><br><span class="line"><span class="comment">%   of a layer with L_in incoming connections and L_out outgoing </span></span><br><span class="line"><span class="comment">%   connections. </span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%   Note that W should be set to a matrix of size(L_out, 1 + L_in) as</span></span><br><span class="line"><span class="comment">%   the first column of W handles the "bias" terms</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% You need to return the following variables correctly </span></span><br><span class="line">W = <span class="built_in">zeros</span>(L_out, <span class="number">1</span> + L_in);</span><br><span class="line"></span><br><span class="line"><span class="comment">% ====================== YOUR CODE HERE ======================</span></span><br><span class="line"><span class="comment">% Instructions: Initialize W randomly so that we break the symmetry while</span></span><br><span class="line"><span class="comment">%               training the neural network.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Note: The first column of W corresponds to the parameters for the bias unit</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">epsilon_init = <span class="number">0.12</span></span><br><span class="line">W = <span class="built_in">rand</span>(L_out + L_in) * <span class="number">2</span> * epsilon_init - epsilon_init;</span><br><span class="line"></span><br><span class="line"><span class="comment">% =========================================================================</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>]]></content>
     
@@ -31,8 +51,6 @@
     
     </summary>
     
-    
-      <category term="机器学习" scheme="http://ilern.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -52,10 +70,6 @@
     
     </summary>
     
-      <category term="C++" scheme="http://ilern.github.io/categories/C/"/>
-    
-    
-      <category term="STL" scheme="http://ilern.github.io/tags/STL/"/>
     
   </entry>
   
@@ -74,10 +88,6 @@
     
     </summary>
     
-      <category term="PAT" scheme="http://ilern.github.io/categories/PAT/"/>
-    
-    
-      <category term="PAT" scheme="http://ilern.github.io/tags/PAT/"/>
     
   </entry>
   
@@ -96,10 +106,6 @@
     
     </summary>
     
-      <category term="PAT" scheme="http://ilern.github.io/categories/PAT/"/>
-    
-    
-      <category term="PAT" scheme="http://ilern.github.io/tags/PAT/"/>
     
   </entry>
   
@@ -118,10 +124,6 @@
     
     </summary>
     
-      <category term="PAT" scheme="http://ilern.github.io/categories/PAT/"/>
-    
-    
-      <category term="PAT" scheme="http://ilern.github.io/tags/PAT/"/>
     
   </entry>
   
@@ -140,10 +142,6 @@
     
     </summary>
     
-      <category term="PAT" scheme="http://ilern.github.io/categories/PAT/"/>
-    
-    
-      <category term="PAT" scheme="http://ilern.github.io/tags/PAT/"/>
     
   </entry>
   
@@ -164,10 +162,6 @@
     
     </summary>
     
-      <category term="数学" scheme="http://ilern.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
-    
-    
-      <category term="无穷级数" scheme="http://ilern.github.io/tags/%E6%97%A0%E7%A9%B7%E7%BA%A7%E6%95%B0/"/>
     
   </entry>
   
@@ -186,10 +180,6 @@
     
     </summary>
     
-      <category term="Leetcode" scheme="http://ilern.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="数据结构" scheme="http://ilern.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -208,10 +198,6 @@
     
     </summary>
     
-      <category term="数学" scheme="http://ilern.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
-    
-    
-      <category term="微积分" scheme="http://ilern.github.io/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"/>
     
   </entry>
   
@@ -230,10 +216,6 @@
     
     </summary>
     
-      <category term="数学" scheme="http://ilern.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
-    
-    
-      <category term="微积分" scheme="http://ilern.github.io/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"/>
     
   </entry>
   
@@ -252,10 +234,6 @@
     
     </summary>
     
-      <category term="数学" scheme="http://ilern.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
-    
-    
-      <category term="微积分" scheme="http://ilern.github.io/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"/>
     
   </entry>
   
@@ -275,10 +253,6 @@
     
     </summary>
     
-      <category term="数学" scheme="http://ilern.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
-    
-    
-      <category term="微积分" scheme="http://ilern.github.io/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/"/>
     
   </entry>
   
@@ -297,10 +271,6 @@
     
     </summary>
     
-      <category term="音乐" scheme="http://ilern.github.io/categories/%E9%9F%B3%E4%B9%90/"/>
-    
-    
-      <category term="乐理" scheme="http://ilern.github.io/tags/%E4%B9%90%E7%90%86/"/>
     
   </entry>
   
@@ -319,14 +289,6 @@
     
     </summary>
     
-      <category term="计算机系统基础" scheme="http://ilern.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="计算机系统基础" scheme="http://ilern.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
-    
-      <category term="计算机组成原理" scheme="http://ilern.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
-    
-      <category term="操作系统" scheme="http://ilern.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
@@ -345,10 +307,6 @@
     
     </summary>
     
-      <category term="计算机网络" scheme="http://ilern.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-    
-      <category term="网络" scheme="http://ilern.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
@@ -367,10 +325,6 @@
     
     </summary>
     
-      <category term="操作系统" scheme="http://ilern.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="OS" scheme="http://ilern.github.io/tags/OS/"/>
     
   </entry>
   
@@ -389,10 +343,6 @@
     
     </summary>
     
-      <category term="计算机网络" scheme="http://ilern.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-    
-      <category term="网络" scheme="http://ilern.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
@@ -411,10 +361,6 @@
     
     </summary>
     
-      <category term="操作系统" scheme="http://ilern.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="实验" scheme="http://ilern.github.io/tags/%E5%AE%9E%E9%AA%8C/"/>
     
   </entry>
   
@@ -433,32 +379,6 @@
     
     </summary>
     
-      <category term="操作系统" scheme="http://ilern.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="实验" scheme="http://ilern.github.io/tags/%E5%AE%9E%E9%AA%8C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>操作系统实验笔记（三）</title>
-    <link href="http://ilern.github.io/2020/12/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89/"/>
-    <id>http://ilern.github.io/2020/12/03/操作系统实验笔记（三）/</id>
-    <published>2020-12-03T02:45:26.000Z</published>
-    <updated>2020-12-30T09:04:56.661Z</updated>
-    
-    <content type="html"><![CDATA[<p>管道通信是有局限的，共享内存段和消息队列提供了更灵活的进程间通信方式<br>不过非要说最灵活可能还是用socket</p><a id="more"></a><h1 id="共享内存通信与消息队列通信"><a href="#共享内存通信与消息队列通信" class="headerlink" title="共享内存通信与消息队列通信"></a>共享内存通信与消息队列通信</h1><h2 id="使用管道进行通信的局限"><a href="#使用管道进行通信的局限" class="headerlink" title="使用管道进行通信的局限"></a>使用管道进行通信的局限</h2><p>只能在有家族关系的进程间进行通信</p><p>大小只有4K，不好传输过大的</p><p>Socket一般用于用户进程间的通信</p><p>IP+端口可以唯一定位一台主机上的一个进程，把IP设定为127.0.0.1，可以实现本机间的两个进程通信</p><p>IPC一般用于系统间的通信</p><p>信号量使用集合的方式进行管理，Semaphores Set</p><p>共享内存 Shared Memory Segment</p><p>消息队列 Message Queue</p><p>管道由操作系统进行管理</p><p>IPC需要自己手工管理</p><h2 id="用到的函数"><a href="#用到的函数" class="headerlink" title="用到的函数"></a>用到的函数</h2><p><code>int shmget(key_t key, size_t size, int shmflg);</code></p><p>创建一个新的共享内存段 / 关联已有的共享内存段，返回一个共享内存段的ID</p><p><code>void *shmat(int shmid, const void *shmaddr, int shmflg);</code></p><p>获得共享内存段的地址，通常和脱离配合使用。</p><p><code>int shmdt(const void *shmaddr);</code> </p><p>脱离。注意，将共享内存分离并不是删除它，只是使该共享内存对当前进程不再可用。</p><p><code>int shmctl(int shmid, int cmd, struct shmid_ds *buf);</code> </p><p>操作共享内存段，如果要进行更细致的操作需要用到，在实验中用来删除共享内存段，<code>cmd</code>设定为<code>IPC_RMID</code></p><p>写是覆盖写，读是多次读。</p><p>读多少次都不会影响数据的存在，用于进程间的一对多通信，多个进程先后去读结果是一样的。</p><h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><p>在创建共享内存段时，可以指明共享内存段的权限</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shmget(shm_key, SHM_SIZE, IPC_CREAT | <span class="number">0600</span>)</span><br></pre></td></tr></table></figure><p>在<code>flag</code>后面或上一个八进制数，这里的数字含义和<code>chomd</code>的数字含义相同，例如<code>0600</code>代表创建者可读可写</p><h2 id="生成Key"><a href="#生成Key" class="headerlink" title="生成Key"></a>生成Key</h2><p>操作系统中唯一标识共享内存段</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ipc.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">key_t</span> ftok(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> proj_id);</span><br></pre></td></tr></table></figure><p><code>ftok()</code>使用一个路径和一个项目编号来生成一个唯一的 system V 进程间通信的 key</p><p>通常情况下<code>pathname</code>选择一个所有Linux都有的路径，比如<code>/boot</code>，<code>proj_id</code>因为只会用到低8位，通常选择一个字符常量</p><p>对于同样的参数会得到同样的key</p><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ipc.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> KEY 3456</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 1024</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *shm_addr = <span class="literal">NULL</span>;</span><br><span class="line">  <span class="comment">//0600 only for this user's process</span></span><br><span class="line">  <span class="comment">//0666 for all process</span></span><br><span class="line">  <span class="keyword">int</span> shm_id;</span><br><span class="line">  shm_id = shmget(KEY, SIZE, IPC_CREAT | <span class="number">0600</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">pid_t</span> p;</span><br><span class="line">  p = fork();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (p) &#123;</span><br><span class="line">    <span class="comment">//parent</span></span><br><span class="line">    wait(<span class="number">0</span>);</span><br><span class="line">    shm_addr = (<span class="keyword">char</span>*)shmat(shm_id, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, shm_addr);</span><br><span class="line">    shmdt(shm_addr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//control</span></span><br><span class="line">    <span class="comment">//destroy the shared memory segment</span></span><br><span class="line">    shmctl(shm_id, IPC_RMID, <span class="literal">NULL</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//chlid</span></span><br><span class="line">    <span class="comment">//get the address of shared memory segment</span></span><br><span class="line">    <span class="comment">//shmat()</span></span><br><span class="line">    shm_addr = (<span class="keyword">char</span>*)shmat(shm_id, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(shm_addr, <span class="string">"This is a message"</span>);</span><br><span class="line">    shmdt(shm_addr);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>构建一个多进程并发的环境，实现共享内存段通信</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;管道通信是有局限的，共享内存段和消息队列提供了更灵活的进程间通信方式&lt;br&gt;不过非要说最灵活可能还是用socket&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="操作系统" scheme="http://ilern.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="实验" scheme="http://ilern.github.io/tags/%E5%AE%9E%E9%AA%8C/"/>
     
   </entry>
   
